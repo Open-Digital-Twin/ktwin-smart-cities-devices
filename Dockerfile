@@ -2,7 +2,7 @@ FROM python:alpine3.18
 
 ARG DEVICE_NAME
 
-COPY ./DEVICE_NAME /app
+COPY ./${DEVICE_NAME} /app
 
 WORKDIR /app
 
