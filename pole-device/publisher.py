@@ -1,32 +1,6 @@
 import os
 import json
-import logging
-import random
-import sys
-from dotenv import load_dotenv
-from modules.mqtt import MQTTClient, MQTTClientConfig
-
-def load_mqtt_config() -> MQTTClientConfig:
-    if os.getenv("ENV") == "local":
-        load_dotenv('local.env')
-
-    broker_address = os.getenv("BROKER_ADDRESS")
-    broker_port = int(os.getenv("BROKER_PORT"))
-    client_id = os.getenv("CLIENT_ID")
-    username = os.getenv("USERNAME")
-    password = os.getenv("PASSWORD")
-
-    config = MQTTClientConfig(broker_address=broker_address, client_id=client_id, port=broker_port)
-    
-    if username is not None and password is not None:
-        config.set_credentials(username=username, password=password)
-
-    return config
-
-def load_mqtt_client(config: MQTTClientConfig) -> MQTTClient:
-    broker_topic = os.getenv("BROKER_TOPIC")
-    client = MQTTClient(config=config, topic=broker_topic)
-    return client
+from modules.mqtt import load_mqtt_config, load_mqtt_client
 
 def build_message(msg_count: int):
     msg = {}

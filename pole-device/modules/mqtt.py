@@ -1,6 +1,8 @@
+import os
 import logging
 import time
 import json
+from dotenv import load_dotenv
 from paho.mqtt import client as paho_mqtt_client
 
 QOS_AT_MOST_ONCE=0
@@ -82,3 +84,25 @@ class MQTTClient:
         self.mqtt_client.subscribe(self.topic)
         self.mqtt_client.on_message = on_message
         self.mqtt_client.loop_forever()
+
+def load_mqtt_config() -> MQTTClientConfig:
+    if os.getenv("ENV") == "local":
+        load_dotenv('local.env')
+
+    broker_address = os.getenv("BROKER_ADDRESS")
+    broker_port = int(os.getenv("BROKER_PORT"))
+    client_id = os.getenv("CLIENT_ID")
+    username = os.getenv("USERNAME")
+    password = os.getenv("PASSWORD")
+
+    config = MQTTClientConfig(broker_address=broker_address, client_id=client_id, port=broker_port)
+    
+    if username is not None and password is not None:
+        config.set_credentials(username=username, password=password)
+
+    return config
+
+def load_mqtt_client(config: MQTTClientConfig) -> MQTTClient:
+    broker_topic = os.getenv("BROKER_TOPIC")
+    client = MQTTClient(config=config, topic=broker_topic)
+    return client
