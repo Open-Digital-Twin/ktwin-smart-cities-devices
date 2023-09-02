@@ -1,1 +1,1 @@
-export ENV="local" && python publisher.py
+export ENV="publish-local" && python publisher.py

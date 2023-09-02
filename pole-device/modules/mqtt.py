@@ -5,9 +5,6 @@ import json
 from dotenv import load_dotenv
 from paho.mqtt import client as paho_mqtt_client
 
-QOS_AT_MOST_ONCE=0
-QOS_AT_LEAST_ONCE=1
-QOS_EXACTLY_ONCE=2
 
 class MQTTClientConfig:
     def __init__(self, client_id, broker_address, port) -> None:
@@ -86,8 +83,11 @@ class MQTTClient:
         self.mqtt_client.loop_forever()
 
 def load_mqtt_config() -> MQTTClientConfig:
-    if os.getenv("ENV") == "local":
-        load_dotenv('local.env')
+    if os.getenv("ENV") == "publish-local":
+        load_dotenv('publisher-local.env')
+    
+    if os.getenv("ENV") == "subscribe-local":
+        load_dotenv('subscriber-local.env')
 
     broker_address = os.getenv("BROKER_ADDRESS")
     broker_port = int(os.getenv("BROKER_PORT"))
