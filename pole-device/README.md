@@ -1,4 +1,4 @@
-# Edge Service
+# Pole Device
 
 ## Setup Virtual environment
 
