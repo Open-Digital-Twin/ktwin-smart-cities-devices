@@ -1,0 +1,6 @@
+**/venv
+.DS_Store
+**/__pycache__
+
+docker/mosquitto/data
+docker/mosquitto/log
