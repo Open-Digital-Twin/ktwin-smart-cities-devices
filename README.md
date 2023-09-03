@@ -4,16 +4,9 @@ This repository contains the KTWIN devices implementation for the DTDL Smart Cit
 
 ## Docker Build
 
-Build for Intel:
-
 ```sh
-docker build -t ghcr.io/open-digital-twin/ktwin-pole-device:0.1 --build-arg DEVICE_NAME=pole-device .
-```
-
-Build for ARM (RaspberryPI):
-
-```sh
-docker build -t ghcr.io/open-digital-twin/ktwin-pole-device:0.1 --build-arg DEVICE_NAME=pole-device .
+docker build -f publisher.Dockerfile -t ghcr.io/open-digital-twin/ktwin-pole-device-publisher:0.1 --build-arg DEVICE_NAME=pole-device .
+docker build -f subscriber.Dockerfile  -t ghcr.io/open-digital-twin/ktwin-pole-device-subscriber:0.1 --build-arg DEVICE_NAME=pole-device .
 ```
 
 ## Docker Run
@@ -23,13 +16,25 @@ docker run -it --rm \
     -e BROKER_ADDRESS=localhost \
     -e BROKER_PORT=1883 \
     -e BROKER_TOPIC=mytopic \
-    -e CLIENT_ID=mqtt-client-id \
+    -e CLIENT_ID=mqtt-client-id-publisher \
     -e USERNAME= \
     -e PASSWORD= \
     -e N_MESSAGES=3 \
     -e MESSAGE_PERIOD=1 \
     --network host \
-    ghcr.io/open-digital-twin/ktwin-pole-device:0.1
+    ghcr.io/open-digital-twin/ktwin-pole-device-publisher:0.1
+```
+
+```sh
+docker run -it --rm \
+    -e BROKER_ADDRESS=localhost \
+    -e BROKER_PORT=1883 \
+    -e BROKER_TOPIC=mytopic \
+    -e CLIENT_ID=mqtt-client-id-subscriber\
+    -e USERNAME= \
+    -e PASSWORD= \
+    --network host \
+    ghcr.io/open-digital-twin/ktwin-pole-device-subscriber:0.1
 ```
 
 ## Kubernetes Run

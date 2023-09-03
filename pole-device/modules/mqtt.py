@@ -5,7 +5,6 @@ import json
 from dotenv import load_dotenv
 from paho.mqtt import client as paho_mqtt_client
 
-
 class MQTTClientConfig:
     def __init__(self, client_id, broker_address, port) -> None:
         self.has_credentials = False
@@ -74,7 +73,6 @@ class MQTTClient:
     def subscribe(self, callback=None):
         def on_message(client, userdata, msg):
             msg_dict = json.loads(msg.payload)
-            self.logger.info(f"Received message from `{msg_dict}`")
             if callback is not None:
                 callback(msg_dict)
 
