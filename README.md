@@ -9,6 +9,15 @@ docker build -f publisher.Dockerfile -t ghcr.io/open-digital-twin/ktwin-pole-dev
 docker build -f subscriber.Dockerfile  -t ghcr.io/open-digital-twin/ktwin-pole-device-subscriber:0.1 --build-arg DEVICE_NAME=pole-device .
 ```
 
+Build Local Development:
+
+```sh
+docker build -f publisher.Dockerfile -t dev.local/open-digital-twin/ktwin-pole-device-publisher:0.1 --build-arg DEVICE_NAME=pole-device .
+docker build -f subscriber.Dockerfile  -t dev.local/open-digital-twin/ktwin-pole-device-subscriber:0.1 --build-arg DEVICE_NAME=pole-device .
+kind load docker-image dev.local/open-digital-twin/ktwin-pole-device-publisher:0.1
+kind load docker-image dev.local/open-digital-twin/ktwin-pole-device-subscriber:0.1
+```
+
 ## Docker Run
 
 ```sh
