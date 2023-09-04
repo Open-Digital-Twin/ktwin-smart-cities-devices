@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ktwin-pole-device-publisher
+  namespace: ktwin
+spec:
+  schedule: "07 * * * *" # minute (0 - 59), hour (0 - 23), day of the month (1 - 31), month (1 - 12), day of the week (0 - 6)
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+          - name: ktwin-pole-device-publisher
+            image: dev.local/open-digital-twin/ktwin-pole-device-publisher:0.1
+            imagePullPolicy: Never
+            env:
+            - name: BROKER_ADDRESS
+              value: rabbitmq.ktwin.svc.cluster.local
+            - name: BROKER_PORT
+              value: "1883"
+            - name: BROKER_TOPIC
+              value: "ktwin/virtual/city-pole/city-pole-001"
+            - name: CLIENT_ID
+              value: "ktwin-pole-device-publisher-001"
+            - name: USERNAME
+              value: ""
+            - name: PASSWORD
+              value: ""
+            - name: N_MESSAGES
+              value: "3"
+            - name: MESSAGE_PERIOD
+              value: "1"
