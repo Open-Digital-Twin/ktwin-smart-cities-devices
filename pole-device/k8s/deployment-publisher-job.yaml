@@ -1,21 +1,14 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: batch/v1
+kind: Job
 metadata:
   namespace: ktwin
   name: ktwin-pole-device-publisher
   labels:
     app: ktwin-pole-device-publisher
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: ktwin-pole-device-publisher
   template:
-    metadata:
-      name: ktwin-pole-device-publisher
-      labels:
-        app: ktwin-pole-device-publisher
     spec:
+      restartPolicy: Never
       containers:
       - name: ktwin-pole-device-publisher
         image: dev.local/open-digital-twin/ktwin-pole-device-publisher:0.1
@@ -34,7 +27,7 @@ spec:
         - name: PASSWORD
           value: ""
         - name: N_MESSAGES
-          value: "3"
+          value: "10"
         - name: MESSAGE_PERIOD
           value: "1"
         resources:
