@@ -18,6 +18,13 @@ kind load docker-image dev.local/open-digital-twin/ktwin-pole-device-publisher:0
 kind load docker-image dev.local/open-digital-twin/ktwin-pole-device-subscriber:0.1
 ```
 
+Build Build for ARM:
+
+```sh
+docker buildx build --platform linux/arm -f publisher.Dockerfile -t ghcr.io/open-digital-twin/ktwin-pole-device-publisher:0.1 --build-arg DEVICE_NAME=pole-device .
+docker buildx build --platform linux/arm -f subscriber.Dockerfile  -t ghcr.io/open-digital-twin/ktwin-pole-device-subscriber:0.1 --build-arg DEVICE_NAME=pole-device .
+```
+
 ## Docker Run
 
 ```sh

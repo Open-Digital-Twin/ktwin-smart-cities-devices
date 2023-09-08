@@ -9,17 +9,19 @@ spec:
   template:
     spec:
       restartPolicy: Never
+      nodeSelector:
+        nodetype: edge # Force the execution in RaspberryPI/ARM nodes
       containers:
       - name: ktwin-pole-device-publisher
-        image: dev.local/open-digital-twin/ktwin-pole-device-publisher:0.1
-        imagePullPolicy: Never
+        image: ghcr.io/open-digital-twin/ktwin-pole-device-publisher:0.1
+        imagePullPolicy: Always
         env:
         - name: BROKER_ADDRESS
           value: rabbitmq.ktwin.svc.cluster.local
         - name: BROKER_PORT
           value: "1883"
         - name: BROKER_TOPIC
-          value: "ktwin/virtual/city-pole/city-pole-001"
+          value: "ktwin/real/ngsi-ld-city-weatherobserved/ngsi-ld-city-weatherobserved-001"
         - name: CLIENT_ID
           value: "ktwin-pole-device-publisher-001"
         - name: USERNAME

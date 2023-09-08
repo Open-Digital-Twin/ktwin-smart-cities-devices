@@ -16,6 +16,8 @@ spec:
       labels:
         app: ktwin-pole-device-subscriber
     spec:
+      nodeSelector:
+        nodetype: edge
       containers:
       - name: ktwin-pole-device-subscriber
         image: dev.local/open-digital-twin/ktwin-pole-device-subscriber:0.1
