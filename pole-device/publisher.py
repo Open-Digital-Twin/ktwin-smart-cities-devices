@@ -1,11 +1,12 @@
 import os
 import json
+from datetime import datetime
 from modules.mqtt import load_mqtt_config, load_mqtt_client
 
 def build_message(msg_count: int):
-    msg = {}
+    msg = build_weather_observed()
     msg["msg_count"] = msg_count
-    msg["sensor"] = build_air_quality_observed()
+    msg["timestamp"] = datetime.now().isoformat()
     return json.dumps(msg)
 
 def build_air_quality_observed() -> dict:
