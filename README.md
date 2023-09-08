@@ -63,3 +63,10 @@ kubectl run -it --rm \
     --network host \
     ghcr.io/open-digital-twin/ktwin-pole-device:0.1
 ```
+
+## Push to Repository
+
+```sh
+docker push ghcr.io/open-digital-twin/ktwin-pole-device-publisher:0.1
+docker push ghcr.io/open-digital-twin/ktwin-pole-device-subscriber:0.1
+```
