@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: ktwin
+  name: ktwin-ev-charging-device-subscriber
+  labels:
+    app: ktwin-ev-charging-device-subscriber
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ktwin-ev-charging-device-subscriber
+  template:
+    metadata:
+      name: ktwin-ev-charging-device-subscriber
+      labels:
+        app: ktwin-ev-charging-device-subscriber
+    spec:
+      nodeSelector:
+        nodetype: edge
+      containers:
+      - name: ktwin-ev-charging-device-subscriber
+        image: dev.local/open-digital-twin/ktwin-ev-charging-device-subscriber:0.1
+        imagePullPolicy: Never
+        env:
+        - name: BROKER_ADDRESS
+          value: rabbitmq.ktwin.svc.cluster.local
+        - name: BROKER_PORT
+          value: "1883"
+        - name: BROKER_TOPIC
+          value: "ktwin/virtual/city-ev-charging/city-ev-charging-001"
+        - name: CLIENT_ID
+          value: "ktwin-ev-charging-device-subscriber-001"
+        - name: USERNAME
+          value: ""
+        - name: PASSWORD
+          value: ""
+        resources:
+          requests:
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
