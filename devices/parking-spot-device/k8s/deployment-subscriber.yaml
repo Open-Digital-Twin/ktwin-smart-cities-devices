@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: ktwin
+  name: ktwin-parking-spot-device-subscriber
+  labels:
+    app: ktwin-parking-spot-device-subscriber
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ktwin-parking-spot-device-subscriber
+  template:
+    metadata:
+      name: ktwin-parking-spot-device-subscriber
+      labels:
+        app: ktwin-parking-spot-device-subscriber
+    spec:
+      nodeSelector:
+        nodetype: edge
+      containers:
+      - name: ktwin-parking-spot-device-subscriber
+        image: dev.local/open-digital-twin/ktwin-parking-spot-device-subscriber:0.1
+        imagePullPolicy: Never
+        env:
+        - name: BROKER_ADDRESS
+          value: rabbitmq.ktwin.svc.cluster.local
+        - name: BROKER_PORT
+          value: "1883"
+        - name: BROKER_TOPIC
+          value: "ktwin/virtual/city-parking-spot/city-parking-spot-001"
+        - name: CLIENT_ID
+          value: "ktwin-parking-spot-device-subscriber-001"
+        - name: USERNAME
+          value: ""
+        - name: PASSWORD
+          value: ""
+        resources:
+          requests:
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"

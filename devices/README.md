@@ -24,10 +24,12 @@ kind load docker-image dev.local/open-digital-twin/ktwin-pole-device-subscriber:
 # Publisher devices
 docker buildx build --platform linux/arm -f publisher.Dockerfile -t ghcr.io/open-digital-twin/ktwin-pole-device-publisher:0.1 --build-arg DEVICE_NAME=pole-device .
 docker buildx build --platform linux/arm -f publisher.Dockerfile -t ghcr.io/open-digital-twin/ktwin-streetlight-device-publisher:0.1 --build-arg DEVICE_NAME=streetlight-device .
+docker buildx build --platform linux/arm -f publisher.Dockerfile -t ghcr.io/open-digital-twin/ktwin-parking-spot-device-publisher:0.1 --build-arg DEVICE_NAME=parking-spot-device .
 
 # Subscriber devices
 docker buildx build --platform linux/arm -f subscriber.Dockerfile  -t ghcr.io/open-digital-twin/ktwin-pole-device-subscriber:0.1 --build-arg DEVICE_NAME=pole-device .
-docker buildx build --platform linux/arm -f subscriber.Dockerfile  -t ghcr.io/open-digital-twin/ktwin-streetlight-device-subscriber:0.1 --build-arg DEVICE_NAME=postreetlightle-device .
+docker buildx build --platform linux/arm -f subscriber.Dockerfile  -t ghcr.io/open-digital-twin/ktwin-parking-spot-device-subscriber:0.1 --build-arg DEVICE_NAME=streetlight-device .
+docker buildx build --platform linux/arm -f subscriber.Dockerfile  -t ghcr.io/open-digital-twin/ktwin-parking-spot-device-subscriber:0.1 --build-arg DEVICE_NAME=parking-spot-device .
 ```
 
 ## Docker Run
@@ -83,4 +85,6 @@ docker push ghcr.io/open-digital-twin/ktwin-pole-device-publisher:0.1
 docker push ghcr.io/open-digital-twin/ktwin-pole-device-subscriber:0.1
 docker push ghcr.io/open-digital-twin/ktwin-streetlight-device-publisher:0.1
 docker push ghcr.io/open-digital-twin/ktwin-streetlight-device-subscriber:0.1
+docker push ghcr.io/open-digital-twin/ktwin-parking-spot-device-publisher:0.1
+docker push ghcr.io/open-digital-twin/ktwin-parking-spot-device-subscriber:0.1
 ```
