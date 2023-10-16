@@ -9,7 +9,7 @@ docker build -f publisher.Dockerfile -t ghcr.io/open-digital-twin/ktwin-pole-dev
 docker build -f subscriber.Dockerfile  -t ghcr.io/open-digital-twin/ktwin-pole-device-subscriber:0.1 --build-arg DEVICE_NAME=pole-device .
 ```
 
-Build Local Development:
+### Build Local Development
 
 ```sh
 docker build -f publisher.Dockerfile -t dev.local/open-digital-twin/ktwin-pole-device-publisher:0.1 --build-arg DEVICE_NAME=pole-device .
@@ -18,15 +18,15 @@ kind load docker-image dev.local/open-digital-twin/ktwin-pole-device-publisher:0
 kind load docker-image dev.local/open-digital-twin/ktwin-pole-device-subscriber:0.1
 ```
 
-Build Build for ARM:
+### Build Build for ARM (RaspberryPI)
 
 ```sh
+# Publisher devices
 docker buildx build --platform linux/arm -f publisher.Dockerfile -t ghcr.io/open-digital-twin/ktwin-pole-device-publisher:0.1 --build-arg DEVICE_NAME=pole-device .
-docker buildx build --platform linux/arm -f subscriber.Dockerfile  -t ghcr.io/open-digital-twin/ktwin-pole-device-subscriber:0.1 --build-arg DEVICE_NAME=pole-device .
-```
-
-```sh
 docker buildx build --platform linux/arm -f publisher.Dockerfile -t ghcr.io/open-digital-twin/ktwin-streetlight-device-publisher:0.1 --build-arg DEVICE_NAME=streetlight-device .
+
+# Subscriber devices
+docker buildx build --platform linux/arm -f subscriber.Dockerfile  -t ghcr.io/open-digital-twin/ktwin-pole-device-subscriber:0.1 --build-arg DEVICE_NAME=pole-device .
 docker buildx build --platform linux/arm -f subscriber.Dockerfile  -t ghcr.io/open-digital-twin/ktwin-streetlight-device-subscriber:0.1 --build-arg DEVICE_NAME=postreetlightle-device .
 ```
 
