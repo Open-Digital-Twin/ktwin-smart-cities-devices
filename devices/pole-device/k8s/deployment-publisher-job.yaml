@@ -32,6 +32,10 @@ spec:
           value: "10"
         - name: MESSAGE_PERIOD
           value: "1"
+        - name: FULL_PERIOD
+          value: "10"
+        - name: PART_PERIOD
+          value: "4"
         resources:
           requests:
             cpu: "50m"
