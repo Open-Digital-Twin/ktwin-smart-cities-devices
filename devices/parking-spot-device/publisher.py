@@ -19,22 +19,20 @@ def build_parkingspot_message(msg_count):
     return sensor_data
 
 # This method generates status based on the msg_count information
-# 0 -> part_period -> full_period: it changes the status to occupied when message count is equal to N, later it changes to free when msg_count is M.
+# 0 -> part_period -> full_period: it changes the status to free when message count is equal to part_period, later it changes to occupied when msg_count is full_period.
 def generate_status(msg_count, part_period, full_period):
     if full_period < part_period:
-        raise Exception("M must be greater than N")
+        raise Exception("full_period must be greater than part_period")
     
     if (msg_count % full_period) < part_period:
-        return "off"
+        return "free"
     if (msg_count % full_period) > part_period:
-        return "on"
+        return "occupied"
 
-    return "off"
-
+    return "free"
 
 
 def run():
-
     config = load_mqtt_config()
     client = load_mqtt_client(config)
 
