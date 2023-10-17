@@ -26,12 +26,14 @@ docker buildx build --platform linux/arm -f publisher.Dockerfile -t ghcr.io/open
 docker buildx build --platform linux/arm -f publisher.Dockerfile -t ghcr.io/open-digital-twin/ktwin-streetlight-device-publisher:0.1 --build-arg DEVICE_NAME=streetlight-device .
 docker buildx build --platform linux/arm -f publisher.Dockerfile -t ghcr.io/open-digital-twin/ktwin-parking-spot-device-publisher:0.1 --build-arg DEVICE_NAME=parking-spot-device .
 docker buildx build --platform linux/arm -f publisher.Dockerfile -t ghcr.io/open-digital-twin/ktwin-ev-charging-device-publisher:0.1 --build-arg DEVICE_NAME=ev-charging-device .
+docker buildx build --platform linux/arm -f publisher.Dockerfile -t ghcr.io/open-digital-twin/ktwin-battery-publisher:0.1 --build-arg DEVICE_NAME=battery-device .
 
 # Subscriber devices
 docker buildx build --platform linux/arm -f subscriber.Dockerfile  -t ghcr.io/open-digital-twin/ktwin-pole-device-subscriber:0.1 --build-arg DEVICE_NAME=pole-device .
 docker buildx build --platform linux/arm -f subscriber.Dockerfile  -t ghcr.io/open-digital-twin/ktwin-streetlight-device-subscriber:0.1 --build-arg DEVICE_NAME=streetlight-device .
 docker buildx build --platform linux/arm -f subscriber.Dockerfile  -t ghcr.io/open-digital-twin/ktwin-parking-spot-device-subscriber:0.1 --build-arg DEVICE_NAME=parking-spot-device .
 docker buildx build --platform linux/arm -f subscriber.Dockerfile  -t ghcr.io/open-digital-twin/ktwin-ev-charging-device-subscriber:0.1 --build-arg DEVICE_NAME=ev-charging-device .
+docker buildx build --platform linux/arm -f subscriber.Dockerfile  -t ghcr.io/open-digital-twin/battery-device-subscriber:0.1 --build-arg DEVICE_NAME=battery-device .
 ```
 
 ## Docker Run
@@ -84,11 +86,14 @@ kubectl run -it --rm \
 
 ```sh
 docker push ghcr.io/open-digital-twin/ktwin-pole-device-publisher:0.1
-docker push ghcr.io/open-digital-twin/ktwin-pole-device-subscriber:0.1
 docker push ghcr.io/open-digital-twin/ktwin-streetlight-device-publisher:0.1
-docker push ghcr.io/open-digital-twin/ktwin-streetlight-device-subscriber:0.1
 docker push ghcr.io/open-digital-twin/ktwin-parking-spot-device-publisher:0.1
-docker push ghcr.io/open-digital-twin/ktwin-parking-spot-device-subscriber:0.1
 docker push ghcr.io/open-digital-twin/ktwin-ev-charging-device-publisher:0.1
+docker push ghcr.io/open-digital-twin/battery-device-publisher:0.1
+
+docker push ghcr.io/open-digital-twin/ktwin-pole-device-subscriber:0.1
+docker push ghcr.io/open-digital-twin/ktwin-streetlight-device-subscriber:0.1
+docker push ghcr.io/open-digital-twin/ktwin-parking-spot-device-subscriber:0.1
 docker push ghcr.io/open-digital-twin/ktwin-ev-charging-device-subscriber:0.1
+docker push ghcr.io/open-digital-twin/battery-device-subscriber:0.1
 ```
