@@ -12,9 +12,10 @@ def build_message(msg_count: int):
 
 def build_parkingspot_message(msg_count):
     sensor_data = dict()
-    power_state = ""
-    power_state = generate_status(msg_count=msg_count, part_period=4, full_period=10)
-    sensor_data["powerState"] = power_state
+    part_period = int(os.getenv("PART_PERIOD"))
+    full_period = int(os.getenv("FULL_PERIOD"))
+    status = generate_status(msg_count=msg_count, part_period=part_period, full_period=full_period)
+    sensor_data["status"] = status
     return sensor_data
 
 # This method generates status based on the msg_count information
