@@ -7,17 +7,30 @@ def build_message(msg_count: int):
     msg = build_parkingspot_message(msg_count)
     msg["msg_count"] = msg_count
     msg["timestamp"] = datetime.now().isoformat()
+    print(msg)
     return json.dumps(msg)
 
 def build_parkingspot_message(msg_count):
     sensor_data = dict()
     power_state = ""
-    if msg_count%2:
-        power_state = "on"
-    else:
-        power_state = "off"
+    power_state = generate_status(msg_count=msg_count, part_period=4, full_period=10)
     sensor_data["powerState"] = power_state
     return sensor_data
+
+# This method generates status based on the msg_count information
+# 0 -> part_period -> full_period: it changes the status to occupied when message count is equal to N, later it changes to free when msg_count is M.
+def generate_status(msg_count, part_period, full_period):
+    if full_period < part_period:
+        raise Exception("M must be greater than N")
+    
+    if (msg_count % full_period) < part_period:
+        return "off"
+    if (msg_count % full_period) > part_period:
+        return "on"
+
+    return "off"
+
+
 
 def run():
 
