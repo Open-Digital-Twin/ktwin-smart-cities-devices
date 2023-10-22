@@ -14,12 +14,12 @@ def build_battery_message(msg_count):
     sensor_data = dict()
     part_period = int(os.getenv("PART_PERIOD"))
     full_period = int(os.getenv("FULL_PERIOD"))
-    sensor_data["batteryLevel"] = generate_power_state(msg_count=msg_count, part_period=part_period, full_period=full_period)
+    sensor_data["batteryLevel"] = get_battery_level(msg_count=msg_count, part_period=part_period, full_period=full_period)
     return sensor_data
 
 # This method generates status based on the msg_count information
 # 0 -> part_period -> full_period: it changes the batteryLevel when message count is equal to part_period, later it changes to a different value when msg_count is full_period.
-def generate_power_state(msg_count, part_period, full_period):
+def get_battery_level(msg_count, part_period, full_period):
     if full_period < part_period:
         raise Exception("full_period must be greater than part_period")
     
@@ -28,7 +28,7 @@ def generate_power_state(msg_count, part_period, full_period):
     if (msg_count % full_period) > part_period:
         return 15
 
-    return "off"
+    return 90
 
 def run():
     config = load_mqtt_config()
