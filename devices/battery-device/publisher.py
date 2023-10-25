@@ -15,6 +15,7 @@ def build_battery_message(msg_count):
     part_period = int(os.getenv("PART_PERIOD"))
     full_period = int(os.getenv("FULL_PERIOD"))
     sensor_data["batteryLevel"] = get_battery_level(msg_count=msg_count, part_period=part_period, full_period=full_period)
+    sensor_data["measurementFrequency"] = get_measure_frequency_level(msg_count=msg_count, part_period=part_period+part_period/3, full_period=full_period+part_period/3)
     return sensor_data
 
 # This method generates status based on the msg_count information
@@ -26,7 +27,20 @@ def get_battery_level(msg_count, part_period, full_period):
     if (msg_count % full_period) < part_period:
         return 90
     if (msg_count % full_period) > part_period:
+        return 12
+
+    return 90
+
+# This method generates status based on the msg_count information
+# 0 -> part_period -> full_period: it changes the measurementFrequency when message count is equal to part_period, later it changes to a different value when msg_count is full_period.
+def get_measure_frequency_level(msg_count, part_period, full_period):
+    if full_period < part_period:
+        raise Exception("full_period must be greater than part_period")
+    
+    if (msg_count % full_period) < part_period:
         return 15
+    if (msg_count % full_period) > part_period:
+        return 60
 
     return 90
 
