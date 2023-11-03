@@ -28,7 +28,7 @@ spec:
         - name: BROKER_PORT
           value: "1883"
         - name: BROKER_TOPIC
-          value: "ktwin/virtual/city-pole/city-pole-001"
+          value: "ktwin/virtual/ngsi-ld-city-airqualityobserved/ngsi-ld-city-airqualityobserved-001"
         - name: CLIENT_ID
           value: "ktwin-pole-air-quality-observed-device-subscriber-001"
         - name: USERNAME
