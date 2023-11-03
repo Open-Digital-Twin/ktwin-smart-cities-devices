@@ -9,8 +9,8 @@ spec:
   template:
     spec:
       restartPolicy: Never
-      nodeSelector:
-        nodetype: edge # Force the execution in RaspberryPI/ARM nodes
+      # nodeSelector:
+      #   nodetype: edge # Force the execution in RaspberryPI/ARM nodes
       containers:
       - name: ktwin-streetlight-device-publisher
         image: ghcr.io/open-digital-twin/ktwin-streetlight-device-publisher:0.1
@@ -25,13 +25,13 @@ spec:
         - name: CLIENT_ID
           value: "ktwin-streetlight-device-publisher-001"
         - name: USERNAME
-          value: ""
+          value: "default_user_4fNTdy_ZIhc45OYITSH"
         - name: PASSWORD
-          value: ""
+          value: "yXpNW2DmTN_IZOJQtK2kO75zZ2KhImaZ"
         - name: N_MESSAGES
-          value: "2"
+          value: "100"
         - name: MESSAGE_PERIOD
-          value: "1"
+          value: "0.1"
         - name: FULL_PERIOD
           value: "10"
         - name: PART_PERIOD

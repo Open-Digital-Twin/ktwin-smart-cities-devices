@@ -2,9 +2,9 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   namespace: ktwin
-  name: ktwin-pole-device-publisher
+  name: ktwin-pole-weather-observed-device-publisher
   labels:
-    app: ktwin-pole-device-publisher
+    app: ktwin-pole-weather-observed-device-publisher
 spec:
   template:
     spec:
@@ -12,8 +12,8 @@ spec:
       nodeSelector:
         nodetype: edge # Force the execution in RaspberryPI/ARM nodes
       containers:
-      - name: ktwin-pole-device-publisher
-        image: ghcr.io/open-digital-twin/ktwin-pole-device-publisher:0.1
+      - name: ktwin-pole-weather-observed-device-publisher
+        image: ghcr.io/open-digital-twin/ktwin-pole-weather-observed-device-publisher:0.1-arm64
         imagePullPolicy: Always
         env:
         - name: BROKER_ADDRESS
@@ -23,7 +23,7 @@ spec:
         - name: BROKER_TOPIC
           value: "ktwin/real/ngsi-ld-city-weatherobserved/ngsi-ld-city-weatherobserved-001"
         - name: CLIENT_ID
-          value: "ktwin-pole-device-publisher-001"
+          value: "ktwin-pole-weather-observed-device-publisher-001"
         - name: USERNAME
           value: ""
         - name: PASSWORD

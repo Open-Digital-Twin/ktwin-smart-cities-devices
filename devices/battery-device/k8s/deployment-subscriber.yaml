@@ -16,8 +16,8 @@ spec:
       labels:
         app: ktwin-battery-device-subscriber
     spec:
-      nodeSelector:
-        nodetype: edge
+      # nodeSelector:
+      #   nodetype: edge
       containers:
       - name: ktwin-battery-device-subscriber
         image: ghcr.io/open-digital-twin/ktwin-battery-device-subscriber:0.1
@@ -32,9 +32,9 @@ spec:
         - name: CLIENT_ID
           value: "ktwin-battery-device-subscriber-001"
         - name: USERNAME
-          value: ""
+          value: "default_user_4fNTdy_ZIhc45OYITSH"
         - name: PASSWORD
-          value: ""
+          value: "yXpNW2DmTN_IZOJQtK2kO75zZ2KhImaZ"
         resources:
           requests:
             cpu: "50m"
