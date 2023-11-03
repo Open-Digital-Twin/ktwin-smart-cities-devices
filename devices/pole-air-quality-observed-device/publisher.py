@@ -21,6 +21,7 @@ def build_air_quality_observed() -> dict:
     sensor_data["SO2Density"] = 8
     sensor_data["C6H6Density"] = 8
     sensor_data["NIDensity"] = 8
+    sensor_data["NODensity"] = 8
     sensor_data["ASDensity"] = 8
     sensor_data["CDDensity"] = 8
     sensor_data["NO2Density"] = 8
