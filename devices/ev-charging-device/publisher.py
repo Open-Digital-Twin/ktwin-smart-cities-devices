@@ -11,13 +11,23 @@ def build_message(msg_count: int):
 
 def build_evcharging_message(msg_count):
     sensor_data = dict()
-    power_state = ""
-    if msg_count%2:
-        power_state = "on"
-    else:
-        power_state = "off"
-    sensor_data["powerState"] = power_state
+    part_period = int(os.getenv("PART_PERIOD"))
+    full_period = int(os.getenv("FULL_PERIOD"))
+    sensor_data["availableCapacity"] = get_available_capacity(msg_count=msg_count, part_period=part_period, full_period=full_period)
     return sensor_data
+
+# This method generates status based on the msg_count information
+# 0 -> part_period -> full_period: it changes the availableCapacity when message count is equal to part_period, later it changes to a different value when msg_count is full_period.
+def get_available_capacity(msg_count, part_period, full_period):
+    if full_period < part_period:
+        raise Exception("full_period must be greater than part_period")
+    
+    if (msg_count % full_period) < part_period:
+        return 1
+    if (msg_count % full_period) > part_period:
+        return 3
+
+    return 1
 
 def run():
 
