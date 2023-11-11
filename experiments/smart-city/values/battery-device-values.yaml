@@ -1,0 +1,33 @@
+armDeployment: true
+
+nameOverride: "ktwin-battery-device-publisher"
+fullnameOverride: "ktwin-battery-device-publisher"
+
+image:
+  name: ktwin-battery-device-publisher
+  repository: ghcr.io/open-digital-twin/ktwin-battery-device-publisher
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "0.1"
+
+env:
+  - name: BROKER_ADDRESS
+    value: rabbitmq.ktwin.svc.cluster.local
+  - name: BROKER_PORT
+    value: "1883"
+  - name: BROKER_TOPIC
+    value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-001"
+  - name: CLIENT_ID
+    value: "ktwin-battery-device-publisher-001"
+  - name: USERNAME
+    value: ""
+  - name: PASSWORD
+    value: ""
+  - name: N_MESSAGES
+    value: "20000"
+  - name: MESSAGE_PERIOD
+    value: "0.5"
+  - name: FULL_PERIOD
+    value: "10"
+  - name: PART_PERIOD
+    value: "4"
