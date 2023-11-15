@@ -6,7 +6,7 @@
 ## Battery Devices
 ############################
 
-NUMBER_DEVICES=2
+NUMBER_DEVICES=10
 DEVICE_NAME=battery-device
 for counter in $(seq 1 $NUMBER_DEVICES); do
     # Format ID
@@ -20,7 +20,7 @@ for counter in $(seq 1 $NUMBER_DEVICES); do
         --set image.tag="0.1" \
         --set environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-$id \
         --set environmentVariables.clientId=$DEVICE_NAME-publisher-$id \
-        --set environmentVariables.numberMessages="10" \
+        --set environmentVariables.numberMessages="2500" \
         --set environmentVariables.messagePeriod="0.5" \
         --set environmentVariables.fullPeriod="10" \
         --set environmentVariables.partPeriod="4"
@@ -30,7 +30,7 @@ done
 ## EV Charging Devices
 ############################
 
-NUMBER_DEVICES=2
+NUMBER_DEVICES=10
 DEVICE_NAME=ev-charging-device
 for counter in $(seq 1 $NUMBER_DEVICES); do
     # Format ID
@@ -44,7 +44,7 @@ for counter in $(seq 1 $NUMBER_DEVICES); do
         --set image.tag="0.1" \
         --set environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-evchargingstation/ngsi-ld-city-evchargingstation-$id \
         --set environmentVariables.clientId=$DEVICE_NAME-publisher-$id \
-        --set environmentVariables.numberMessages="10" \
+        --set environmentVariables.numberMessages="2500" \
         --set environmentVariables.messagePeriod="0.5" \
         --set environmentVariables.fullPeriod="10" \
         --set environmentVariables.partPeriod="4"
@@ -54,7 +54,7 @@ done
 ## Parking Spot Devices
 ############################
 
-NUMBER_DEVICES=2
+NUMBER_DEVICES=10
 DEVICE_NAME=parking-spot-device
 for counter in $(seq 1 $NUMBER_DEVICES); do
     # Format ID
@@ -68,7 +68,7 @@ for counter in $(seq 1 $NUMBER_DEVICES); do
         --set image.tag="0.1" \
         --set environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-parkingspot/ngsi-ld-city-offstreet-parkingspot-$id \
         --set environmentVariables.clientId=$DEVICE_NAME-publisher-$id \
-        --set environmentVariables.numberMessages="10" \
+        --set environmentVariables.numberMessages="2500" \
         --set environmentVariables.messagePeriod="0.5" \
         --set environmentVariables.fullPeriod="10" \
         --set environmentVariables.partPeriod="4"
@@ -78,7 +78,7 @@ done
 ## Pole Air Quality Observed Devices
 ############################
 
-NUMBER_DEVICES=2
+NUMBER_DEVICES=10
 DEVICE_NAME=pole-air-quality-observed-device
 for counter in $(seq 1 $NUMBER_DEVICES); do
     # Format ID
@@ -92,7 +92,7 @@ for counter in $(seq 1 $NUMBER_DEVICES); do
         --set image.tag="0.1" \
         --set environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-airqualityobserved/ngsi-ld-city-airqualityobserved-$id \
         --set environmentVariables.clientId=$DEVICE_NAME-publisher-$id \
-        --set environmentVariables.numberMessages="10" \
+        --set environmentVariables.numberMessages="2500" \
         --set environmentVariables.messagePeriod="0.5" \
         --set environmentVariables.fullPeriod="10" \
         --set environmentVariables.partPeriod="4"
@@ -102,7 +102,7 @@ done
 ## Pole Weather Observed Devices
 ############################
 
-NUMBER_DEVICES=2
+NUMBER_DEVICES=10
 DEVICE_NAME=pole-weather-observed-device
 for counter in $(seq 1 $NUMBER_DEVICES); do
     # Format ID
@@ -116,7 +116,7 @@ for counter in $(seq 1 $NUMBER_DEVICES); do
         --set image.tag="0.1" \
         --set environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-weatherobserved/ngsi-ld-city-weatherobserved-$id \
         --set environmentVariables.clientId=$DEVICE_NAME-publisher-$id \
-        --set environmentVariables.numberMessages="10" \
+        --set environmentVariables.numberMessages="2500" \
         --set environmentVariables.messagePeriod="0.5" \
         --set environmentVariables.fullPeriod="10" \
         --set environmentVariables.partPeriod="4"
@@ -126,7 +126,7 @@ done
 ## Streetlight Devices
 ############################
 
-NUMBER_DEVICES=2
+NUMBER_DEVICES=10
 DEVICE_NAME=streetlight-device
 for counter in $(seq 1 $NUMBER_DEVICES); do
     # Format ID
@@ -140,7 +140,7 @@ for counter in $(seq 1 $NUMBER_DEVICES); do
         --set image.tag="0.1" \
         --set environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-streetlight/ngsi-ld-city-streetlight-$id \
         --set environmentVariables.clientId=$DEVICE_NAME-publisher-$id \
-        --set environmentVariables.numberMessages="10" \
+        --set environmentVariables.numberMessages="2500" \
         --set environmentVariables.messagePeriod="0.5" \
         --set environmentVariables.fullPeriod="10" \
         --set environmentVariables.partPeriod="4"
