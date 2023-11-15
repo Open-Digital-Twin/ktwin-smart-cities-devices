@@ -10,24 +10,12 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "0.1"
 
-env:
-  - name: BROKER_ADDRESS
-    value: rabbitmq.ktwin.svc.cluster.local
-  - name: BROKER_PORT
-    value: "1883"
-  - name: BROKER_TOPIC
-    value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-001"
-  - name: CLIENT_ID
-    value: "ktwin-battery-device-publisher-001"
-  - name: USERNAME
-    value: ""
-  - name: PASSWORD
-    value: ""
-  - name: N_MESSAGES
-    value: "20000"
-  - name: MESSAGE_PERIOD
-    value: "0.5"
-  - name: FULL_PERIOD
-    value: "10"
-  - name: PART_PERIOD
-    value: "4"
+environmentVariables:
+  brokerTopic: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-001"
+  clientId: "ktwin-battery-device-publisher-001"
+  username: "default_user_4fNTdy_ZIhc45OYITSH"
+  password: "yXpNW2DmTN_IZOJQtK2kO75zZ2KhImaZ"
+  numberMessages: "20000"
+  messagePeriod: "0.5"
+  fullPeriod: "10"
+  partPeriod: "4"

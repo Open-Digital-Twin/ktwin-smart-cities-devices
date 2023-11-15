@@ -1,0 +1,21 @@
+armDeployment: true
+
+nameOverride: "ktwin-streetlight-device-publisher"
+fullnameOverride: "ktwin-streetlight-device-publisher"
+
+image:
+  name: ktwin-streetlight-device-publisher
+  repository: ghcr.io/open-digital-twin/ktwin-streetlight-device-publisher
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "0.1"
+
+environmentVariables:
+  brokerTopic: "ktwin/real/ngsi-ld-city-streetlight/ngsi-ld-city-streetlight-001"
+  clientId: "ktwin-streetlight-device-publisher-001"
+  username: ""
+  password: ""
+  numberMessages: "20000"
+  messagePeriod: "0.5"
+  fullPeriod: "10"
+  partPeriod: "4"

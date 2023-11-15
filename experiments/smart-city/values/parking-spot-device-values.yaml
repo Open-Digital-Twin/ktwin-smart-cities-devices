@@ -1,0 +1,21 @@
+armDeployment: true
+
+nameOverride: "ktwin-parking-spot-device-publisher"
+fullnameOverride: "ktwin-parking-spot-device-publisher"
+
+image:
+  name: ktwin-parking-spot-device-publisher
+  repository: ghcr.io/open-digital-twin/ktwin-parking-spot-device-publisher
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "0.1"
+
+environmentVariables:
+  brokerTopic: "ktwin/real/ngsi-ld-city-parkingspot/ngsi-ld-city-offstreet-parkingspot-001"
+  clientId: "ktwin-parking-spot-device-publisher-001"
+  username: ""
+  password: ""
+  numberMessages: "20000"
+  messagePeriod: "0.5"
+  fullPeriod: "10"
+  partPeriod: "4"

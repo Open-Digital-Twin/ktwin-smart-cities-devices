@@ -21,7 +21,26 @@ spec:
           {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-            {{- toYaml .Values.env | nindent 12 }}
+            - name: "BROKER_ADDRESS"
+              value: {{ .Values.environmentVariables.brokerAddress | quote }}
+            - name: "BROKER_PORT"
+              value: {{ .Values.environmentVariables.brokerPort | quote }}
+            - name: "BROKER_TOPIC"
+              value: {{ .Values.environmentVariables.brokerTopic | quote }}
+            - name: "CLIENT_ID"
+              value: {{ .Values.environmentVariables.clientId | quote }}
+            - name: "USERNAME"
+              value: {{ .Values.environmentVariables.username | quote }}
+            - name: "PASSWORD"
+              value: {{ .Values.environmentVariables.password | quote}}
+            - name: "N_MESSAGES"
+              value: {{ .Values.environmentVariables.numberMessages | quote }}
+            - name: "MESSAGE_PERIOD"
+              value: {{ .Values.environmentVariables.messagePeriod | quote }}
+            - name: "FULL_PERIOD"
+              value: {{ .Values.environmentVariables.fullPeriod | quote }}
+            - name: "PART_PERIOD"
+              value: {{ .Values.environmentVariables.partPeriod | quote }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- if .Values.armDeployment }}

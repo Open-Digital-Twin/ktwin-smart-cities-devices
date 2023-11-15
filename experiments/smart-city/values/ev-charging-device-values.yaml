@@ -1,0 +1,21 @@
+armDeployment: true
+
+nameOverride: "ktwin-ev-charging-device-publisher"
+fullnameOverride: "ktwin-ev-charging-device-publisher"
+
+image:
+  name: ktwin-ev-charging-device-publisher
+  repository: ghcr.io/open-digital-twin/ktwin-ev-charging-device-publisher
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "0.1"
+
+environmentVariables:
+  brokerTopic: "ktwin/real/ngsi-ld-city-evchargingstation/ngsi-ld-city-evchargingstation-001"
+  clientId: "ktwin-ev-charging-device-publisher-001"
+  username: ""
+  password: ""
+  numberMessages: "20000"
+  messagePeriod: "0.5"
+  fullPeriod: "10"
+  partPeriod: "4"

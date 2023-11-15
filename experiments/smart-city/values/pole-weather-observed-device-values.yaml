@@ -1,0 +1,21 @@
+armDeployment: true
+
+nameOverride: "ktwin-pole-weather-observed-device-publisher"
+fullnameOverride: "ktwin-pole-weather-observed-device-publisher"
+
+image:
+  name: ktwin-pole-weather-observed-device-publisher
+  repository: ghcr.io/open-digital-twin/ktwin-pole-weather-observed-device-publisher
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "0.1"
+
+environmentVariables:
+  brokerTopic: "ktwin/real/ngsi-ld-city-weatherobserved/ngsi-ld-city-weatherobserved-001"
+  clientId: "ktwin-pole-weather-observed-device-publisher-001"
+  username: ""
+  password: ""
+  numberMessages: "20000"
+  messagePeriod: "0.5"
+  fullPeriod: "10"
+  partPeriod: "4"

@@ -1,0 +1,21 @@
+armDeployment: true
+
+nameOverride: "ktwin-pole-air-quality-observed-device-publisher"
+fullnameOverride: "ktwin-pole-air-quality-observed-device-publisher"
+
+image:
+  name: ktwin-pole-air-quality-observed-device-publisher
+  repository: ghcr.io/open-digital-twin/ktwin-pole-air-quality-observed-device-publisher
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "0.1"
+
+environmentVariables:
+  brokerTopic: "ktwin/real/ngsi-ld-city-airqualityobserved/ngsi-ld-city-airqualityobserved-001"
+  clientId: "ktwin-pole-air-quality-observed-device-publisher-001"
+  username: ""
+  password: ""
+  numberMessages: "20000"
+  messagePeriod: "0.5"
+  fullPeriod: "10"
+  partPeriod: "4"
