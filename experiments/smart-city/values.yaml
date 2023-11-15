@@ -19,6 +19,8 @@ podAnnotations: {}
 environmentVariables:
   brokerAddress: rabbitmq.ktwin.svc.cluster.local
   brokerPort: "1883"
+  username: ""
+  password: ""
 
 resources:
   # We usually recommend not to specify default resources and to leave this as a conscious

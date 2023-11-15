@@ -13,9 +13,7 @@ image:
 environmentVariables:
   brokerTopic: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-001"
   clientId: "ktwin-battery-device-publisher-001"
-  username: "default_user_4fNTdy_ZIhc45OYITSH"
-  password: "yXpNW2DmTN_IZOJQtK2kO75zZ2KhImaZ"
-  numberMessages: "20000"
+  numberMessages: "2500"
   messagePeriod: "0.5"
   fullPeriod: "10"
   partPeriod: "4"

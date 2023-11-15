@@ -13,9 +13,7 @@ image:
 environmentVariables:
   brokerTopic: "ktwin/real/ngsi-ld-city-parkingspot/ngsi-ld-city-offstreet-parkingspot-001"
   clientId: "ktwin-parking-spot-device-publisher-001"
-  username: ""
-  password: ""
-  numberMessages: "20000"
+  numberMessages: "2500"
   messagePeriod: "0.5"
   fullPeriod: "10"
   partPeriod: "4"
