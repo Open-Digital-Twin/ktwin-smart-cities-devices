@@ -1,5 +1,3 @@
-armDeployment: true
-
 nameOverride: "ktwin-streetlight-device-publisher"
 fullnameOverride: "ktwin-streetlight-device-publisher"
 

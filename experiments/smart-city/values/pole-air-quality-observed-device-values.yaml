@@ -1,5 +1,3 @@
-armDeployment: true
-
 nameOverride: "ktwin-pole-air-quality-observed-device-publisher"
 fullnameOverride: "ktwin-pole-air-quality-observed-device-publisher"
 

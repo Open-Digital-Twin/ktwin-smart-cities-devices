@@ -1,5 +1,3 @@
-armDeployment: true
-
 nameOverride: "ktwin-ev-charging-device-publisher"
 fullnameOverride: "ktwin-ev-charging-device-publisher"
 

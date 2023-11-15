@@ -1,5 +1,3 @@
-armDeployment: true
-
 nameOverride: "ktwin-battery-device-publisher"
 fullnameOverride: "ktwin-battery-device-publisher"
 
