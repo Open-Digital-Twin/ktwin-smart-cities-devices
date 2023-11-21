@@ -34,7 +34,7 @@ spec:
             - name: "PASSWORD"
               value: {{ .Values.environmentVariables.password | quote}}
             - name: "FULL_TIME_FRAMES"
-              value: {{ .Values.environmentVariables.fullTimeFrames | quote }}
+              value: {{ .Values.environmentVariables.fullTimeFrames }}
             - name: "MESSAGE_PERIOD"
               value: {{ .Values.environmentVariables.messagePeriod | quote }}
             - name: "FULL_PERIOD"
