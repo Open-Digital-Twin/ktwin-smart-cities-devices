@@ -11,7 +11,7 @@ image:
 environmentVariables:
   brokerTopic: "ktwin/real/ngsi-ld-city-streetlight/ngsi-ld-city-streetlight-001"
   clientId: "ktwin-streetlight-device-publisher-001"
-  numberMessages: "2500"
+  fullTimeFrames: "2500"
   messagePeriod: "0.5"
   fullPeriod: "10"
   partPeriod: "4"

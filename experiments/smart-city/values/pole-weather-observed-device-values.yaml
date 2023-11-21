@@ -11,7 +11,7 @@ image:
 environmentVariables:
   brokerTopic: "ktwin/real/ngsi-ld-city-weatherobserved/ngsi-ld-city-weatherobserved-001"
   clientId: "ktwin-pole-weather-observed-device-publisher-001"
-  numberMessages: "2500"
+  fullTimeFrames: "2500"
   messagePeriod: "0.5"
   fullPeriod: "10"
   partPeriod: "4"

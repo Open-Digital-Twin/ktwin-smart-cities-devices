@@ -20,7 +20,7 @@ for counter in $(seq 1 $NUMBER_DEVICES); do
         --set image.tag="0.1" \
         --set environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-$id \
         --set environmentVariables.clientId=$DEVICE_NAME-publisher-$id \
-        --set environmentVariables.numberMessages="2500" \
+        --set environmentVariables.fullTimeFrames="2500" \
         --set environmentVariables.messagePeriod="0.5" \
         --set environmentVariables.fullPeriod="10" \
         --set environmentVariables.partPeriod="4"
@@ -44,7 +44,7 @@ for counter in $(seq 1 $NUMBER_DEVICES); do
         --set image.tag="0.1" \
         --set environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-evchargingstation/ngsi-ld-city-evchargingstation-$id \
         --set environmentVariables.clientId=$DEVICE_NAME-publisher-$id \
-        --set environmentVariables.numberMessages="2500" \
+        --set environmentVariables.fullTimeFrames="2500" \
         --set environmentVariables.messagePeriod="0.5" \
         --set environmentVariables.fullPeriod="10" \
         --set environmentVariables.partPeriod="4"
@@ -68,7 +68,7 @@ for counter in $(seq 1 $NUMBER_DEVICES); do
         --set image.tag="0.1" \
         --set environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-parkingspot/ngsi-ld-city-offstreet-parkingspot-$id \
         --set environmentVariables.clientId=$DEVICE_NAME-publisher-$id \
-        --set environmentVariables.numberMessages="2500" \
+        --set environmentVariables.fullTimeFrames="2500" \
         --set environmentVariables.messagePeriod="0.5" \
         --set environmentVariables.fullPeriod="10" \
         --set environmentVariables.partPeriod="4"
@@ -92,7 +92,7 @@ for counter in $(seq 1 $NUMBER_DEVICES); do
         --set image.tag="0.1" \
         --set environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-airqualityobserved/ngsi-ld-city-airqualityobserved-$id \
         --set environmentVariables.clientId=$DEVICE_NAME-publisher-$id \
-        --set environmentVariables.numberMessages="2500" \
+        --set environmentVariables.fullTimeFrames="2500" \
         --set environmentVariables.messagePeriod="0.5" \
         --set environmentVariables.fullPeriod="10" \
         --set environmentVariables.partPeriod="4"
@@ -116,7 +116,7 @@ for counter in $(seq 1 $NUMBER_DEVICES); do
         --set image.tag="0.1" \
         --set environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-weatherobserved/ngsi-ld-city-weatherobserved-$id \
         --set environmentVariables.clientId=$DEVICE_NAME-publisher-$id \
-        --set environmentVariables.numberMessages="2500" \
+        --set environmentVariables.fullTimeFrames="2500" \
         --set environmentVariables.messagePeriod="0.5" \
         --set environmentVariables.fullPeriod="10" \
         --set environmentVariables.partPeriod="4"
@@ -140,7 +140,7 @@ for counter in $(seq 1 $NUMBER_DEVICES); do
         --set image.tag="0.1" \
         --set environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-streetlight/ngsi-ld-city-streetlight-$id \
         --set environmentVariables.clientId=$DEVICE_NAME-publisher-$id \
-        --set environmentVariables.numberMessages="2500" \
+        --set environmentVariables.fullTimeFrames="2500" \
         --set environmentVariables.messagePeriod="0.5" \
         --set environmentVariables.fullPeriod="10" \
         --set environmentVariables.partPeriod="4"

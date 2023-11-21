@@ -33,8 +33,8 @@ spec:
               value: {{ .Values.environmentVariables.username | quote }}
             - name: "PASSWORD"
               value: {{ .Values.environmentVariables.password | quote}}
-            - name: "N_MESSAGES"
-              value: {{ .Values.environmentVariables.numberMessages | quote }}
+            - name: "FULL_TIME_FRAMES"
+              value: {{ .Values.environmentVariables.fullTimeFrames | quote }}
             - name: "MESSAGE_PERIOD"
               value: {{ .Values.environmentVariables.messagePeriod | quote }}
             - name: "FULL_PERIOD"
