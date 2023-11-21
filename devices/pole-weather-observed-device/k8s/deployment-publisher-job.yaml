@@ -4,7 +4,7 @@ metadata:
   namespace: ktwin
   name: ktwin-pole-weather-observed-device-publisher
   labels:
-    app: ktwin-pole-weather-observed-device-publisher
+    app: ktwin-pole-device-publisher
 spec:
   template:
     spec:

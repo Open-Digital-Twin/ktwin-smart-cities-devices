@@ -25,9 +25,9 @@ spec:
         - name: CLIENT_ID
           value: "ktwin-streetlight-device-publisher-001"
         - name: USERNAME
-          value: "default_user_4fNTdy_ZIhc45OYITSH"
+          value: ""
         - name: PASSWORD
-          value: "yXpNW2DmTN_IZOJQtK2kO75zZ2KhImaZ"
+          value: ""
         - name: N_MESSAGES
           value: "100"
         - name: MESSAGE_PERIOD

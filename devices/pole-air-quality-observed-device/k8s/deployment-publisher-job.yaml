@@ -29,7 +29,7 @@ spec:
         - name: PASSWORD
           value: ""
         - name: N_MESSAGES
-          value: "10000"
+          value: "100000"
         - name: MESSAGE_PERIOD
           value: "0.2"
         - name: FULL_PERIOD
