@@ -28,8 +28,8 @@ spec:
           value: ""
         - name: PASSWORD
           value: ""
-        - name: N_MESSAGES
-          value: "100000"
+        - name: FULL_TIME_FRAMES
+          value: "30"
         - name: MESSAGE_PERIOD
           value: "0.2"
         - name: FULL_PERIOD
