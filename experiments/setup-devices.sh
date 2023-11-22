@@ -23,7 +23,7 @@ for counter in $(seq 1 $NUMBER_DEVICES); do
         --set environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
         --set environmentVariables.messagePeriod="20;20;20;20;20;20" \
         --set environmentVariables.fullPeriod="10" \
-        --set environmentVariables.partPeriod="4"
+        --set environmentVariables.partPeriod="4" &
 done
 
 ############################
@@ -34,7 +34,7 @@ NUMBER_DEVICES=10
 DEVICE_NAME=ev-charging-device
 for counter in $(seq 1 $NUMBER_DEVICES); do
     # Format ID
-    id=$(printf "%03d" $counter)
+    id=$(printf "nb001-ev%04d" $counter)
     helm upgrade --install $DEVICE_NAME-$id smart-city \
         --set nameOverride=$DEVICE_NAME-publisher-$id \
         --set fullnameOverride=$DEVICE_NAME-publisher-$id \
@@ -47,18 +47,18 @@ for counter in $(seq 1 $NUMBER_DEVICES); do
         --set environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
         --set environmentVariables.messagePeriod="80;15;5;5;15;80" \
         --set environmentVariables.fullPeriod="10" \
-        --set environmentVariables.partPeriod="4"
+        --set environmentVariables.partPeriod="4" &
 done
 
 ############################
-## Parking Spot Devices
+## Off street Parking Spot Devices
 ############################
 
 NUMBER_DEVICES=10
 DEVICE_NAME=parking-spot-device
 for counter in $(seq 1 $NUMBER_DEVICES); do
     # Format ID
-    id=$(printf "%03d" $counter)
+    id=$(printf "nb001-ofps%05d" $counter)
     helm upgrade --install $DEVICE_NAME-$id smart-city \
         --set nameOverride=$DEVICE_NAME-publisher-$id \
         --set fullnameOverride=$DEVICE_NAME-publisher-$id \
@@ -71,7 +71,7 @@ for counter in $(seq 1 $NUMBER_DEVICES); do
         --set environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
         --set environmentVariables.messagePeriod="80;15;5;5;15;80" \
         --set environmentVariables.fullPeriod="10" \
-        --set environmentVariables.partPeriod="4"
+        --set environmentVariables.partPeriod="4" &
 done
 
 ############################
@@ -82,7 +82,7 @@ NUMBER_DEVICES=10
 DEVICE_NAME=pole-air-quality-observed-device
 for counter in $(seq 1 $NUMBER_DEVICES); do
     # Format ID
-    id=$(printf "%03d" $counter)
+    id=$(printf "nb001-p%05d" $counter)
     helm upgrade --install $DEVICE_NAME-$id smart-city \
         --set nameOverride=$DEVICE_NAME-publisher-$id \
         --set fullnameOverride=$DEVICE_NAME-publisher-$id \
@@ -95,7 +95,7 @@ for counter in $(seq 1 $NUMBER_DEVICES); do
         --set environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
         --set environmentVariables.messagePeriod="10;10;10;10;10;10" \
         --set environmentVariables.fullPeriod="10" \
-        --set environmentVariables.partPeriod="4"
+        --set environmentVariables.partPeriod="4" &
 done
 
 ############################
@@ -106,7 +106,7 @@ NUMBER_DEVICES=10
 DEVICE_NAME=pole-weather-observed-device
 for counter in $(seq 1 $NUMBER_DEVICES); do
     # Format ID
-    id=$(printf "%03d" $counter)
+    id=$(printf "nb001-p%05d" $counter)
     helm upgrade --install $DEVICE_NAME-$id smart-city \
         --set nameOverride=$DEVICE_NAME-publisher-$id \
         --set fullnameOverride=$DEVICE_NAME-publisher-$id \
@@ -119,7 +119,7 @@ for counter in $(seq 1 $NUMBER_DEVICES); do
         --set environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
         --set environmentVariables.messagePeriod="10;10;10;10;10;10" \
         --set environmentVariables.fullPeriod="10" \
-        --set environmentVariables.partPeriod="4"
+        --set environmentVariables.partPeriod="4" &
 done
 
 ############################
@@ -130,7 +130,7 @@ NUMBER_DEVICES=10
 DEVICE_NAME=streetlight-device
 for counter in $(seq 1 $NUMBER_DEVICES); do
     # Format ID
-    id=$(printf "%03d" $counter)
+    id=$(printf "nb001-sl%05d" $counter)
     helm upgrade --install $DEVICE_NAME-$id smart-city \
         --set nameOverride=$DEVICE_NAME-publisher-$id \
         --set fullnameOverride=$DEVICE_NAME-publisher-$id \
@@ -143,5 +143,8 @@ for counter in $(seq 1 $NUMBER_DEVICES); do
         --set environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
         --set environmentVariables.messagePeriod="240;120;240;240;120;240" \
         --set environmentVariables.fullPeriod="10" \
-        --set environmentVariables.partPeriod="4"
+        --set environmentVariables.partPeriod="4" &
 done
+
+# Wait for processes to the closed
+wait
