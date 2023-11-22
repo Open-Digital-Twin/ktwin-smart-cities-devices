@@ -1,3 +1,4 @@
+import os
 import json
 from datetime import datetime
 from modules.mqtt import load_mqtt_config, load_mqtt_client
@@ -10,14 +11,49 @@ def build_message(msg_count: int):
     msg["dateObservedFrom"] = datetime.now().isoformat()
     return json.dumps(msg)
 
-def build_crowd_flow_observed():
+def build_crowd_flow_observed(msg_count: int):
     sensor_data = dict()
-    sensor_data["occupancy"] = True
-    sensor_data["averageCrowdSpeed"] = 8
-    sensor_data["congested"] = True
-    sensor_data["averageHeadwayTime"] = 8
-    sensor_data["peopleCount"] = 50
+    part_period = int(os.getenv("PART_PERIOD"))
+    full_period = int(os.getenv("FULL_PERIOD"))
+    sensor_data["averageCrowdSpeed"] = generate_average_crowd_speed(msg_count=msg_count, part_period=part_period, full_period=full_period)
+    sensor_data["averageHeadwayTime"] = generate_average_headway_time(msg_count=msg_count, part_period=part_period, full_period=full_period)
+    sensor_data["peopleCount"] = generate_average_people_count(msg_count=msg_count, part_period=part_period, full_period=full_period)
     return sensor_data
+
+# This method generates status based on the msg_count information
+# 0 -> part_period -> full_period
+def generate_average_crowd_speed(msg_count, part_period, full_period):
+    if full_period < part_period:
+        raise Exception("full_period must be greater than part_period")
+    
+    if (msg_count % full_period) < part_period:
+        return 2
+    if (msg_count % full_period) > part_period:
+        return 8
+
+    return 2
+
+def generate_average_headway_time(msg_count, part_period, full_period):
+    if full_period < part_period:
+        raise Exception("full_period must be greater than part_period")
+    
+    if (msg_count % full_period) < part_period:
+        return 1
+    if (msg_count % full_period) > part_period:
+        return 6
+
+    return 2
+
+def generate_average_people_count(msg_count, part_period, full_period):
+    if full_period < part_period:
+        raise Exception("full_period must be greater than part_period")
+    
+    if (msg_count % full_period) < part_period:
+        return 50
+    if (msg_count % full_period) > part_period:
+        return 5
+
+    return 2
 
 def run():
 
