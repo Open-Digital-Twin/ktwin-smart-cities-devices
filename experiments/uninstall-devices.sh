@@ -38,6 +38,20 @@ for counter in $(seq 1 $NUMBER_DEVICES); do
 done
 
 NUMBER_DEVICES=10
+DEVICE_NAME=pole-noise-level-observed-device
+for counter in $(seq 1 $NUMBER_DEVICES); do
+    id=$(printf "nb001-p%05d" $counter)
+    helm uninstall $DEVICE_NAME-$id
+done
+
+NUMBER_DEVICES=10
+DEVICE_NAME=pole-crow-flow-observed-device
+for counter in $(seq 1 $NUMBER_DEVICES); do
+    id=$(printf "nb001-p%05d" $counter)
+    helm uninstall $DEVICE_NAME-$id
+done
+
+NUMBER_DEVICES=10
 DEVICE_NAME=streetlight-device
 for counter in $(seq 1 $NUMBER_DEVICES); do
     id=$(printf "nb001-sl%05d" $counter)

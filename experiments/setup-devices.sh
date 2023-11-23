@@ -123,6 +123,54 @@ for counter in $(seq 1 $NUMBER_DEVICES); do
 done
 
 ############################
+## Pole Noise Level Observed Devices
+############################
+
+NUMBER_DEVICES=10
+DEVICE_NAME=pole-noise-level-observed-device
+for counter in $(seq 1 $NUMBER_DEVICES); do
+    # Format ID
+    id=$(printf "nb001-p%05d" $counter)
+    helm upgrade --install $DEVICE_NAME-$id smart-city \
+        --set nameOverride=$DEVICE_NAME-publisher-$id \
+        --set fullnameOverride=$DEVICE_NAME-publisher-$id \
+        --set image.name=$DEVICE_NAME-publisher \
+        --set image.repository=ghcr.io/open-digital-twin/ktwin-$DEVICE_NAME-publisher \
+        --set image.pullPolicy=Always \
+        --set image.tag="0.1" \
+        --set environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-noiselevelobserved/ngsi-ld-city-noiselevelobserved-$id \
+        --set environmentVariables.clientId=$DEVICE_NAME-publisher-$id \
+        --set environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
+        --set environmentVariables.messagePeriod="10;10;10;10;10;10" \
+        --set environmentVariables.fullPeriod="10" \
+        --set environmentVariables.partPeriod="4" &
+done
+
+############################
+## Pole Crowd Level Observed Devices
+############################
+
+NUMBER_DEVICES=10
+DEVICE_NAME=pole-crowd-flow-observed-device
+for counter in $(seq 1 $NUMBER_DEVICES); do
+    # Format ID
+    id=$(printf "nb001-p%05d" $counter)
+    helm upgrade --install $DEVICE_NAME-$id smart-city \
+        --set nameOverride=$DEVICE_NAME-publisher-$id \
+        --set fullnameOverride=$DEVICE_NAME-publisher-$id \
+        --set image.name=$DEVICE_NAME-publisher \
+        --set image.repository=ghcr.io/open-digital-twin/ktwin-$DEVICE_NAME-publisher \
+        --set image.pullPolicy=Always \
+        --set image.tag="0.1" \
+        --set environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-crowdflowobserved/ngsi-ld-city-crowdflowobserved-$id \
+        --set environmentVariables.clientId=$DEVICE_NAME-publisher-$id \
+        --set environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
+        --set environmentVariables.messagePeriod="10;10;10;10;10;10" \
+        --set environmentVariables.fullPeriod="10" \
+        --set environmentVariables.partPeriod="4" &
+done
+
+############################
 ## Streetlight Devices
 ############################
 
