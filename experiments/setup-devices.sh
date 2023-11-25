@@ -2,7 +2,7 @@
 # Values shared between all instances are in values.yaml
 # Values specific for each instance is passed as parameter
 
-APPLY_HELM=false
+APPLY_HELM=true
 
 if [[ $APPLY_HELM == true ]]
 then
@@ -87,6 +87,12 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
     done
 done
 
+# Wait for processes to the closed
+if [[ $APPLY_HELM == true ]]
+then
+    wait
+fi
+
 ############################
 ## Off street Parking Spot Devices
 ############################
@@ -121,7 +127,11 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
     done
 done
 
-exit
+# Wait for processes to the closed
+if [[ $APPLY_HELM == true ]]
+then
+    wait
+fi
 
 ############################
 ## Pole Air Quality Observed Devices
@@ -153,7 +163,13 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
         fi
     done
 done
-exit
+
+# Wait for processes to the closed
+if [[ $APPLY_HELM == true ]]
+then
+    wait
+fi
+
 ############################
 ## Pole Weather Observed Devices
 ############################
@@ -185,7 +201,11 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
     done
 done
 
-exit
+# Wait for processes to the closed
+if [[ $APPLY_HELM == true ]]
+then
+    wait
+fi
 
 ############################
 ## Pole Noise Level Observed Devices
@@ -218,7 +238,11 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
     done
 done
 
-exit
+# Wait for processes to the closed
+if [[ $APPLY_HELM == true ]]
+then
+    wait
+fi
 
 ############################
 ## Pole Crowd Level Observed Devices
@@ -250,6 +274,12 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
         fi
     done
 done
+
+# Wait for processes to the closed
+if [[ $APPLY_HELM == true ]]
+then
+    wait
+fi
 
 ############################
 ## Streetlight Devices
