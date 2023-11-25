@@ -2,7 +2,7 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-armDeployment: true
+armDeployment: false
 
 image:
   repository: ""
@@ -37,10 +37,10 @@ resources:
     memory: 16Mi
 
 nodeSelectorArm:
-  beta.kubernetes.io/arch: arm64
+  kubernetes.io/arch: arm64
 
 nodeSelectorx86:
-  beta.kubernetes.io/arch: amd64
+  kubernetes.io/arch: amd64
 
 restartPolicy: Never
 
