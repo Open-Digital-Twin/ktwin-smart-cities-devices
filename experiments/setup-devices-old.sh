@@ -2,32 +2,29 @@
 # Values shared between all instances are in values.yaml
 # Values specific for each instance is passed as parameter
 
-NUMBER_NEIGHBORHOOD=1
-NUMBER_POLE=50
-
 ############################
 ## Battery Devices
 ############################
 
-# NUMBER_DEVICES=10
-# DEVICE_NAME=battery-device
-# for counter in $(seq 1 $NUMBER_DEVICES); do
-#     # Format ID
-#     id=$(printf "%03d" $counter)
-#     helm upgrade --install $DEVICE_NAME-$id smart-city \
-#         --set nameOverride=$DEVICE_NAME-publisher-$id \
-#         --set fullnameOverride=$DEVICE_NAME-publisher-$id \
-#         --set image.name=$DEVICE_NAME-publisher \
-#         --set image.repository=ghcr.io/open-digital-twin/ktwin-$DEVICE_NAME-publisher \
-#         --set image.pullPolicy=Always \
-#         --set image.tag="0.1" \
-#         --set environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-$id \
-#         --set environmentVariables.clientId=$DEVICE_NAME-publisher-$id \
-#         --set environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
-#         --set environmentVariables.messagePeriod="20;20;20;20;20;20" \
-#         --set environmentVariables.fullPeriod="10" \
-#         --set environmentVariables.partPeriod="4" &
-# done
+NUMBER_DEVICES=10
+DEVICE_NAME=battery-device
+for counter in $(seq 1 $NUMBER_DEVICES); do
+    # Format ID
+    id=$(printf "%03d" $counter)
+    helm upgrade --install $DEVICE_NAME-$id smart-city \
+        --set nameOverride=$DEVICE_NAME-publisher-$id \
+        --set fullnameOverride=$DEVICE_NAME-publisher-$id \
+        --set image.name=$DEVICE_NAME-publisher \
+        --set image.repository=ghcr.io/open-digital-twin/ktwin-$DEVICE_NAME-publisher \
+        --set image.pullPolicy=Always \
+        --set image.tag="0.1" \
+        --set environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-$id \
+        --set environmentVariables.clientId=$DEVICE_NAME-publisher-$id \
+        --set environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
+        --set environmentVariables.messagePeriod="20;20;20;20;20;20" \
+        --set environmentVariables.fullPeriod="10" \
+        --set environmentVariables.partPeriod="4" &
+done
 
 # ############################
 # ## EV Charging Devices
@@ -57,6 +54,7 @@ done
 ## Off street Parking Spot Devices
 ############################
 
+NUMBER_NEIGHBORHOOD=1
 NUMBER_PARKING=5
 NUMBER_PARKING_SPOT=10
 DEVICE_NAME=parking-spot-device
@@ -90,25 +88,24 @@ exit
 ## Pole Air Quality Observed Devices
 ############################
 
+NUMBER_DEVICES=10
 DEVICE_NAME=pole-air-quality-observed-device
-for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
-    neighborhood_id=$(printf "nb%03d" $neighborhood)
-    for pole in $(seq 1 $NUMBER_POLE); do
-        id=$(printf "p%05d" $pole)
-        helm upgrade --install $DEVICE_NAME-$id smart-city \
-            --set nameOverride=$DEVICE_NAME-publisher-$id \
-            --set fullnameOverride=$DEVICE_NAME-publisher-$id \
-            --set image.name=$DEVICE_NAME-publisher \
-            --set image.repository=ghcr.io/open-digital-twin/ktwin-$DEVICE_NAME-publisher \
-            --set image.pullPolicy=Always \
-            --set image.tag="0.1" \
-            --set environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-airqualityobserved/ngsi-ld-city-airqualityobserved-$id \
-            --set environmentVariables.clientId=$DEVICE_NAME-publisher-$id \
-            --set environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
-            --set environmentVariables.messagePeriod="10;10;10;10;10;10" \
-            --set environmentVariables.fullPeriod="10" \
-            --set environmentVariables.partPeriod="4" &
-    done
+for counter in $(seq 1 $NUMBER_DEVICES); do
+    # Format ID
+    id=$(printf "nb001-p%05d" $counter)
+    helm upgrade --install $DEVICE_NAME-$id smart-city \
+        --set nameOverride=$DEVICE_NAME-publisher-$id \
+        --set fullnameOverride=$DEVICE_NAME-publisher-$id \
+        --set image.name=$DEVICE_NAME-publisher \
+        --set image.repository=ghcr.io/open-digital-twin/ktwin-$DEVICE_NAME-publisher \
+        --set image.pullPolicy=Always \
+        --set image.tag="0.1" \
+        --set environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-airqualityobserved/ngsi-ld-city-airqualityobserved-$id \
+        --set environmentVariables.clientId=$DEVICE_NAME-publisher-$id \
+        --set environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
+        --set environmentVariables.messagePeriod="10;10;10;10;10;10" \
+        --set environmentVariables.fullPeriod="10" \
+        --set environmentVariables.partPeriod="4" &
 done
 
 ############################
