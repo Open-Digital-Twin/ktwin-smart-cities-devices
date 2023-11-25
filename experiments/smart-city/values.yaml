@@ -37,10 +37,10 @@ resources:
     memory: 16Mi
 
 nodeSelectorArm:
-  nodetype: edge
+  beta.kubernetes.io/arch: arm64
 
 nodeSelectorx86:
-  nodetype: cloud
+  beta.kubernetes.io/arch: amd64
 
 restartPolicy: Never
 
