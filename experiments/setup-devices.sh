@@ -88,7 +88,7 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
                     --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-$id \
                     --set images[1].environmentVariables.clientId=$BATTERY_DEVICE_NAME-publisher-$id \
                     --set images[1].environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
-                    --set images[0].environmentVariables.messagePeriod="240;120;240;240;120;240" \
+                    --set images[1].environmentVariables.messagePeriod="240;120;240;240;120;240" \
                     --set images[1].environmentVariables.fullPeriod="10" \
                     --set images[1].environmentVariables.partPeriod="4" &
             else
@@ -134,7 +134,7 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
                 --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-$id \
                 --set images[1].environmentVariables.clientId=$BATTERY_DEVICE_NAME-publisher-$id \
                 --set images[1].environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
-                --set images[0].environmentVariables.messagePeriod="240;120;240;240;120;240" \
+                --set images[1].environmentVariables.messagePeriod="240;120;240;240;120;240" \
                 --set images[1].environmentVariables.fullPeriod="10" \
                 --set images[1].environmentVariables.partPeriod="4" &
         else
@@ -179,7 +179,7 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
                 --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-$id \
                 --set images[1].environmentVariables.clientId=$BATTERY_DEVICE_NAME-publisher-$id \
                 --set images[1].environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
-                --set images[0].environmentVariables.messagePeriod="240;120;240;240;120;240" \
+                --set images[1].environmentVariables.messagePeriod="240;120;240;240;120;240" \
                 --set images[1].environmentVariables.fullPeriod="10" \
                 --set images[1].environmentVariables.partPeriod="4" &
         else
@@ -224,7 +224,7 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
                 --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-$id \
                 --set images[1].environmentVariables.clientId=$BATTERY_DEVICE_NAME-publisher-$id \
                 --set images[1].environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
-                --set images[0].environmentVariables.messagePeriod="240;120;240;240;120;240" \
+                --set images[1].environmentVariables.messagePeriod="240;120;240;240;120;240" \
                 --set images[1].environmentVariables.fullPeriod="10" \
                 --set images[1].environmentVariables.partPeriod="4" &
         else
@@ -269,7 +269,7 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
                 --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-$id \
                 --set images[1].environmentVariables.clientId=$BATTERY_DEVICE_NAME-publisher-$id \
                 --set images[1].environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
-                --set images[0].environmentVariables.messagePeriod="240;120;240;240;120;240" \
+                --set images[1].environmentVariables.messagePeriod="240;120;240;240;120;240" \
                 --set images[1].environmentVariables.fullPeriod="10" \
                 --set images[1].environmentVariables.partPeriod="4" &
         else
@@ -314,7 +314,7 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
                 --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-$id \
                 --set images[1].environmentVariables.clientId=$BATTERY_DEVICE_NAME-publisher-$id \
                 --set images[1].environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
-                --set images[0].environmentVariables.messagePeriod="240;120;240;240;120;240" \
+                --set images[1].environmentVariables.messagePeriod="240;120;240;240;120;240" \
                 --set images[1].environmentVariables.fullPeriod="10" \
                 --set images[1].environmentVariables.partPeriod="4" &
         else
