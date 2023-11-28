@@ -14,8 +14,8 @@ images:
 globalEnvironmentVariables:
   brokerAddress: rabbitmq.ktwin.svc.cluster.local
   brokerPort: "1883"
-  username: ""
-  password: ""
+  username: "default_user_4fNTdy_ZIhc45OYITSH"
+  password: "yXpNW2DmTN_IZOJQtK2kO75zZ2KhImaZ"
 
 namespace: ktwin
 imagePullSecrets: []
