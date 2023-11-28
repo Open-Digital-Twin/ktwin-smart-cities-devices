@@ -13,34 +13,36 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
-        - name: {{ .Values.image.name }}
-          {{- if .Values.armDeployment }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}-{{ .Values.image.armSuffix }}"
+        {{- range $i := .Values.images }}
+        - name: {{ $i.name }}
+          {{- if .armDeployment }}
+          image: "{{ $i.repository }}:{{ $i.tag }}-{{ $i.armSuffix }}"
           {{- else }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          image: "{{ $i.repository }}:{{ $i.tag }}"
           {{- end }}
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          imagePullPolicy: {{ $i.pullPolicy }}
           env:
             - name: "BROKER_ADDRESS"
-              value: {{ .Values.environmentVariables.brokerAddress | quote }}
+              value: {{ $.Values.globalEnvironmentVariables.brokerAddress | quote }}
             - name: "BROKER_PORT"
-              value: {{ .Values.environmentVariables.brokerPort | quote }}
+              value: {{ $.Values.globalEnvironmentVariables.brokerPort | quote }}
             - name: "BROKER_TOPIC"
-              value: {{ .Values.environmentVariables.brokerTopic | quote }}
+              value: {{ $i.environmentVariables.brokerTopic | quote }}
             - name: "CLIENT_ID"
-              value: {{ .Values.environmentVariables.clientId | quote }}
+              value: {{ $i.environmentVariables.clientId | quote }}
             - name: "USERNAME"
-              value: {{ .Values.environmentVariables.username | quote }}
+              value: {{ $.Values.globalEnvironmentVariables.username | quote }}
             - name: "PASSWORD"
-              value: {{ .Values.environmentVariables.password | quote}}
+              value: {{ $.Values.globalEnvironmentVariables.password | quote}}
             - name: "FULL_TIME_FRAMES"
-              value: {{ .Values.environmentVariables.fullTimeFrames | quote }}
+              value: {{ $i.environmentVariables.fullTimeFrames | quote }}
             - name: "MESSAGE_PERIOD"
-              value: {{ .Values.environmentVariables.messagePeriod | quote }}
+              value: {{ $i.environmentVariables.messagePeriod | quote }}
             - name: "FULL_PERIOD"
-              value: {{ .Values.environmentVariables.fullPeriod | quote }}
+              value: {{ $i.environmentVariables.fullPeriod | quote }}
             - name: "PART_PERIOD"
-              value: {{ .Values.environmentVariables.partPeriod | quote }}
+              value: {{ $i.environmentVariables.partPeriod | quote }}
+        {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- if .Values.armDeployment }}
