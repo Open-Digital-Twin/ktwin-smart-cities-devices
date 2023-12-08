@@ -15,8 +15,8 @@ spec:
       containers:
         {{- range $i := .Values.images }}
         - name: {{ $i.name }}
-          {{- if .armDeployment }}
-          image: "{{ $i.repository }}:{{ $i.tag }}-{{ .armSuffix }}"
+          {{- if .Values.armDeployment }}
+          image: "{{ $i.repository }}:{{ $i.tag }}-{{ .Values.armSuffix }}"
           {{- else }}
           image: "{{ $i.repository }}:{{ $i.tag }}"
           {{- end }}
