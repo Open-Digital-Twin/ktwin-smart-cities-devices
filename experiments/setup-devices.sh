@@ -53,8 +53,6 @@ done
 # Wait for processes to the closed
 if [[ $APPLY_HELM == true ]]
 then
-    # Keep logging to not lose session
-    while sleep 2; do echo "Setting up experiment"; done &
     wait
 fi
 
@@ -103,8 +101,6 @@ done
 # Wait for processes to the closed
 if [[ $APPLY_HELM == true ]]
 then
-    # Keep logging to not lose session
-    while sleep 2; do echo "Setting up experiment"; done &
     wait
 fi
 
@@ -150,8 +146,6 @@ done
 # Wait for processes to the closed
 if [[ $APPLY_HELM == true ]]
 then
-    # Keep logging to not lose session
-    while sleep 2; do echo "Setting up experiment"; done &
     wait
 fi
 
@@ -197,8 +191,6 @@ done
 # Wait for processes to the closed
 if [[ $APPLY_HELM == true ]]
 then
-    # Keep logging to not lose session
-    while sleep 2; do echo "Setting up experiment"; done &
     wait
 fi
 
@@ -244,8 +236,6 @@ done
 # Wait for processes to the closed
 if [[ $APPLY_HELM == true ]]
 then
-    # Keep logging to not lose session
-    while sleep 2; do echo "Setting up experiment"; done &
     wait
 fi
 
@@ -291,8 +281,6 @@ done
 # Wait for processes to the closed
 if [[ $APPLY_HELM == true ]]
 then
-    # Keep logging to not lose session
-    while sleep 2; do echo "Setting up experiment"; done &
     wait
 fi
 
@@ -338,7 +326,5 @@ done
 # Wait for processes to the closed
 if [[ $APPLY_HELM == true ]]
 then
-    # Keep logging to not lose session
-    while sleep 2; do echo "Setting up experiment"; done &
     wait
 fi
