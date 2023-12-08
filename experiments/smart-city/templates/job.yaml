@@ -1,19 +1,20 @@
+{{ range $deviceId := .Values.deviceIds  }}
 apiVersion: batch/v1
 kind: Job
 metadata:
-  namespace: {{ include "smart-city.namespace" . }}
-  name: {{ include "smart-city.fullname" . }}
+  namespace: {{ include "smart-city.namespace" $ }}
+  name: {{ include "smart-city.fullname" $ }}-{{ $deviceId }}
   labels:
-    {{- include "smart-city.labels" . | nindent 4 }}
+    {{- include "smart-city.labels" $ | nindent 4 }}
 spec:
   template:
     spec:
-      {{- with .Values.imagePullSecrets }}
+      {{- with $.Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
-        {{- range $i := .Values.images }}
+        {{- range $i := $.Values.images }}
         - name: {{ $i.name }}
           {{- if $.Values.armDeployment }}
           image: "{{ $i.repository }}:{{ $i.tag }}-{{ $.Values.armSuffix }}"
@@ -27,9 +28,9 @@ spec:
             - name: "BROKER_PORT"
               value: {{ $.Values.globalEnvironmentVariables.brokerPort | quote }}
             - name: "BROKER_TOPIC"
-              value: {{ $i.environmentVariables.brokerTopic | quote }}
+              value: {{ printf "%s-%s" $i.environmentVariables.brokerTopic $deviceId | quote }}
             - name: "CLIENT_ID"
-              value: {{ $i.environmentVariables.clientId | quote }}
+              value: {{ printf "%s-%s" $i.environmentVariables.clientId $deviceId | quote }}
             - name: "USERNAME"
               value: {{ $.Values.globalEnvironmentVariables.username | quote }}
             - name: "PASSWORD"
@@ -44,25 +45,27 @@ spec:
               value: {{ $i.environmentVariables.partPeriod | quote }}
         {{- end }}
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
-      {{- if .Values.armDeployment }}
-      {{- with .Values.nodeSelectorArm }}
+            {{- toYaml $.Values.resources | nindent 12 }}
+      {{- if $.Values.armDeployment }}
+      {{- with $.Values.nodeSelectorArm }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       {{- end }}
-      {{- if not .Values.armDeployment }}
-      {{- with .Values.nodeSelectorx86 }}
+      {{- if not $.Values.armDeployment }}
+      {{- with $.Values.nodeSelectorx86 }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       {{- end }}
-      restartPolicy: {{ include "smart-city.restartPolicy" . }}
-      {{- with .Values.affinity }}
+      restartPolicy: {{ include "smart-city.restartPolicy" $ }}
+      {{- with $.Values.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.tolerations }}
+      {{- with $.Values.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+---
+{{- end }}
