@@ -11,9 +11,6 @@ else
   echo "Running in debug mode. Helm is not going to be applied."
 fi
 
-# Keep logging to not lose session
-while sleep 2; do echo "Setting up experiment"; done &
-
 # Configure number of sensors to initiate
 NUMBER_NEIGHBORHOOD=1
 NUMBER_POLE=100
@@ -56,6 +53,8 @@ done
 # Wait for processes to the closed
 if [[ $APPLY_HELM == true ]]
 then
+    # Keep logging to not lose session
+    while sleep 2; do echo "Setting up experiment"; done &
     wait
 fi
 
@@ -104,6 +103,8 @@ done
 # Wait for processes to the closed
 if [[ $APPLY_HELM == true ]]
 then
+    # Keep logging to not lose session
+    while sleep 2; do echo "Setting up experiment"; done &
     wait
 fi
 
@@ -149,6 +150,8 @@ done
 # Wait for processes to the closed
 if [[ $APPLY_HELM == true ]]
 then
+    # Keep logging to not lose session
+    while sleep 2; do echo "Setting up experiment"; done &
     wait
 fi
 
@@ -194,6 +197,8 @@ done
 # Wait for processes to the closed
 if [[ $APPLY_HELM == true ]]
 then
+    # Keep logging to not lose session
+    while sleep 2; do echo "Setting up experiment"; done &
     wait
 fi
 
@@ -239,6 +244,8 @@ done
 # Wait for processes to the closed
 if [[ $APPLY_HELM == true ]]
 then
+    # Keep logging to not lose session
+    while sleep 2; do echo "Setting up experiment"; done &
     wait
 fi
 
@@ -284,6 +291,8 @@ done
 # Wait for processes to the closed
 if [[ $APPLY_HELM == true ]]
 then
+    # Keep logging to not lose session
+    while sleep 2; do echo "Setting up experiment"; done &
     wait
 fi
 
@@ -329,5 +338,7 @@ done
 # Wait for processes to the closed
 if [[ $APPLY_HELM == true ]]
 then
+    # Keep logging to not lose session
+    while sleep 2; do echo "Setting up experiment"; done &
     wait
 fi
