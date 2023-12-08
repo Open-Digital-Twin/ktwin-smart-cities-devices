@@ -3,13 +3,13 @@
 # Declare variables to be passed into your templates.
 
 armDeployment: true
+armSuffix: "arm64"
 
 images:
   - repository: ""
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
     tag: ""
-    armSuffix: "arm64"
 
 globalEnvironmentVariables:
   brokerAddress: rabbitmq.ktwin.svc.cluster.local

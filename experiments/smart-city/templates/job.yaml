@@ -16,7 +16,7 @@ spec:
         {{- range $i := .Values.images }}
         - name: {{ $i.name }}
           {{- if .armDeployment }}
-          image: "{{ $i.repository }}:{{ $i.tag }}-{{ $i.armSuffix }}"
+          image: "{{ $i.repository }}:{{ $i.tag }}-{{ .armSuffix }}"
           {{- else }}
           image: "{{ $i.repository }}:{{ $i.tag }}"
           {{- end }}
