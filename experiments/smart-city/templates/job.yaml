@@ -28,9 +28,17 @@ spec:
             - name: "BROKER_PORT"
               value: {{ $.Values.globalEnvironmentVariables.brokerPort | quote }}
             - name: "BROKER_TOPIC"
+              {{- if $i.imagePrefixId }}
+              value: {{ printf "%s-%s-%s" $i.environmentVariables.brokerTopic $i.imagePrefixId $deviceId | quote }}
+              {{- else }}
               value: {{ printf "%s-%s" $i.environmentVariables.brokerTopic $deviceId | quote }}
+              {{- end }}
             - name: "CLIENT_ID"
+              {{- if $i.imagePrefixId }}
+              value: {{ printf "%s-%s-%s" $i.environmentVariables.clientId $i.imagePrefixId $deviceId | quote }}
+              {{- else }}
               value: {{ printf "%s-%s" $i.environmentVariables.clientId $deviceId | quote }}
+              {{- end }}
             - name: "USERNAME"
               value: {{ $.Values.globalEnvironmentVariables.username | quote }}
             - name: "PASSWORD"

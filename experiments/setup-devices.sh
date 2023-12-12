@@ -151,6 +151,7 @@ then
         --set images[0].environmentVariables.fullPeriod="10" \
         --set images[0].environmentVariables.partPeriod="4" \
         --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
+        --set images[1].imagePrefixId=aqo \
         --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publisher \
         --set images[1].pullPolicy=Always \
         --set images[1].tag="0.1" \
@@ -204,6 +205,7 @@ then
         --set images[0].environmentVariables.fullPeriod="10" \
         --set images[0].environmentVariables.partPeriod="4" \
         --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
+        --set images[1].imagePrefixId=wo \
         --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publisher \
         --set images[1].pullPolicy=Always \
         --set images[1].tag="0.1" \
@@ -228,6 +230,7 @@ fi
 ############################
 
 POLE_NOISE_LEVEL_DEVICE_NAME=pole-noise-level-observed-device
+DEVICE_IDS=""
 for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
     neighborhood_id=$(printf "nb%03d" $neighborhood)
     for pole in $(seq 1 $NUMBER_POLE); do
@@ -255,6 +258,7 @@ then
         --set images[0].environmentVariables.fullPeriod="10" \
         --set images[0].environmentVariables.partPeriod="4" \
         --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
+        --set images[1].imagePrefixId=nlo \
         --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publisher \
         --set images[1].pullPolicy=Always \
         --set images[1].tag="0.1" \
@@ -279,6 +283,7 @@ fi
 ############################
 
 POLE_CROWD_LEVEL_DEVICE_NAME=pole-crowd-flow-observed-device
+DEVICE_IDS=""
 for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
     neighborhood_id=$(printf "nb%03d" $neighborhood)
     for pole in $(seq 1 $NUMBER_POLE); do
@@ -304,17 +309,7 @@ then
         --set images[0].environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
         --set images[0].environmentVariables.messagePeriod="10;10;10;10;10;10" \
         --set images[0].environmentVariables.fullPeriod="10" \
-        --set images[0].environmentVariables.partPeriod="4" \
-        --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
-        --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publisher \
-        --set images[1].pullPolicy=Always \
-        --set images[1].tag="0.1" \
-        --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device \
-        --set images[1].environmentVariables.clientId=$BATTERY_DEVICE_NAME-publisher \
-        --set images[1].environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
-        --set images[1].environmentVariables.messagePeriod="240;120;240;240;120;240" \
-        --set images[1].environmentVariables.fullPeriod="10" \
-        --set images[1].environmentVariables.partPeriod="4"
+        --set images[0].environmentVariables.partPeriod="4"
 else
     echo "Applying Pole Crowd Level Observed Device - ${id}"
 fi
@@ -330,6 +325,7 @@ fi
 ############################
 
 STREETLIGHT_DEVICE_NAME=streetlight-device
+DEVICE_IDS=""
 for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
     neighborhood_id=$(printf "nb%03d" $neighborhood)
     for streetlight in $(seq 1 $NUMBER_STREETLIGHTS); do
