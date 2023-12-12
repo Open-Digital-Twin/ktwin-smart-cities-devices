@@ -42,6 +42,7 @@ class MQTTClient:
             self.mqtt_client.username_pw_set(self.mqtt_config.username, self.mqtt_config.password)
 
         self.mqtt_client.connect(self.mqtt_config.broker_address, self.mqtt_config.port)
+        self.mqtt_client.loop_start()
         return self.mqtt_client
     
     def disconnect_mqtt(self):
