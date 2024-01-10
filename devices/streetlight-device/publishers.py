@@ -17,7 +17,7 @@ print("Number of devices: " + str(NUMBER_DEVICES))
 
 processes = list()
 
-for i in range(1, NUMBER_DEVICES):
+for i in range(0, NUMBER_DEVICES):
     command = 'python publisher.py'
     env = load_env(i)
     print('Executing command: ' + command)
