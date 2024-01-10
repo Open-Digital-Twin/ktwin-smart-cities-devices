@@ -1,9 +1,8 @@
-{{ range $deviceId := .Values.deviceIds  }}
 apiVersion: batch/v1
 kind: Job
 metadata:
   namespace: {{ include "smart-city.namespace" $ }}
-  name: {{ include "smart-city.fullname" $ }}-{{ $deviceId }}
+  name: {{ include "smart-city.fullname" $ }}
   labels:
     {{- include "smart-city.labels" $ | nindent 4 }}
 spec:
@@ -23,22 +22,26 @@ spec:
           {{- end }}
           imagePullPolicy: {{ $i.pullPolicy }}
           env:
+            - name: "NUMBER_DEVICES"
+              value: {{ $.Values.numberDevices | quote }}
             - name: "BROKER_ADDRESS"
               value: {{ $.Values.globalEnvironmentVariables.brokerAddress | quote }}
             - name: "BROKER_PORT"
               value: {{ $.Values.globalEnvironmentVariables.brokerPort | quote }}
-            - name: "BROKER_TOPIC"
+            {{ range $index, $deviceId := $.Values.deviceIds  }}
+            - name: {{ printf "BROKER_TOPIC_%d" $index }}
               {{- if $i.imagePrefixId }}
               value: {{ printf "%s-%s-%s" $i.environmentVariables.brokerTopic $i.imagePrefixId $deviceId | quote }}
               {{- else }}
               value: {{ printf "%s-%s" $i.environmentVariables.brokerTopic $deviceId | quote }}
               {{- end }}
-            - name: "CLIENT_ID"
+            - name: {{ printf "CLIENT_ID_%d" $index }}
               {{- if $i.imagePrefixId }}
               value: {{ printf "%s-%s-%s" $i.environmentVariables.clientId $i.imagePrefixId $deviceId | quote }}
               {{- else }}
               value: {{ printf "%s-%s" $i.environmentVariables.clientId $deviceId | quote }}
               {{- end }}
+            {{- end }}
             - name: "USERNAME"
               value: {{ $.Values.globalEnvironmentVariables.username | quote }}
             - name: "PASSWORD"
@@ -75,5 +78,3 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
----
-{{- end }}

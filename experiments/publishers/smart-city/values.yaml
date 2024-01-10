@@ -30,11 +30,11 @@ resources:
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   limits:
-    cpu: 15m
-    memory: 16Mi
+    cpu: 300m
+    memory: 256Mi
   requests:
-    cpu: 15m
-    memory: 16Mi
+    cpu: 300m
+    memory: 256Mi
 
 nodeSelectorArm:
   kubernetes.io/arch: arm64

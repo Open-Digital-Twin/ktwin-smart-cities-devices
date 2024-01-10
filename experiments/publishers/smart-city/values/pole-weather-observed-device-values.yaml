@@ -3,7 +3,7 @@ fullnameOverride: "ktwin-pole-weather-observed-device-publisher"
 
 image:
   - name: ktwin-pole-weather-observed-device-publisher
-    repository: ghcr.io/open-digital-twin/ktwin-pole-weather-observed-device-publisher
+    repository: ghcr.io/open-digital-twin/ktwin-pole-weather-observed-device-publishers
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
     tag: "0.1"
@@ -15,7 +15,7 @@ image:
       fullPeriod: "10"
       partPeriod: "4"
   - name: ktwin-battery-device-publisher
-    repository: ghcr.io/open-digital-twin/ktwin-battery-device-publisher
+    repository: ghcr.io/open-digital-twin/ktwin-battery-device-publishers
     pullPolicy: Always
     # Overrides the image tag whose default is the chart appVersion.
     tag: "0.1"

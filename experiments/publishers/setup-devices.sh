@@ -42,6 +42,7 @@ done
 if [[ $APPLY_HELM == true ]]
 then
     helm upgrade --install $EV_CHARGING_DEVICE_NAME smart-city \
+        --set numberDevices="${#DEVICE_IDS[*]}" \
         --set deviceIds={$DEVICE_IDS} \
         --set images[0].name=$EV_CHARGING_DEVICE_NAME-publisher \
         --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$EV_CHARGING_DEVICE_NAME-publisher \
@@ -86,6 +87,7 @@ done
 if [[ $APPLY_HELM == true ]]
 then
     helm upgrade --install $PARKING_SPOT_DEVICE_NAME smart-city \
+        --set numberDevices="${#DEVICE_IDS[*]}" \
         --set deviceIds={$DEVICE_IDS} \
         --set images[0].name=$PARKING_SPOT_DEVICE_NAME-publisher \
         --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$PARKING_SPOT_DEVICE_NAME-publisher \
@@ -139,6 +141,7 @@ done
 if [[ $APPLY_HELM == true ]]
 then
     helm upgrade --install $AIR_QUALITY_DEVICE_NAME smart-city \
+        --set numberDevices="${#DEVICE_IDS[*]}" \
         --set deviceIds={$DEVICE_IDS} \
         --set images[0].name=$AIR_QUALITY_DEVICE_NAME-publisher \
         --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$AIR_QUALITY_DEVICE_NAME-publisher \
@@ -193,6 +196,7 @@ done
 if [[ $APPLY_HELM == true ]]
 then
     helm upgrade --install $POLE_WEATHER_DEVICE_NAME smart-city \
+        --set numberDevices="${#DEVICE_IDS[*]}" \
         --set deviceIds={$DEVICE_IDS} \
         --set images[0].name=$POLE_WEATHER_DEVICE_NAME-publisher \
         --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$POLE_WEATHER_DEVICE_NAME-publisher \
@@ -246,6 +250,7 @@ done
 if [[ $APPLY_HELM == true ]]
 then
     helm upgrade --install $POLE_NOISE_LEVEL_DEVICE_NAME smart-city \
+        --set numberDevices="${#DEVICE_IDS[*]}" \
         --set deviceIds={$DEVICE_IDS} \
         --set images[0].name=$POLE_NOISE_LEVEL_DEVICE_NAME-publisher \
         --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$POLE_NOISE_LEVEL_DEVICE_NAME-publisher \
@@ -299,6 +304,7 @@ done
 if [[ $APPLY_HELM == true ]]
 then
     helm upgrade --install $POLE_CROWD_LEVEL_DEVICE_NAME smart-city \
+        --set numberDevices="${#DEVICE_IDS[*]}" \
         --set deviceIds={$DEVICE_IDS} \
         --set images[0].name=$POLE_CROWD_LEVEL_DEVICE_NAME-publisher \
         --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$POLE_CROWD_LEVEL_DEVICE_NAME-publisher \
@@ -341,6 +347,7 @@ done
 if [[ $APPLY_HELM == true ]]
 then
     helm upgrade --install $STREETLIGHT_DEVICE_NAME smart-city \
+        --set numberDevices="${#DEVICE_IDS[*]}" \
         --set deviceIds={$DEVICE_IDS} \
         --set images[0].name=$STREETLIGHT_DEVICE_NAME-publisher \
         --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$STREETLIGHT_DEVICE_NAME-publisher \

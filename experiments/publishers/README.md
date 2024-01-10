@@ -27,5 +27,5 @@ helm uninstall streetlight-device
 ### Simulate Install
 
 ```sh
-helm install experiments smart-city --values smart-city/values/battery-device-values.yaml --dry-run > output.yaml
+helm install battery-device smart-city --values smart-city/values/battery-device-values.yaml --dry-run > output.yaml
 ```
