@@ -2,14 +2,6 @@
 # Values shared between all instances are in values.yaml
 # Values specific for each instance is passed as parameter
 
-# Configure number of sensors to initiate
-NUMBER_NEIGHBORHOOD=1
-NUMBER_POLE=100
-NUMBER_EV_CHARGING_STATION=10
-NUMBER_OFFSTRET_PARKING=5
-NUMBER_OFFSTRET_PARKING_SPOT=10
-NUMBER_STREETLIGHTS=100
-
 # ############################
 # ## EV Charging Devices
 # ############################
