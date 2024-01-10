@@ -4,11 +4,12 @@ from datetime import datetime
 from modules.mqtt import load_mqtt_config, load_mqtt_client
 from modules.config import get_period_configs
 
-def build_message(msg_count: int):
+def build_message(msg_count: int, client_id: str):
     msg = build_crowd_flow_observed(msg_count=msg_count)
     msg["msg_count"] = msg_count
     msg["dateObservedTo"] = datetime.now().isoformat()
     msg["dateObservedFrom"] = datetime.now().isoformat()
+    print(client_id + " " + str(msg))
     return json.dumps(msg)
 
 def build_crowd_flow_observed(msg_count: int):
