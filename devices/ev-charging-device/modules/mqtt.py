@@ -59,7 +59,7 @@ class MQTTClient:
         self.logger.info("Published to topic %s", self.topic)
         while n_messages > msg_count:
             time.sleep(message_period)
-            msg = callback(msg_count)
+            msg = callback(msg_count, self.mqtt_config.client_id)
             result = self.mqtt_client.publish(self.topic, msg)
             status = result[0]
             self.logger.info("Published to topic %s", self.topic)
