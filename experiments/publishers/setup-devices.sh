@@ -47,7 +47,7 @@ then
         --set numberDevices=$NUMBER_DEVICES \
         --set deviceIds={$DEVICE_IDS} \
         --set images[0].name=$EV_CHARGING_DEVICE_NAME-publisher \
-        --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$EV_CHARGING_DEVICE_NAME-publisher \
+        --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$EV_CHARGING_DEVICE_NAME-publishers \
         --set images[0].pullPolicy=Always \
         --set images[0].tag="0.1" \
         --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-evchargingstation/ngsi-ld-city-evchargingstation \
@@ -94,7 +94,7 @@ then
         --set numberDevices="${#DEVICE_IDS[*]}" \
         --set deviceIds={$DEVICE_IDS} \
         --set images[0].name=$PARKING_SPOT_DEVICE_NAME-publisher \
-        --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$PARKING_SPOT_DEVICE_NAME-publisher \
+        --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$PARKING_SPOT_DEVICE_NAME-publishers \
         --set images[0].pullPolicy=Always \
         --set images[0].tag="0.1" \
         --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-parkingspot/ngsi-ld-city-offstreetparkingspot \
@@ -104,7 +104,7 @@ then
         --set images[0].environmentVariables.fullPeriod="10" \
         --set images[0].environmentVariables.partPeriod="4" \
         --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
-        --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publisher \
+        --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
         --set images[1].pullPolicy=Always \
         --set images[1].tag="0.1" \
         --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device \
@@ -150,7 +150,7 @@ then
         --set numberDevices=$NUMBER_DEVICES \
         --set deviceIds={$DEVICE_IDS} \
         --set images[0].name=$AIR_QUALITY_DEVICE_NAME-publisher \
-        --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$AIR_QUALITY_DEVICE_NAME-publisher \
+        --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$AIR_QUALITY_DEVICE_NAME-publishers \
         --set images[0].pullPolicy=Always \
         --set images[0].tag="0.1" \
         --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-airqualityobserved/ngsi-ld-city-airqualityobserved \
@@ -161,7 +161,7 @@ then
         --set images[0].environmentVariables.partPeriod="4" \
         --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
         --set images[1].imagePrefixId=aqo \
-        --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publisher \
+        --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
         --set images[1].pullPolicy=Always \
         --set images[1].tag="0.1" \
         --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device \
@@ -207,7 +207,7 @@ then
         --set numberDevices=$NUMBER_DEVICES \
         --set deviceIds={$DEVICE_IDS} \
         --set images[0].name=$POLE_WEATHER_DEVICE_NAME-publisher \
-        --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$POLE_WEATHER_DEVICE_NAME-publisher \
+        --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$POLE_WEATHER_DEVICE_NAME-publishers \
         --set images[0].pullPolicy=Always \
         --set images[0].tag="0.1" \
         --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-weatherobserved/ngsi-ld-city-weatherobserved \
@@ -218,7 +218,7 @@ then
         --set images[0].environmentVariables.partPeriod="4" \
         --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
         --set images[1].imagePrefixId=wo \
-        --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publisher \
+        --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
         --set images[1].pullPolicy=Always \
         --set images[1].tag="0.1" \
         --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device \
@@ -263,7 +263,7 @@ then
         --set numberDevices=$NUMBER_DEVICES \
         --set deviceIds={$DEVICE_IDS} \
         --set images[0].name=$POLE_NOISE_LEVEL_DEVICE_NAME-publisher \
-        --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$POLE_NOISE_LEVEL_DEVICE_NAME-publisher \
+        --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$POLE_NOISE_LEVEL_DEVICE_NAME-publishers \
         --set images[0].pullPolicy=Always \
         --set images[0].tag="0.1" \
         --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-noiselevelobserved/ngsi-ld-city-noiselevelobserved \
@@ -274,7 +274,7 @@ then
         --set images[0].environmentVariables.partPeriod="4" \
         --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
         --set images[1].imagePrefixId=nlo \
-        --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publisher \
+        --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
         --set images[1].pullPolicy=Always \
         --set images[1].tag="0.1" \
         --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device \
@@ -319,7 +319,7 @@ then
         --set numberDevices=$NUMBER_DEVICES \
         --set deviceIds={$DEVICE_IDS} \
         --set images[0].name=$POLE_CROWD_LEVEL_DEVICE_NAME-publisher \
-        --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$POLE_CROWD_LEVEL_DEVICE_NAME-publisher \
+        --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$POLE_CROWD_LEVEL_DEVICE_NAME-publishers \
         --set images[0].pullPolicy=Always \
         --set images[0].tag="0.1" \
         --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-crowdflowobserved/ngsi-ld-city-crowdflowobserved \
@@ -364,7 +364,7 @@ then
         --set numberDevices=$NUMBER_DEVICES \
         --set deviceIds={$DEVICE_IDS} \
         --set images[0].name=$STREETLIGHT_DEVICE_NAME-publisher \
-        --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$STREETLIGHT_DEVICE_NAME-publisher \
+        --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$STREETLIGHT_DEVICE_NAME-publishers \
         --set images[0].pullPolicy=Always \
         --set images[0].tag="0.1" \
         --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-streetlight/ngsi-ld-city-streetlight \
@@ -374,7 +374,7 @@ then
         --set images[0].environmentVariables.fullPeriod="10" \
         --set images[0].environmentVariables.partPeriod="4" \
         --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
-        --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publisher \
+        --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
         --set images[1].pullPolicy=Always \
         --set images[1].tag="0.1" \
         --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device \
