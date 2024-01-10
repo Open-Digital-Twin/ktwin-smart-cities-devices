@@ -1,0 +1,50 @@
+# Default values for smart-city.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+armDeployment: false
+armSuffix: "arm64"
+
+images:
+  - repository: ""
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: ""
+
+globalEnvironmentVariables:
+  brokerAddress: rabbitmq.ktwin.svc.cluster.local
+  brokerPort: "1883"
+  username: "default_user_fK7nL3bkpb6rqYYDMAs"
+  password: "JY0S3TOdCZQkeHOBfdUgI4S6AEAqcdPo"
+
+namespace: ktwin
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+podAnnotations: {}
+
+resources:
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  limits:
+    cpu: 15m
+    memory: 16Mi
+  requests:
+    cpu: 15m
+    memory: 16Mi
+
+nodeSelectorArm:
+  kubernetes.io/arch: arm64
+
+nodeSelectorx86:
+  kubernetes.io/arch: amd64
+  ktwin/device-node: "true"
+
+restartPolicy: Never
+
+tolerations: []
+
+affinity: {}

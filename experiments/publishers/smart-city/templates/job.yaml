@@ -1,0 +1,79 @@
+{{ range $deviceId := .Values.deviceIds  }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  namespace: {{ include "smart-city.namespace" $ }}
+  name: {{ include "smart-city.fullname" $ }}-{{ $deviceId }}
+  labels:
+    {{- include "smart-city.labels" $ | nindent 4 }}
+spec:
+  template:
+    spec:
+      {{- with $.Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        {{- range $i := $.Values.images }}
+        - name: {{ $i.name }}
+          {{- if $.Values.armDeployment }}
+          image: "{{ $i.repository }}:{{ $i.tag }}-{{ $.Values.armSuffix }}"
+          {{- else }}
+          image: "{{ $i.repository }}:{{ $i.tag }}"
+          {{- end }}
+          imagePullPolicy: {{ $i.pullPolicy }}
+          env:
+            - name: "BROKER_ADDRESS"
+              value: {{ $.Values.globalEnvironmentVariables.brokerAddress | quote }}
+            - name: "BROKER_PORT"
+              value: {{ $.Values.globalEnvironmentVariables.brokerPort | quote }}
+            - name: "BROKER_TOPIC"
+              {{- if $i.imagePrefixId }}
+              value: {{ printf "%s-%s-%s" $i.environmentVariables.brokerTopic $i.imagePrefixId $deviceId | quote }}
+              {{- else }}
+              value: {{ printf "%s-%s" $i.environmentVariables.brokerTopic $deviceId | quote }}
+              {{- end }}
+            - name: "CLIENT_ID"
+              {{- if $i.imagePrefixId }}
+              value: {{ printf "%s-%s-%s" $i.environmentVariables.clientId $i.imagePrefixId $deviceId | quote }}
+              {{- else }}
+              value: {{ printf "%s-%s" $i.environmentVariables.clientId $deviceId | quote }}
+              {{- end }}
+            - name: "USERNAME"
+              value: {{ $.Values.globalEnvironmentVariables.username | quote }}
+            - name: "PASSWORD"
+              value: {{ $.Values.globalEnvironmentVariables.password | quote}}
+            - name: "FULL_TIME_FRAMES"
+              value: {{ $i.environmentVariables.fullTimeFrames | quote }}
+            - name: "MESSAGE_PERIOD"
+              value: {{ $i.environmentVariables.messagePeriod | quote }}
+            - name: "FULL_PERIOD"
+              value: {{ $i.environmentVariables.fullPeriod | quote }}
+            - name: "PART_PERIOD"
+              value: {{ $i.environmentVariables.partPeriod | quote }}
+        {{- end }}
+          resources:
+            {{- toYaml $.Values.resources | nindent 12 }}
+      {{- if $.Values.armDeployment }}
+      {{- with $.Values.nodeSelectorArm }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- end }}
+      {{- if not $.Values.armDeployment }}
+      {{- with $.Values.nodeSelectorx86 }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- end }}
+      restartPolicy: {{ include "smart-city.restartPolicy" $ }}
+      {{- with $.Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with $.Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+---
+{{- end }}
