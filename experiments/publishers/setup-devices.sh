@@ -27,6 +27,7 @@ BATTERY_DEVICE_NAME=battery-device
 
 EV_CHARGING_DEVICE_NAME=ev-charging-device
 DEVICE_IDS=""
+NUMBER_DEVICES=0
 for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
     neighborhood_id=$(printf "nb%03d" $neighborhood)
     for ev_charging_station in $(seq 1 $NUMBER_EV_CHARGING_STATION); do
@@ -36,13 +37,14 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             DEVICE_IDS+=","
         fi
         DEVICE_IDS+=$id
+        NUMBER_DEVICES=$((NUMBER_DEVICES + 1))
     done
 done
 
 if [[ $APPLY_HELM == true ]]
 then
     helm upgrade --install $EV_CHARGING_DEVICE_NAME smart-city \
-        --set numberDevices="${#DEVICE_IDS[*]}" \
+        --set numberDevices=$NUMBER_DEVICES \
         --set deviceIds={$DEVICE_IDS} \
         --set images[0].name=$EV_CHARGING_DEVICE_NAME-publisher \
         --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$EV_CHARGING_DEVICE_NAME-publisher \
@@ -70,6 +72,7 @@ fi
 
 PARKING_SPOT_DEVICE_NAME=parking-spot-device
 DEVICE_IDS=""
+NUMBER_DEVICES=0
 for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
     neighborhood_id=$(printf "nb%03d" $neighborhood)
     for parking in $(seq 1 $NUMBER_OFFSTRET_PARKING); do
@@ -81,6 +84,7 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
                 DEVICE_IDS+=","
             fi
             DEVICE_IDS+=$id
+            NUMBER_DEVICES=$((NUMBER_DEVICES + 1))
     done
 done
 
@@ -126,6 +130,7 @@ fi
 
 AIR_QUALITY_DEVICE_NAME=pole-air-quality-observed-device
 DEVICE_IDS=""
+NUMBER_DEVICES=0
 for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
     neighborhood_id=$(printf "nb%03d" $neighborhood)
     for pole in $(seq 1 $NUMBER_POLE); do
@@ -135,13 +140,14 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             DEVICE_IDS+=","
         fi
         DEVICE_IDS+=$id
+        NUMBER_DEVICES=$((NUMBER_DEVICES + 1))
     done
 done
 
 if [[ $APPLY_HELM == true ]]
 then
     helm upgrade --install $AIR_QUALITY_DEVICE_NAME smart-city \
-        --set numberDevices="${#DEVICE_IDS[*]}" \
+        --set numberDevices=$NUMBER_DEVICES \
         --set deviceIds={$DEVICE_IDS} \
         --set images[0].name=$AIR_QUALITY_DEVICE_NAME-publisher \
         --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$AIR_QUALITY_DEVICE_NAME-publisher \
@@ -180,6 +186,7 @@ fi
 
 POLE_WEATHER_DEVICE_NAME=pole-weather-observed-device
 DEVICE_IDS=""
+NUMBER_DEVICES=0
 for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
     neighborhood_id=$(printf "nb%03d" $neighborhood)
     for pole in $(seq 1 $NUMBER_POLE); do
@@ -189,6 +196,7 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             DEVICE_IDS+=","
         fi
         DEVICE_IDS+=$id
+        NUMBER_DEVICES=$((NUMBER_DEVICES + 1))
     done
 done
 
@@ -196,7 +204,7 @@ done
 if [[ $APPLY_HELM == true ]]
 then
     helm upgrade --install $POLE_WEATHER_DEVICE_NAME smart-city \
-        --set numberDevices="${#DEVICE_IDS[*]}" \
+        --set numberDevices=$NUMBER_DEVICES \
         --set deviceIds={$DEVICE_IDS} \
         --set images[0].name=$POLE_WEATHER_DEVICE_NAME-publisher \
         --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$POLE_WEATHER_DEVICE_NAME-publisher \
@@ -235,6 +243,7 @@ fi
 
 POLE_NOISE_LEVEL_DEVICE_NAME=pole-noise-level-observed-device
 DEVICE_IDS=""
+NUMBER_DEVICES=0
 for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
     neighborhood_id=$(printf "nb%03d" $neighborhood)
     for pole in $(seq 1 $NUMBER_POLE); do
@@ -244,13 +253,14 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             DEVICE_IDS+=","
         fi
         DEVICE_IDS+=$id
+        NUMBER_DEVICES=$((NUMBER_DEVICES + 1))
     done
 done
 
 if [[ $APPLY_HELM == true ]]
 then
     helm upgrade --install $POLE_NOISE_LEVEL_DEVICE_NAME smart-city \
-        --set numberDevices="${#DEVICE_IDS[*]}" \
+        --set numberDevices=$NUMBER_DEVICES \
         --set deviceIds={$DEVICE_IDS} \
         --set images[0].name=$POLE_NOISE_LEVEL_DEVICE_NAME-publisher \
         --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$POLE_NOISE_LEVEL_DEVICE_NAME-publisher \
@@ -289,6 +299,7 @@ fi
 
 POLE_CROWD_LEVEL_DEVICE_NAME=pole-crowd-flow-observed-device
 DEVICE_IDS=""
+NUMBER_DEVICES=0
 for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
     neighborhood_id=$(printf "nb%03d" $neighborhood)
     for pole in $(seq 1 $NUMBER_POLE); do
@@ -298,13 +309,14 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             DEVICE_IDS+=","
         fi
         DEVICE_IDS+=$id
+        NUMBER_DEVICES=$((NUMBER_DEVICES + 1))
     done
 done
 
 if [[ $APPLY_HELM == true ]]
 then
     helm upgrade --install $POLE_CROWD_LEVEL_DEVICE_NAME smart-city \
-        --set numberDevices="${#DEVICE_IDS[*]}" \
+        --set numberDevices=$NUMBER_DEVICES \
         --set deviceIds={$DEVICE_IDS} \
         --set images[0].name=$POLE_CROWD_LEVEL_DEVICE_NAME-publisher \
         --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$POLE_CROWD_LEVEL_DEVICE_NAME-publisher \
@@ -332,6 +344,7 @@ fi
 
 STREETLIGHT_DEVICE_NAME=streetlight-device
 DEVICE_IDS=""
+NUMBER_DEVICES=0
 for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
     neighborhood_id=$(printf "nb%03d" $neighborhood)
     for streetlight in $(seq 1 $NUMBER_STREETLIGHTS); do
@@ -341,13 +354,14 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             DEVICE_IDS+=","
         fi
         DEVICE_IDS+=$id
+        NUMBER_DEVICES=$((NUMBER_DEVICES + 1))
     done
 done
 
 if [[ $APPLY_HELM == true ]]
 then
     helm upgrade --install $STREETLIGHT_DEVICE_NAME smart-city \
-        --set numberDevices="${#DEVICE_IDS[*]}" \
+        --set numberDevices=$NUMBER_DEVICES \
         --set deviceIds={$DEVICE_IDS} \
         --set images[0].name=$STREETLIGHT_DEVICE_NAME-publisher \
         --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$STREETLIGHT_DEVICE_NAME-publisher \
