@@ -9,7 +9,7 @@ def build_message(msg_count: int, client_id: str):
     msg["msg_count"] = msg_count
     msg["timestamp"] = datetime.now().isoformat()
 
-    print(client_id + " " + str(msg))
+    print(client_id + ": " + str(msg))
     return json.dumps(msg)
 
 def build_evcharging_message(msg_count):

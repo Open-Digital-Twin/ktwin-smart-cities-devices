@@ -9,7 +9,7 @@ def build_message(msg_count: int, client_id: str):
     msg["msg_count"] = msg_count
     msg["dateObservedTo"] = datetime.now().isoformat()
     msg["dateObservedFrom"] = datetime.now().isoformat()
-    print(client_id + " " + str(msg))
+    print(client_id + ": " + str(msg))
     return json.dumps(msg)
 
 def build_crowd_flow_observed(msg_count: int):

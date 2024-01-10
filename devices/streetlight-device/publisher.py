@@ -8,7 +8,7 @@ def build_message(msg_count: int, client_id: str):
     msg = build_streetlight_message(msg_count)
     msg["msg_count"] = msg_count
     msg["timestamp"] = datetime.now().isoformat()
-    print(client_id + " " + str(msg))
+    print(client_id + ": " + str(msg))
     return json.dumps(msg)
 
 def build_streetlight_message(msg_count):
