@@ -1,18 +1,12 @@
 import os
-import json
 import subprocess
 from dotenv import load_dotenv
-
 
 def load_env(deviceNumber):
     env = os.environ.copy()
     env["BROKER_TOPIC"] = os.getenv("BROKER_TOPIC_{}".format(deviceNumber))
     env["CLIENT_ID"] = os.getenv("CLIENT_ID_{}".format(deviceNumber))
-
-    print(env["BROKER_TOPIC"])
-    print(env["CLIENT_ID"])
     return env
-
 
 if os.getenv("ENV") == "publishers-local":
     load_dotenv('publishers-local.env')
