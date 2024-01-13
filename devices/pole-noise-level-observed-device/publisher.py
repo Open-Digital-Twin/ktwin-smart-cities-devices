@@ -25,10 +25,12 @@ def run():
 
     period_configs = get_period_configs()
 
+    client.connect_mqtt()
+
     for period in period_configs:
-        client.connect_mqtt()
         client.publish(n_messages=period.n_messages, message_period=period.message_period, callback=build_message)
-        client.disconnect_mqtt()
+
+    client.disconnect_mqtt()
 
 if __name__ == '__main__':
     run()

@@ -49,6 +49,7 @@ class MQTTClient:
         def on_disconnect():
             self.logger.info("Client disconnected")
         self.mqtt_client.disconnect(on_disconnect)
+        self.mqtt_client.loop_stop()
 
     # n_messages: total amount of messages
     # message_period: period of time between each message (seconds)
