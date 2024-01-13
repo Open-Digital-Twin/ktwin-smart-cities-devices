@@ -54,9 +54,14 @@ spec:
               value: {{ $i.environmentVariables.fullPeriod | quote }}
             - name: "PART_PERIOD"
               value: {{ $i.environmentVariables.partPeriod | quote }}
-        {{- end }}
           resources:
-            {{- toYaml $.Values.resources | nindent 12 }}
+            limits:
+              cpu: {{ $i.resources.limits.cpu }}
+              memory: {{ $i.resources.limits.memory }}
+            requests:
+              cpu: {{ $i.resources.requests.cpu }}
+              memory: {{ $i.resources.requests.memory }}
+        {{- end }}
       {{- if $.Values.armDeployment }}
       {{- with $.Values.nodeSelectorArm }}
       nodeSelector:
