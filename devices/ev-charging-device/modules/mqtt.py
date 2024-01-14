@@ -106,3 +106,15 @@ def load_mqtt_client(config: MQTTClientConfig) -> MQTTClient:
     broker_topic = os.getenv("BROKER_TOPIC")
     client = MQTTClient(config=config, topic=broker_topic)
     return client
+
+def load_mqtt_config_with_params(broker_address: str, broker_port: str, client_id: str, username: str, password: str) -> MQTTClientConfig:
+    config = MQTTClientConfig(broker_address=broker_address, client_id=client_id, port=broker_port)
+    
+    if username is not None and password is not None:
+        config.set_credentials(username=username, password=password)
+
+    return config
+
+def load_mqtt_client_with_params(config: MQTTClientConfig, broker_topic) -> MQTTClient:
+    client = MQTTClient(config=config, topic=broker_topic)
+    return client
