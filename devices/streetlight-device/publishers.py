@@ -1,5 +1,6 @@
 import os
-import subprocess
+import threading
+from publisher import run_thread
 from dotenv import load_dotenv
 
 def load_env(deviceNumber):
@@ -15,17 +16,34 @@ NUMBER_DEVICES = int(os.getenv("NUMBER_DEVICES"))
 
 print("Number of devices: " + str(NUMBER_DEVICES))
 
-processes = list()
+threads = list()
 
 for i in range(0, NUMBER_DEVICES):
-    command = 'python publisher.py'
-    env = load_env(i)
-    print('Executing command: ' + command)
+    broker_address = os.getenv("BROKER_ADDRESS")
+    broker_port = int(os.getenv("BROKER_PORT"))
+    client_id = os.getenv("CLIENT_ID")
+    username = os.getenv("USERNAME")
+    password = os.getenv("PASSWORD")
+    broker_topic = os.getenv("BROKER_TOPIC_{}".format(i))
+    client_id = os.getenv("CLIENT_ID_{}".format(i))
 
-    process = subprocess.Popen(command, shell=True, env=env)
-    processes.append(process)
+    args=[
+        broker_address,
+        broker_port,
+        client_id,
+        username,
+        password,
+        broker_topic
+    ]
 
-for process in processes:
-    process.wait()
+    thread = threading.Thread(name=client_id, target=run_thread, args=args)
+    threads.append(thread)
+
+for thread in threads:
+    print('Starting Thread: ' + thread.name)
+    thread.start()
+
+for thread in threads:
+    thread.join()
 
 print('All processes have finished')
