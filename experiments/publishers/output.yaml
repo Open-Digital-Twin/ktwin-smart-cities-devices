@@ -1,0 +1,461 @@
+Release "pole-air-quality-observed-device" does not exist. Installing it now.
+NAME: pole-air-quality-observed-device
+LAST DEPLOYED: Sun Jan 14 20:25:41 2024
+NAMESPACE: ktwin
+STATUS: pending-install
+REVISION: 1
+TEST SUITE: None
+HOOKS:
+MANIFEST:
+---
+# Source: smart-city/templates/job.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  namespace: ktwin
+  name: pole-air-quality-observed-device-smart-city
+  labels:
+    helm.sh/chart: smart-city-0.1.0
+    app.kubernetes.io/name: smart-city
+    app.kubernetes.io/instance: pole-air-quality-observed-device
+    app.kubernetes.io/version: "1.16.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  template:
+    spec:
+      containers:
+        - name: battery-device-publisher
+          image: "ghcr.io/open-digital-twin/ktwin-battery-device-publishers:0.1"
+          imagePullPolicy: Always
+          env:
+            - name: "NUMBER_DEVICES"
+              value: "100"
+            - name: "BROKER_ADDRESS"
+              value: "rabbitmq.ktwin.svc.cluster.local"
+            - name: "BROKER_PORT"
+              value: "1883"
+            
+            - name: BROKER_TOPIC_0
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00001"
+            - name: CLIENT_ID_0
+              value: "battery-device-publisher-aqo-nb001-p00001"
+            - name: BROKER_TOPIC_1
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00002"
+            - name: CLIENT_ID_1
+              value: "battery-device-publisher-aqo-nb001-p00002"
+            - name: BROKER_TOPIC_2
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00003"
+            - name: CLIENT_ID_2
+              value: "battery-device-publisher-aqo-nb001-p00003"
+            - name: BROKER_TOPIC_3
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00004"
+            - name: CLIENT_ID_3
+              value: "battery-device-publisher-aqo-nb001-p00004"
+            - name: BROKER_TOPIC_4
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00005"
+            - name: CLIENT_ID_4
+              value: "battery-device-publisher-aqo-nb001-p00005"
+            - name: BROKER_TOPIC_5
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00006"
+            - name: CLIENT_ID_5
+              value: "battery-device-publisher-aqo-nb001-p00006"
+            - name: BROKER_TOPIC_6
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00007"
+            - name: CLIENT_ID_6
+              value: "battery-device-publisher-aqo-nb001-p00007"
+            - name: BROKER_TOPIC_7
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00008"
+            - name: CLIENT_ID_7
+              value: "battery-device-publisher-aqo-nb001-p00008"
+            - name: BROKER_TOPIC_8
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00009"
+            - name: CLIENT_ID_8
+              value: "battery-device-publisher-aqo-nb001-p00009"
+            - name: BROKER_TOPIC_9
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00010"
+            - name: CLIENT_ID_9
+              value: "battery-device-publisher-aqo-nb001-p00010"
+            - name: BROKER_TOPIC_10
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00011"
+            - name: CLIENT_ID_10
+              value: "battery-device-publisher-aqo-nb001-p00011"
+            - name: BROKER_TOPIC_11
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00012"
+            - name: CLIENT_ID_11
+              value: "battery-device-publisher-aqo-nb001-p00012"
+            - name: BROKER_TOPIC_12
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00013"
+            - name: CLIENT_ID_12
+              value: "battery-device-publisher-aqo-nb001-p00013"
+            - name: BROKER_TOPIC_13
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00014"
+            - name: CLIENT_ID_13
+              value: "battery-device-publisher-aqo-nb001-p00014"
+            - name: BROKER_TOPIC_14
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00015"
+            - name: CLIENT_ID_14
+              value: "battery-device-publisher-aqo-nb001-p00015"
+            - name: BROKER_TOPIC_15
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00016"
+            - name: CLIENT_ID_15
+              value: "battery-device-publisher-aqo-nb001-p00016"
+            - name: BROKER_TOPIC_16
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00017"
+            - name: CLIENT_ID_16
+              value: "battery-device-publisher-aqo-nb001-p00017"
+            - name: BROKER_TOPIC_17
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00018"
+            - name: CLIENT_ID_17
+              value: "battery-device-publisher-aqo-nb001-p00018"
+            - name: BROKER_TOPIC_18
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00019"
+            - name: CLIENT_ID_18
+              value: "battery-device-publisher-aqo-nb001-p00019"
+            - name: BROKER_TOPIC_19
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00020"
+            - name: CLIENT_ID_19
+              value: "battery-device-publisher-aqo-nb001-p00020"
+            - name: BROKER_TOPIC_20
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00021"
+            - name: CLIENT_ID_20
+              value: "battery-device-publisher-aqo-nb001-p00021"
+            - name: BROKER_TOPIC_21
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00022"
+            - name: CLIENT_ID_21
+              value: "battery-device-publisher-aqo-nb001-p00022"
+            - name: BROKER_TOPIC_22
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00023"
+            - name: CLIENT_ID_22
+              value: "battery-device-publisher-aqo-nb001-p00023"
+            - name: BROKER_TOPIC_23
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00024"
+            - name: CLIENT_ID_23
+              value: "battery-device-publisher-aqo-nb001-p00024"
+            - name: BROKER_TOPIC_24
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00025"
+            - name: CLIENT_ID_24
+              value: "battery-device-publisher-aqo-nb001-p00025"
+            - name: BROKER_TOPIC_25
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00026"
+            - name: CLIENT_ID_25
+              value: "battery-device-publisher-aqo-nb001-p00026"
+            - name: BROKER_TOPIC_26
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00027"
+            - name: CLIENT_ID_26
+              value: "battery-device-publisher-aqo-nb001-p00027"
+            - name: BROKER_TOPIC_27
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00028"
+            - name: CLIENT_ID_27
+              value: "battery-device-publisher-aqo-nb001-p00028"
+            - name: BROKER_TOPIC_28
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00029"
+            - name: CLIENT_ID_28
+              value: "battery-device-publisher-aqo-nb001-p00029"
+            - name: BROKER_TOPIC_29
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00030"
+            - name: CLIENT_ID_29
+              value: "battery-device-publisher-aqo-nb001-p00030"
+            - name: BROKER_TOPIC_30
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00031"
+            - name: CLIENT_ID_30
+              value: "battery-device-publisher-aqo-nb001-p00031"
+            - name: BROKER_TOPIC_31
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00032"
+            - name: CLIENT_ID_31
+              value: "battery-device-publisher-aqo-nb001-p00032"
+            - name: BROKER_TOPIC_32
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00033"
+            - name: CLIENT_ID_32
+              value: "battery-device-publisher-aqo-nb001-p00033"
+            - name: BROKER_TOPIC_33
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00034"
+            - name: CLIENT_ID_33
+              value: "battery-device-publisher-aqo-nb001-p00034"
+            - name: BROKER_TOPIC_34
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00035"
+            - name: CLIENT_ID_34
+              value: "battery-device-publisher-aqo-nb001-p00035"
+            - name: BROKER_TOPIC_35
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00036"
+            - name: CLIENT_ID_35
+              value: "battery-device-publisher-aqo-nb001-p00036"
+            - name: BROKER_TOPIC_36
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00037"
+            - name: CLIENT_ID_36
+              value: "battery-device-publisher-aqo-nb001-p00037"
+            - name: BROKER_TOPIC_37
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00038"
+            - name: CLIENT_ID_37
+              value: "battery-device-publisher-aqo-nb001-p00038"
+            - name: BROKER_TOPIC_38
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00039"
+            - name: CLIENT_ID_38
+              value: "battery-device-publisher-aqo-nb001-p00039"
+            - name: BROKER_TOPIC_39
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00040"
+            - name: CLIENT_ID_39
+              value: "battery-device-publisher-aqo-nb001-p00040"
+            - name: BROKER_TOPIC_40
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00041"
+            - name: CLIENT_ID_40
+              value: "battery-device-publisher-aqo-nb001-p00041"
+            - name: BROKER_TOPIC_41
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00042"
+            - name: CLIENT_ID_41
+              value: "battery-device-publisher-aqo-nb001-p00042"
+            - name: BROKER_TOPIC_42
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00043"
+            - name: CLIENT_ID_42
+              value: "battery-device-publisher-aqo-nb001-p00043"
+            - name: BROKER_TOPIC_43
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00044"
+            - name: CLIENT_ID_43
+              value: "battery-device-publisher-aqo-nb001-p00044"
+            - name: BROKER_TOPIC_44
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00045"
+            - name: CLIENT_ID_44
+              value: "battery-device-publisher-aqo-nb001-p00045"
+            - name: BROKER_TOPIC_45
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00046"
+            - name: CLIENT_ID_45
+              value: "battery-device-publisher-aqo-nb001-p00046"
+            - name: BROKER_TOPIC_46
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00047"
+            - name: CLIENT_ID_46
+              value: "battery-device-publisher-aqo-nb001-p00047"
+            - name: BROKER_TOPIC_47
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00048"
+            - name: CLIENT_ID_47
+              value: "battery-device-publisher-aqo-nb001-p00048"
+            - name: BROKER_TOPIC_48
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00049"
+            - name: CLIENT_ID_48
+              value: "battery-device-publisher-aqo-nb001-p00049"
+            - name: BROKER_TOPIC_49
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00050"
+            - name: CLIENT_ID_49
+              value: "battery-device-publisher-aqo-nb001-p00050"
+            - name: BROKER_TOPIC_50
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00051"
+            - name: CLIENT_ID_50
+              value: "battery-device-publisher-aqo-nb001-p00051"
+            - name: BROKER_TOPIC_51
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00052"
+            - name: CLIENT_ID_51
+              value: "battery-device-publisher-aqo-nb001-p00052"
+            - name: BROKER_TOPIC_52
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00053"
+            - name: CLIENT_ID_52
+              value: "battery-device-publisher-aqo-nb001-p00053"
+            - name: BROKER_TOPIC_53
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00054"
+            - name: CLIENT_ID_53
+              value: "battery-device-publisher-aqo-nb001-p00054"
+            - name: BROKER_TOPIC_54
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00055"
+            - name: CLIENT_ID_54
+              value: "battery-device-publisher-aqo-nb001-p00055"
+            - name: BROKER_TOPIC_55
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00056"
+            - name: CLIENT_ID_55
+              value: "battery-device-publisher-aqo-nb001-p00056"
+            - name: BROKER_TOPIC_56
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00057"
+            - name: CLIENT_ID_56
+              value: "battery-device-publisher-aqo-nb001-p00057"
+            - name: BROKER_TOPIC_57
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00058"
+            - name: CLIENT_ID_57
+              value: "battery-device-publisher-aqo-nb001-p00058"
+            - name: BROKER_TOPIC_58
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00059"
+            - name: CLIENT_ID_58
+              value: "battery-device-publisher-aqo-nb001-p00059"
+            - name: BROKER_TOPIC_59
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00060"
+            - name: CLIENT_ID_59
+              value: "battery-device-publisher-aqo-nb001-p00060"
+            - name: BROKER_TOPIC_60
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00061"
+            - name: CLIENT_ID_60
+              value: "battery-device-publisher-aqo-nb001-p00061"
+            - name: BROKER_TOPIC_61
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00062"
+            - name: CLIENT_ID_61
+              value: "battery-device-publisher-aqo-nb001-p00062"
+            - name: BROKER_TOPIC_62
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00063"
+            - name: CLIENT_ID_62
+              value: "battery-device-publisher-aqo-nb001-p00063"
+            - name: BROKER_TOPIC_63
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00064"
+            - name: CLIENT_ID_63
+              value: "battery-device-publisher-aqo-nb001-p00064"
+            - name: BROKER_TOPIC_64
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00065"
+            - name: CLIENT_ID_64
+              value: "battery-device-publisher-aqo-nb001-p00065"
+            - name: BROKER_TOPIC_65
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00066"
+            - name: CLIENT_ID_65
+              value: "battery-device-publisher-aqo-nb001-p00066"
+            - name: BROKER_TOPIC_66
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00067"
+            - name: CLIENT_ID_66
+              value: "battery-device-publisher-aqo-nb001-p00067"
+            - name: BROKER_TOPIC_67
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00068"
+            - name: CLIENT_ID_67
+              value: "battery-device-publisher-aqo-nb001-p00068"
+            - name: BROKER_TOPIC_68
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00069"
+            - name: CLIENT_ID_68
+              value: "battery-device-publisher-aqo-nb001-p00069"
+            - name: BROKER_TOPIC_69
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00070"
+            - name: CLIENT_ID_69
+              value: "battery-device-publisher-aqo-nb001-p00070"
+            - name: BROKER_TOPIC_70
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00071"
+            - name: CLIENT_ID_70
+              value: "battery-device-publisher-aqo-nb001-p00071"
+            - name: BROKER_TOPIC_71
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00072"
+            - name: CLIENT_ID_71
+              value: "battery-device-publisher-aqo-nb001-p00072"
+            - name: BROKER_TOPIC_72
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00073"
+            - name: CLIENT_ID_72
+              value: "battery-device-publisher-aqo-nb001-p00073"
+            - name: BROKER_TOPIC_73
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00074"
+            - name: CLIENT_ID_73
+              value: "battery-device-publisher-aqo-nb001-p00074"
+            - name: BROKER_TOPIC_74
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00075"
+            - name: CLIENT_ID_74
+              value: "battery-device-publisher-aqo-nb001-p00075"
+            - name: BROKER_TOPIC_75
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00076"
+            - name: CLIENT_ID_75
+              value: "battery-device-publisher-aqo-nb001-p00076"
+            - name: BROKER_TOPIC_76
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00077"
+            - name: CLIENT_ID_76
+              value: "battery-device-publisher-aqo-nb001-p00077"
+            - name: BROKER_TOPIC_77
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00078"
+            - name: CLIENT_ID_77
+              value: "battery-device-publisher-aqo-nb001-p00078"
+            - name: BROKER_TOPIC_78
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00079"
+            - name: CLIENT_ID_78
+              value: "battery-device-publisher-aqo-nb001-p00079"
+            - name: BROKER_TOPIC_79
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00080"
+            - name: CLIENT_ID_79
+              value: "battery-device-publisher-aqo-nb001-p00080"
+            - name: BROKER_TOPIC_80
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00081"
+            - name: CLIENT_ID_80
+              value: "battery-device-publisher-aqo-nb001-p00081"
+            - name: BROKER_TOPIC_81
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00082"
+            - name: CLIENT_ID_81
+              value: "battery-device-publisher-aqo-nb001-p00082"
+            - name: BROKER_TOPIC_82
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00083"
+            - name: CLIENT_ID_82
+              value: "battery-device-publisher-aqo-nb001-p00083"
+            - name: BROKER_TOPIC_83
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00084"
+            - name: CLIENT_ID_83
+              value: "battery-device-publisher-aqo-nb001-p00084"
+            - name: BROKER_TOPIC_84
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00085"
+            - name: CLIENT_ID_84
+              value: "battery-device-publisher-aqo-nb001-p00085"
+            - name: BROKER_TOPIC_85
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00086"
+            - name: CLIENT_ID_85
+              value: "battery-device-publisher-aqo-nb001-p00086"
+            - name: BROKER_TOPIC_86
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00087"
+            - name: CLIENT_ID_86
+              value: "battery-device-publisher-aqo-nb001-p00087"
+            - name: BROKER_TOPIC_87
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00088"
+            - name: CLIENT_ID_87
+              value: "battery-device-publisher-aqo-nb001-p00088"
+            - name: BROKER_TOPIC_88
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00089"
+            - name: CLIENT_ID_88
+              value: "battery-device-publisher-aqo-nb001-p00089"
+            - name: BROKER_TOPIC_89
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00090"
+            - name: CLIENT_ID_89
+              value: "battery-device-publisher-aqo-nb001-p00090"
+            - name: BROKER_TOPIC_90
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00091"
+            - name: CLIENT_ID_90
+              value: "battery-device-publisher-aqo-nb001-p00091"
+            - name: BROKER_TOPIC_91
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00092"
+            - name: CLIENT_ID_91
+              value: "battery-device-publisher-aqo-nb001-p00092"
+            - name: BROKER_TOPIC_92
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00093"
+            - name: CLIENT_ID_92
+              value: "battery-device-publisher-aqo-nb001-p00093"
+            - name: BROKER_TOPIC_93
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00094"
+            - name: CLIENT_ID_93
+              value: "battery-device-publisher-aqo-nb001-p00094"
+            - name: BROKER_TOPIC_94
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00095"
+            - name: CLIENT_ID_94
+              value: "battery-device-publisher-aqo-nb001-p00095"
+            - name: BROKER_TOPIC_95
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00096"
+            - name: CLIENT_ID_95
+              value: "battery-device-publisher-aqo-nb001-p00096"
+            - name: BROKER_TOPIC_96
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00097"
+            - name: CLIENT_ID_96
+              value: "battery-device-publisher-aqo-nb001-p00097"
+            - name: BROKER_TOPIC_97
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00098"
+            - name: CLIENT_ID_97
+              value: "battery-device-publisher-aqo-nb001-p00098"
+            - name: BROKER_TOPIC_98
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00099"
+            - name: CLIENT_ID_98
+              value: "battery-device-publisher-aqo-nb001-p00099"
+            - name: BROKER_TOPIC_99
+              value: "ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo-nb001-p00100"
+            - name: CLIENT_ID_99
+              value: "battery-device-publisher-aqo-nb001-p00100"
+            - name: "USERNAME"
+              value: "default_user_fK7nL3bkpb6rqYYDMAs"
+            - name: "PASSWORD"
+              value: "JY0S3TOdCZQkeHOBfdUgI4S6AEAqcdPo"
+            - name: "FULL_TIME_FRAMES"
+              value: "10;10;10;10;10;10"
+            - name: "MESSAGE_PERIOD"
+              value: "10;10;10;10;10;10"
+            - name: "FULL_PERIOD"
+              value: "10"
+            - name: "PART_PERIOD"
+              value: "4"
+          resources:
+            limits:
+              cpu: 100m
+              memory: 64Mi
+            requests:
+              cpu: 100m
+              memory: 64Mi
+      nodeSelector:
+        ktwin/device-node: "true"
+        kubernetes.io/arch: amd64
+      restartPolicy: Never
+

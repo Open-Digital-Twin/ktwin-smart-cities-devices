@@ -180,7 +180,7 @@ then
         --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
         --set images[1].pullPolicy=Always \
         --set images[1].tag="0.1" \
-        --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-aqo \
+        --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device \
         --set images[1].environmentVariables.clientId=$BATTERY_DEVICE_NAME-publisher \
         --set images[1].environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
         --set images[1].environmentVariables.messagePeriod="240;120;240;240;120;240" \
@@ -245,7 +245,7 @@ then
         --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
         --set images[1].pullPolicy=Always \
         --set images[1].tag="0.1" \
-        --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-wo \
+        --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device \
         --set images[1].environmentVariables.clientId=$BATTERY_DEVICE_NAME-publisher \
         --set images[1].environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
         --set images[1].environmentVariables.messagePeriod="240;120;240;240;120;240" \
@@ -309,7 +309,7 @@ then
         --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
         --set images[1].pullPolicy=Always \
         --set images[1].tag="0.1" \
-        --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device-nlo \
+        --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device \
         --set images[1].environmentVariables.clientId=$BATTERY_DEVICE_NAME-publisher \
         --set images[1].environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
         --set images[1].environmentVariables.messagePeriod="240;120;240;240;120;240" \
