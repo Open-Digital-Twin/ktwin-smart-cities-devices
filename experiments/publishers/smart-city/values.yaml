@@ -41,7 +41,7 @@ nodeSelectorArm:
 
 nodeSelectorx86:
   kubernetes.io/arch: amd64
-  ktwin/device-node: "true"
+  ktwin-node: "device"
 
 restartPolicy: Never
 
