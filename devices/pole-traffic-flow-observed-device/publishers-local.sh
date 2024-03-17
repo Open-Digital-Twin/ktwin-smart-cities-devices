@@ -1,0 +1,1 @@
+export ENV="publishers-local" && python publishers.py

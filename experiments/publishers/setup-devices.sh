@@ -379,6 +379,55 @@ then
 fi
 
 ############################
+## Pole Traffic Level Observed Devices
+############################
+
+POLE_TRAFFIC_LEVEL_DEVICE_NAME=pole-traffic-flow-observed-device
+DEVICE_IDS=""
+NUMBER_DEVICES=0
+for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
+    neighborhood_id=$(printf "nb%03d" $neighborhood)
+    for pole in $(seq 1 $NUMBER_POLE); do
+        pole_id=$(printf "p%05d" $pole)
+        id=$(printf "%s-%s" $neighborhood_id $pole_id)
+        if [ ! -z "${DEVICE_IDS}" ]; then
+            DEVICE_IDS+=","
+        fi
+        DEVICE_IDS+=$id
+        NUMBER_DEVICES=$((NUMBER_DEVICES + 1))
+    done
+done
+
+if [[ $APPLY_HELM == true ]]
+then
+    helm upgrade --install $POLE_TRAFFIC_LEVEL_DEVICE_NAME smart-city \
+        --set numberDevices=$NUMBER_DEVICES \
+        --set deviceIds={$DEVICE_IDS} \
+        --set images[0].name=$POLE_TRAFFIC_LEVEL_DEVICE_NAME-publisher \
+        --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$POLE_TRAFFIC_LEVEL_DEVICE_NAME-publishers \
+        --set images[0].pullPolicy=Always \
+        --set images[0].tag="0.1" \
+        --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-trafficflowobserved/ngsi-ld-city-trafficflowobserved \
+        --set images[0].environmentVariables.clientId=$POLE_TRAFFIC_LEVEL_DEVICE_NAME-publisher \
+        --set images[0].environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
+        --set images[0].environmentVariables.messagePeriod="10;10;10;10;10;10" \
+        --set images[0].environmentVariables.fullPeriod="10" \
+        --set images[0].environmentVariables.partPeriod="4" \
+        --set images[0].resources.limits.cpu="100m" \
+        --set images[0].resources.limits.memory="64Mi" \
+        --set images[0].resources.requests.cpu="100m" \
+        --set images[0].resources.requests.memory="64Mi"
+else
+    echo "Applying Pole Traffic Level Observed Device - ${id}"
+fi
+
+# Wait for processes to the closed
+if [[ $APPLY_HELM == true ]]
+then
+    wait
+fi
+
+############################
 ## Streetlight Devices
 ############################
 

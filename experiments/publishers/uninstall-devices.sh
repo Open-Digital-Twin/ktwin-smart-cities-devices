@@ -45,6 +45,13 @@ DEVICE_NAME=pole-crowd-flow-observed-device
 helm uninstall $DEVICE_NAME
 
 ############################
+## Pole Traffic Level Observed Devices
+############################
+
+DEVICE_NAME=pole-traffic-flow-observed-device
+helm uninstall $DEVICE_NAME
+
+############################
 ## Streetlight Devices
 ############################
 
