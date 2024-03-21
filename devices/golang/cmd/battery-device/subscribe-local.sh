@@ -1,0 +1,1 @@
+export ENV="subscribe-local" && python subscriber.py
