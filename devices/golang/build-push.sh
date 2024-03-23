@@ -10,12 +10,12 @@ docker buildx build -f publishers.Dockerfile -t ghcr.io/open-digital-twin/ktwin-
 docker buildx build -f publishers.Dockerfile -t ghcr.io/open-digital-twin/ktwin-ev-charging-device-publishers:0.1 --build-arg DEVICE_NAME=ev-charging-device .
 docker buildx build -f publishers.Dockerfile -t ghcr.io/open-digital-twin/ktwin-battery-device-publishers:0.1 --build-arg DEVICE_NAME=battery-device .
 
-# docker push ghcr.io/open-digital-twin/ktwin-pole-air-quality-observed-device-publishers:0.1
-# docker push ghcr.io/open-digital-twin/ktwin-pole-weather-observed-device-publishers:0.1
-# docker push ghcr.io/open-digital-twin/ktwin-pole-crowd-flow-observed-device-publishers:0.1
-# docker push ghcr.io/open-digital-twin/ktwin-pole-traffic-flow-observed-device-publishers:0.1
-# docker push ghcr.io/open-digital-twin/ktwin-pole-noise-level-observed-device-publishers:0.1
-# docker push ghcr.io/open-digital-twin/ktwin-streetlight-device-publishers:0.1
-# docker push ghcr.io/open-digital-twin/ktwin-parking-spot-device-publishers:0.1
-# docker push ghcr.io/open-digital-twin/ktwin-ev-charging-device-publishers:0.1
-# docker push ghcr.io/open-digital-twin/ktwin-battery-device-publishers:0.1
+docker push ghcr.io/open-digital-twin/ktwin-pole-air-quality-observed-device-publishers:0.1
+docker push ghcr.io/open-digital-twin/ktwin-pole-weather-observed-device-publishers:0.1
+docker push ghcr.io/open-digital-twin/ktwin-pole-crowd-flow-observed-device-publishers:0.1
+docker push ghcr.io/open-digital-twin/ktwin-pole-traffic-flow-observed-device-publishers:0.1
+docker push ghcr.io/open-digital-twin/ktwin-pole-noise-level-observed-device-publishers:0.1
+docker push ghcr.io/open-digital-twin/ktwin-streetlight-device-publishers:0.1
+docker push ghcr.io/open-digital-twin/ktwin-parking-spot-device-publishers:0.1
+docker push ghcr.io/open-digital-twin/ktwin-ev-charging-device-publishers:0.1
+docker push ghcr.io/open-digital-twin/ktwin-battery-device-publishers:0.1
