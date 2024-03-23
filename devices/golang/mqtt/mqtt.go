@@ -6,7 +6,6 @@ import (
 	"log"
 	"os"
 
-	mqtt "github.com/eclipse/paho.mqtt.golang"
 	pahoMqtt "github.com/eclipse/paho.mqtt.golang"
 )
 
@@ -66,7 +65,7 @@ func (c *MQTTClient) Publish(message string) {
 }
 
 func (c *MQTTClient) Subscribe(callback func(map[string]interface{})) {
-	onMessage := func(client mqtt.Client, msg mqtt.Message) {
+	onMessage := func(client pahoMqtt.Client, msg pahoMqtt.Message) {
 		var msgDict map[string]interface{}
 		if err := json.Unmarshal(msg.Payload(), &msgDict); err != nil {
 			c.logger.Println("Error unmarshalling message:", err)
