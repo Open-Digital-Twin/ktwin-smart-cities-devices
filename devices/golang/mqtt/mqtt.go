@@ -9,6 +9,10 @@ import (
 	pahoMqtt "github.com/eclipse/paho.mqtt.golang"
 )
 
+const (
+	NUMBER_RETRIES = 3
+)
+
 type MQTTClient struct {
 	logger     *log.Logger
 	mqttConfig MQTTClientConfig
@@ -42,9 +46,16 @@ func (c *MQTTClient) ConnectMQTT() {
 	}
 
 	c.mqttClient = pahoMqtt.NewClient(opts)
-	if token := c.mqttClient.Connect(); token.Wait() && token.Error() != nil {
-		c.logger.Printf("Error: %s\n" + token.Error().Error())
-		c.logger.Fatalf("Failed to connect to topic %s, %v\n", c.topic, token.Error())
+	retries := 0
+	for token := c.mqttClient.Connect(); token.Wait() && token.Error() != nil && retries < NUMBER_RETRIES; retries++ {
+		c.logger.Printf("Error while connecting to topic %s: %s\n", c.topic, token.Error().Error())
+		if retries < NUMBER_RETRIES {
+			c.logger.Printf("Retrying connection to topic %s\n", c.topic)
+		}
+	}
+
+	if !c.mqttClient.IsConnected() {
+		c.logger.Fatalf("Failed to connect to topic %s\n", c.topic)
 	}
 }
 
