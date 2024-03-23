@@ -13,7 +13,11 @@ func runDevice(mqttClientConfig mqtt.MQTTClientConfig, publisherClientConfig mqt
 	fmt.Printf("Starting device %s\n", clientId)
 
 	client := mqtt.NewMQTTClient(mqttClientConfig, clientId, topicId)
-	client.ConnectMQTT()
+	err := client.ConnectMQTT()
+
+	if err != nil {
+		return
+	}
 
 	messageCount := 0
 
