@@ -32,6 +32,7 @@ func (c *MQTTClient) ConnectMQTT() pahoMqtt.Client {
 	}
 
 	opts := pahoMqtt.NewClientOptions().
+		SetClientID(c.clientId).
 		AddBroker(fmt.Sprintf("tcp://%s:%d", c.mqttConfig.BrokerAddress, c.mqttConfig.Port)).
 		SetAutoReconnect(true).
 		SetOnConnectHandler(onConnect)
