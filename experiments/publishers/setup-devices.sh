@@ -52,14 +52,14 @@ then
         --set images[0].tag="0.1" \
         --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-evchargingstation/ngsi-ld-city-evchargingstation \
         --set images[0].environmentVariables.clientId=$EV_CHARGING_DEVICE_NAME-publisher \
-        --set images[0].environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
-        --set images[0].environmentVariables.messagePeriod="80;15;5;5;15;80" \
+        --set images[0].environmentVariables.messageWindows="240;240;240;240;240;240" \
+        --set images[0].environmentVariables.messagePeriods="80;15;5;5;15;80" \
         --set images[0].environmentVariables.fullPeriod="10" \
         --set images[0].environmentVariables.partPeriod="4" \
         --set images[0].resources.limits.cpu="100m" \
-        --set images[0].resources.limits.memory="64Mi" \
+        --set images[0].resources.limits.memory="256Mi" \
         --set images[0].resources.requests.cpu="100m" \
-        --set images[0].resources.requests.memory="64Mi"
+        --set images[0].resources.requests.memory="256Mi"
 else
     echo "Applying EV Charging Device - ${id}"
 fi
@@ -69,6 +69,8 @@ if [[ $APPLY_HELM == true ]]
 then
     wait
 fi
+
+exit
 
 ############################
 ## Off street Parking Spot Devices
@@ -103,28 +105,28 @@ then
         --set images[0].tag="0.1" \
         --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-parkingspot/ngsi-ld-city-offstreetparkingspot \
         --set images[0].environmentVariables.clientId=$PARKING_SPOT_DEVICE_NAME-publisher \
-        --set images[0].environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
-        --set images[0].environmentVariables.messagePeriod="80;15;5;5;15;80" \
+        --set images[0].environmentVariables.messageWindows="240;240;240;240;240;240" \
+        --set images[0].environmentVariables.messagePeriods="80;15;5;5;15;80" \
         --set images[0].environmentVariables.fullPeriod="10" \
         --set images[0].environmentVariables.partPeriod="4" \
         --set images[0].resources.limits.cpu="100m" \
-        --set images[0].resources.limits.memory="64Mi" \
+        --set images[0].resources.limits.memory="256Mi" \
         --set images[0].resources.requests.cpu="100m" \
-        --set images[0].resources.requests.memory="64Mi" \
+        --set images[0].resources.requests.memory="256Mi" \
         --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
         --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
         --set images[1].pullPolicy=Always \
         --set images[1].tag="0.1" \
         --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device \
         --set images[1].environmentVariables.clientId=$BATTERY_DEVICE_NAME-publisher \
-        --set images[1].environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
-        --set images[1].environmentVariables.messagePeriod="240;120;240;240;120;240" \
+        --set images[1].environmentVariables.messageWindows="240;240;240;240;240;240" \
+        --set images[1].environmentVariables.messagePeriods="240;120;240;240;120;240" \
         --set images[1].environmentVariables.fullPeriod="10" \
         --set images[1].environmentVariables.partPeriod="4" \
         --set images[1].resources.limits.cpu="100m" \
-        --set images[1].resources.limits.memory="64Mi" \
+        --set images[1].resources.limits.memory="256Mi" \
         --set images[1].resources.requests.cpu="100m" \
-        --set images[1].resources.requests.memory="64Mi"
+        --set images[1].resources.requests.memory="256Mi"
 else
     echo "Applying Off street Parking Spot Device - ${id}"
 fi
@@ -167,14 +169,14 @@ then
         --set images[0].tag="0.1" \
         --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-airqualityobserved/ngsi-ld-city-airqualityobserved \
         --set images[0].environmentVariables.clientId=$AIR_QUALITY_DEVICE_NAME-publisher \
-        --set images[0].environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
-        --set images[0].environmentVariables.messagePeriod="10;10;10;10;10;10" \
+        --set images[0].environmentVariables.messageWindows="240;240;240;240;240;240" \
+        --set images[0].environmentVariables.messagePeriods="10;10;10;10;10;10" \
         --set images[0].environmentVariables.fullPeriod="10" \
         --set images[0].environmentVariables.partPeriod="4" \
         --set images[0].resources.limits.cpu="100m" \
-        --set images[0].resources.limits.memory="64Mi" \
+        --set images[0].resources.limits.memory="256Mi" \
         --set images[0].resources.requests.cpu="100m" \
-        --set images[0].resources.requests.memory="64Mi" \
+        --set images[0].resources.requests.memory="256Mi" \
         --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
         --set images[1].imagePrefixId=aqo \
         --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
@@ -182,14 +184,14 @@ then
         --set images[1].tag="0.1" \
         --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device \
         --set images[1].environmentVariables.clientId=$BATTERY_DEVICE_NAME-publisher \
-        --set images[1].environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
-        --set images[1].environmentVariables.messagePeriod="240;120;240;240;120;240" \
+        --set images[1].environmentVariables.messageWindows="240;240;240;240;240;240" \
+        --set images[1].environmentVariables.messagePeriods="240;120;240;240;120;240" \
         --set images[1].environmentVariables.fullPeriod="10" \
         --set images[1].environmentVariables.partPeriod="4" \
         --set images[1].resources.limits.cpu="100m" \
-        --set images[1].resources.limits.memory="64Mi" \
+        --set images[1].resources.limits.memory="256Mi" \
         --set images[1].resources.requests.cpu="100m" \
-        --set images[1].resources.requests.memory="64Mi"
+        --set images[1].resources.requests.memory="256Mi"
 else
     echo "Applying Pole Air Quality Observed Device - ${id}"
 fi
@@ -232,14 +234,14 @@ then
         --set images[0].tag="0.1" \
         --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-weatherobserved/ngsi-ld-city-weatherobserved \
         --set images[0].environmentVariables.clientId=$POLE_WEATHER_DEVICE_NAME-publisher \
-        --set images[0].environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
-        --set images[0].environmentVariables.messagePeriod="10;10;10;10;10;10" \
+        --set images[0].environmentVariables.messageWindows="240;240;240;240;240;240" \
+        --set images[0].environmentVariables.messagePeriods="10;10;10;10;10;10" \
         --set images[0].environmentVariables.fullPeriod="10" \
         --set images[0].environmentVariables.partPeriod="4" \
         --set images[0].resources.limits.cpu="100m" \
-        --set images[0].resources.limits.memory="64Mi" \
+        --set images[0].resources.limits.memory="256Mi" \
         --set images[0].resources.requests.cpu="100m" \
-        --set images[0].resources.requests.memory="64Mi" \
+        --set images[0].resources.requests.memory="256Mi" \
         --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
         --set images[1].imagePrefixId=wo \
         --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
@@ -247,14 +249,14 @@ then
         --set images[1].tag="0.1" \
         --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device \
         --set images[1].environmentVariables.clientId=$BATTERY_DEVICE_NAME-publisher \
-        --set images[1].environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
-        --set images[1].environmentVariables.messagePeriod="240;120;240;240;120;240" \
+        --set images[1].environmentVariables.messageWindows="240;240;240;240;240;240" \
+        --set images[1].environmentVariables.messagePeriods="240;120;240;240;120;240" \
         --set images[1].environmentVariables.fullPeriod="10" \
         --set images[1].environmentVariables.partPeriod="4" \
         --set images[1].resources.limits.cpu="100m" \
-        --set images[1].resources.limits.memory="64Mi" \
+        --set images[1].resources.limits.memory="256Mi" \
         --set images[1].resources.requests.cpu="100m" \
-        --set images[1].resources.requests.memory="64Mi"
+        --set images[1].resources.requests.memory="256Mi"
 else
     echo "Applying Pole Weather Observed Devices - ${id}"
 fi
@@ -296,14 +298,14 @@ then
         --set images[0].tag="0.1" \
         --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-noiselevelobserved/ngsi-ld-city-noiselevelobserved \
         --set images[0].environmentVariables.clientId=$POLE_NOISE_LEVEL_DEVICE_NAME-publisher \
-        --set images[0].environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
-        --set images[0].environmentVariables.messagePeriod="10;10;10;10;10;10" \
+        --set images[0].environmentVariables.messageWindows="240;240;240;240;240;240" \
+        --set images[0].environmentVariables.messagePeriods="10;10;10;10;10;10" \
         --set images[0].environmentVariables.fullPeriod="10" \
         --set images[0].environmentVariables.partPeriod="4" \
         --set images[0].resources.limits.cpu="100m" \
-        --set images[0].resources.limits.memory="64Mi" \
+        --set images[0].resources.limits.memory="256Mi" \
         --set images[0].resources.requests.cpu="100m" \
-        --set images[0].resources.requests.memory="64Mi" \
+        --set images[0].resources.requests.memory="256Mi" \
         --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
         --set images[1].imagePrefixId=nlo \
         --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
@@ -311,14 +313,14 @@ then
         --set images[1].tag="0.1" \
         --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device \
         --set images[1].environmentVariables.clientId=$BATTERY_DEVICE_NAME-publisher \
-        --set images[1].environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
-        --set images[1].environmentVariables.messagePeriod="240;120;240;240;120;240" \
+        --set images[1].environmentVariables.messageWindows="240;240;240;240;240;240" \
+        --set images[1].environmentVariables.messagePeriods="240;120;240;240;120;240" \
         --set images[1].environmentVariables.fullPeriod="10" \
         --set images[1].environmentVariables.partPeriod="4" \
         --set images[1].resources.limits.cpu="100m" \
-        --set images[1].resources.limits.memory="64Mi" \
+        --set images[1].resources.limits.memory="256Mi" \
         --set images[1].resources.requests.cpu="100m" \
-        --set images[1].resources.requests.memory="64Mi"
+        --set images[1].resources.requests.memory="256Mi"
 else
     echo "Applying Pole Noise Level Observed Devices - ${id}"
 fi
@@ -360,14 +362,14 @@ then
         --set images[0].tag="0.1" \
         --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-crowdflowobserved/ngsi-ld-city-crowdflowobserved \
         --set images[0].environmentVariables.clientId=$POLE_CROWD_LEVEL_DEVICE_NAME-publisher \
-        --set images[0].environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
-        --set images[0].environmentVariables.messagePeriod="10;10;10;10;10;10" \
+        --set images[0].environmentVariables.messageWindows="240;240;240;240;240;240" \
+        --set images[0].environmentVariables.messagePeriods="10;10;10;10;10;10" \
         --set images[0].environmentVariables.fullPeriod="10" \
         --set images[0].environmentVariables.partPeriod="4" \
         --set images[0].resources.limits.cpu="100m" \
-        --set images[0].resources.limits.memory="64Mi" \
+        --set images[0].resources.limits.memory="256Mi" \
         --set images[0].resources.requests.cpu="100m" \
-        --set images[0].resources.requests.memory="64Mi"
+        --set images[0].resources.requests.memory="256Mi"
 else
     echo "Applying Pole Crowd Level Observed Device - ${id}"
 fi
@@ -409,14 +411,14 @@ then
         --set images[0].tag="0.1" \
         --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-trafficflowobserved/ngsi-ld-city-trafficflowobserved \
         --set images[0].environmentVariables.clientId=$POLE_TRAFFIC_LEVEL_DEVICE_NAME-publisher \
-        --set images[0].environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
-        --set images[0].environmentVariables.messagePeriod="10;10;10;10;10;10" \
+        --set images[0].environmentVariables.messageWindows="240;240;240;240;240;240" \
+        --set images[0].environmentVariables.messagePeriods="10;10;10;10;10;10" \
         --set images[0].environmentVariables.fullPeriod="10" \
         --set images[0].environmentVariables.partPeriod="4" \
         --set images[0].resources.limits.cpu="100m" \
-        --set images[0].resources.limits.memory="64Mi" \
+        --set images[0].resources.limits.memory="256Mi" \
         --set images[0].resources.requests.cpu="100m" \
-        --set images[0].resources.requests.memory="64Mi"
+        --set images[0].resources.requests.memory="256Mi"
 else
     echo "Applying Pole Traffic Level Observed Device - ${id}"
 fi
@@ -458,28 +460,28 @@ then
         --set images[0].tag="0.1" \
         --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-streetlight/ngsi-ld-city-streetlight \
         --set images[0].environmentVariables.clientId=$STREETLIGHT_DEVICE_NAME-publisher \
-        --set images[0].environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
-        --set images[0].environmentVariables.messagePeriod="240;120;240;240;120;240" \
+        --set images[0].environmentVariables.messageWindows="240;240;240;240;240;240" \
+        --set images[0].environmentVariables.messagePeriods="240;120;240;240;120;240" \
         --set images[0].environmentVariables.fullPeriod="10" \
         --set images[0].environmentVariables.partPeriod="4" \
         --set images[0].resources.limits.cpu="100m" \
-        --set images[0].resources.limits.memory="64Mi" \
+        --set images[0].resources.limits.memory="256Mi" \
         --set images[0].resources.requests.cpu="100m" \
-        --set images[0].resources.requests.memory="64Mi" \
+        --set images[0].resources.requests.memory="256Mi" \
         --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
         --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
         --set images[1].pullPolicy=Always \
         --set images[1].tag="0.1" \
         --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device \
         --set images[1].environmentVariables.clientId=$BATTERY_DEVICE_NAME-publisher \
-        --set images[1].environmentVariables.fullTimeFrames="240;240;240;240;240;240" \
-        --set images[1].environmentVariables.messagePeriod="240;120;240;240;120;240" \
+        --set images[1].environmentVariables.messageWindows="240;240;240;240;240;240" \
+        --set images[1].environmentVariables.messagePeriods="240;120;240;240;120;240" \
         --set images[1].environmentVariables.fullPeriod="10" \
         --set images[1].environmentVariables.partPeriod="4" \
         --set images[1].resources.limits.cpu="100m" \
-        --set images[1].resources.limits.memory="64Mi" \
+        --set images[1].resources.limits.memory="256Mi" \
         --set images[1].resources.requests.cpu="100m" \
-        --set images[1].resources.requests.memory="64Mi"
+        --set images[1].resources.requests.memory="256Mi"
 else
     echo "Applying Streetlight Device - ${id}"
 fi

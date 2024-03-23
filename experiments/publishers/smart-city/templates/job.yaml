@@ -46,10 +46,10 @@ spec:
               value: {{ $.Values.globalEnvironmentVariables.username | quote }}
             - name: "PASSWORD"
               value: {{ $.Values.globalEnvironmentVariables.password | quote}}
-            - name: "FULL_TIME_FRAMES"
-              value: {{ $i.environmentVariables.fullTimeFrames | quote }}
-            - name: "MESSAGE_PERIOD"
-              value: {{ $i.environmentVariables.messagePeriod | quote }}
+            - name: "MESSAGE_WINDOWS"
+              value: {{ $i.environmentVariables.messageWindows | quote }}
+            - name: "MESSAGE_PERIODS"
+              value: {{ $i.environmentVariables.messagePeriods | quote }}
             - name: "FULL_PERIOD"
               value: {{ $i.environmentVariables.fullPeriod | quote }}
             - name: "PART_PERIOD"
