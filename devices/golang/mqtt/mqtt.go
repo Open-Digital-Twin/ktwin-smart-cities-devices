@@ -26,7 +26,7 @@ func NewMQTTClient(config MQTTClientConfig, clientId, topic string) *MQTTClient 
 	}
 }
 
-func (c *MQTTClient) ConnectMQTT() error {
+func (c *MQTTClient) ConnectMQTT() {
 	onConnect := func(client pahoMqtt.Client) {
 		c.logger.Printf("Connected to MQTT Broker on topic %s\n", c.topic)
 	}
@@ -43,12 +43,9 @@ func (c *MQTTClient) ConnectMQTT() error {
 
 	c.mqttClient = pahoMqtt.NewClient(opts)
 	if token := c.mqttClient.Connect(); token.Wait() && token.Error() != nil {
-		c.logger.Printf("Failed to connect to topic %s, %v\n", c.topic, token.Error())
 		c.logger.Printf("Error: %s\n" + token.Error().Error())
-		return token.Error()
+		c.logger.Fatalf("Failed to connect to topic %s, %v\n", c.topic, token.Error())
 	}
-
-	return nil
 }
 
 func (c *MQTTClient) DisconnectMQTT() {
