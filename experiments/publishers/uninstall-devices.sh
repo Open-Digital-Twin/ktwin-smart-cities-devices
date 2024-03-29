@@ -6,54 +6,72 @@
 # ## EV Charging Devices
 # ############################
 
+NUMBER_NEIGHBORHOOD=5
+
 DEVICE_NAME=ev-charging-device
-helm uninstall $DEVICE_NAME
+for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
+    helm uninstall $DEVICE_NAME-$neighborhood
+done
 
 ############################
 ## Off street Parking Spot Devices
 ############################
 
 DEVICE_NAME=parking-spot-device
-helm uninstall $DEVICE_NAME
+for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
+    helm uninstall $DEVICE_NAME-$neighborhood
+done
 
 ############################
 ## Pole Air Quality Observed Devices
 ############################
 
 DEVICE_NAME=pole-air-quality-observed-device
-helm uninstall $DEVICE_NAME
+for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
+    helm uninstall $DEVICE_NAME-$neighborhood
+done
 
 ############################
 ## Pole Weather Observed Devices
 ############################
 
 DEVICE_NAME=pole-weather-observed-device
-helm uninstall $DEVICE_NAME
+for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
+    helm uninstall $DEVICE_NAME-$neighborhood
+done
 
 ############################
 ## Pole Noise Level Observed Devices
 ############################
 
 DEVICE_NAME=pole-noise-level-observed-device
-helm uninstall $DEVICE_NAME
+for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
+    helm uninstall $DEVICE_NAME-$neighborhood
+done
 
 ############################
 ## Pole Crowd Level Observed Devices
 ############################
 
 DEVICE_NAME=pole-crowd-flow-observed-device
-helm uninstall $DEVICE_NAME
+for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
+    helm uninstall $DEVICE_NAME-$neighborhood
+done
 
 ############################
 ## Pole Traffic Level Observed Devices
 ############################
 
 DEVICE_NAME=pole-traffic-flow-observed-device
-helm uninstall $DEVICE_NAME
+for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
+    helm uninstall $DEVICE_NAME-$neighborhood
+done
 
 ############################
 ## Streetlight Devices
 ############################
 
 DEVICE_NAME=streetlight-device
-helm uninstall $DEVICE_NAME
+for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
+    helm uninstall $DEVICE_NAME-$neighborhood
+done

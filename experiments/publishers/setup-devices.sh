@@ -12,7 +12,7 @@ else
 fi
 
 # Configure number of sensors to initiate
-NUMBER_NEIGHBORHOOD=1
+NUMBER_NEIGHBORHOOD=5
 NUMBER_POLE=100
 NUMBER_EV_CHARGING_STATION=10
 NUMBER_OFFSTRET_PARKING=5
@@ -39,38 +39,37 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
         DEVICE_IDS+=$id
         NUMBER_DEVICES=$((NUMBER_DEVICES + 1))
     done
+
+    if [[ $APPLY_HELM == true ]]
+    then
+        helm upgrade --install $EV_CHARGING_DEVICE_NAME-$neighborhood smart-city \
+            --set numberDevices=$NUMBER_DEVICES \
+            --set deviceIds={$DEVICE_IDS} \
+            --set images[0].name=$EV_CHARGING_DEVICE_NAME-publisher \
+            --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$EV_CHARGING_DEVICE_NAME-publishers \
+            --set images[0].pullPolicy=Always \
+            --set images[0].tag="0.1" \
+            --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-evchargingstation/ngsi-ld-city-evchargingstation \
+            --set images[0].environmentVariables.clientId=$EV_CHARGING_DEVICE_NAME-publisher \
+            --set images[0].environmentVariables.messageWindows="240;240;240;240;240;240" \
+            --set images[0].environmentVariables.messagePeriods="80;15;5;5;15;80" \
+            --set images[0].environmentVariables.fullPeriod="10" \
+            --set images[0].environmentVariables.partPeriod="4" \
+            --set images[0].resources.limits.cpu="100m" \
+            --set images[0].resources.limits.memory="256Mi" \
+            --set images[0].resources.requests.cpu="100m" \
+            --set images[0].resources.requests.memory="256Mi"
+    else
+        echo "Applying EV Charging Device - ${id}"
+    fi
 done
 
-if [[ $APPLY_HELM == true ]]
-then
-    helm upgrade --install $EV_CHARGING_DEVICE_NAME smart-city \
-        --set numberDevices=$NUMBER_DEVICES \
-        --set deviceIds={$DEVICE_IDS} \
-        --set images[0].name=$EV_CHARGING_DEVICE_NAME-publisher \
-        --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$EV_CHARGING_DEVICE_NAME-publishers \
-        --set images[0].pullPolicy=Always \
-        --set images[0].tag="0.1" \
-        --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-evchargingstation/ngsi-ld-city-evchargingstation \
-        --set images[0].environmentVariables.clientId=$EV_CHARGING_DEVICE_NAME-publisher \
-        --set images[0].environmentVariables.messageWindows="240;240;240;240;240;240" \
-        --set images[0].environmentVariables.messagePeriods="80;15;5;5;15;80" \
-        --set images[0].environmentVariables.fullPeriod="10" \
-        --set images[0].environmentVariables.partPeriod="4" \
-        --set images[0].resources.limits.cpu="100m" \
-        --set images[0].resources.limits.memory="256Mi" \
-        --set images[0].resources.requests.cpu="100m" \
-        --set images[0].resources.requests.memory="256Mi"
-else
-    echo "Applying EV Charging Device - ${id}"
-fi
 
 # Wait for processes to the closed
 if [[ $APPLY_HELM == true ]]
 then
     wait
 fi
-
-exit
 
 ############################
 ## Off street Parking Spot Devices
@@ -91,45 +90,45 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             fi
             DEVICE_IDS+=$id
             NUMBER_DEVICES=$((NUMBER_DEVICES + 1))
+        done
     done
-done
 
-if [[ $APPLY_HELM == true ]]
-then
-    helm upgrade --install $PARKING_SPOT_DEVICE_NAME smart-city \
-        --set numberDevices="${#DEVICE_IDS[*]}" \
-        --set deviceIds={$DEVICE_IDS} \
-        --set images[0].name=$PARKING_SPOT_DEVICE_NAME-publisher \
-        --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$PARKING_SPOT_DEVICE_NAME-publishers \
-        --set images[0].pullPolicy=Always \
-        --set images[0].tag="0.1" \
-        --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-parkingspot/ngsi-ld-city-offstreetparkingspot \
-        --set images[0].environmentVariables.clientId=$PARKING_SPOT_DEVICE_NAME-publisher \
-        --set images[0].environmentVariables.messageWindows="240;240;240;240;240;240" \
-        --set images[0].environmentVariables.messagePeriods="80;15;5;5;15;80" \
-        --set images[0].environmentVariables.fullPeriod="10" \
-        --set images[0].environmentVariables.partPeriod="4" \
-        --set images[0].resources.limits.cpu="100m" \
-        --set images[0].resources.limits.memory="256Mi" \
-        --set images[0].resources.requests.cpu="100m" \
-        --set images[0].resources.requests.memory="256Mi" \
-        --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
-        --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
-        --set images[1].pullPolicy=Always \
-        --set images[1].tag="0.1" \
-        --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device \
-        --set images[1].environmentVariables.clientId=$BATTERY_DEVICE_NAME-publisher \
-        --set images[1].environmentVariables.messageWindows="240;240;240;240;240;240" \
-        --set images[1].environmentVariables.messagePeriods="240;120;240;240;120;240" \
-        --set images[1].environmentVariables.fullPeriod="10" \
-        --set images[1].environmentVariables.partPeriod="4" \
-        --set images[1].resources.limits.cpu="100m" \
-        --set images[1].resources.limits.memory="256Mi" \
-        --set images[1].resources.requests.cpu="100m" \
-        --set images[1].resources.requests.memory="256Mi"
-else
-    echo "Applying Off street Parking Spot Device - ${id}"
-fi
+    if [[ $APPLY_HELM == true ]]
+    then
+        helm upgrade --install $PARKING_SPOT_DEVICE_NAME-$neighborhood smart-city \
+            --set numberDevices="${#DEVICE_IDS[*]}" \
+            --set deviceIds={$DEVICE_IDS} \
+            --set images[0].name=$PARKING_SPOT_DEVICE_NAME-publisher \
+            --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$PARKING_SPOT_DEVICE_NAME-publishers \
+            --set images[0].pullPolicy=Always \
+            --set images[0].tag="0.1" \
+            --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-parkingspot/ngsi-ld-city-offstreetparkingspot \
+            --set images[0].environmentVariables.clientId=$PARKING_SPOT_DEVICE_NAME-publisher \
+            --set images[0].environmentVariables.messageWindows="240;240;240;240;240;240" \
+            --set images[0].environmentVariables.messagePeriods="80;15;5;5;15;80" \
+            --set images[0].environmentVariables.fullPeriod="10" \
+            --set images[0].environmentVariables.partPeriod="4" \
+            --set images[0].resources.limits.cpu="100m" \
+            --set images[0].resources.limits.memory="256Mi" \
+            --set images[0].resources.requests.cpu="100m" \
+            --set images[0].resources.requests.memory="256Mi" \
+            --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
+            --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
+            --set images[1].pullPolicy=Always \
+            --set images[1].tag="0.1" \
+            --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device \
+            --set images[1].environmentVariables.clientId=$BATTERY_DEVICE_NAME-publisher \
+            --set images[1].environmentVariables.messageWindows="240;240;240;240;240;240" \
+            --set images[1].environmentVariables.messagePeriods="240;120;240;240;120;240" \
+            --set images[1].environmentVariables.fullPeriod="10" \
+            --set images[1].environmentVariables.partPeriod="4" \
+            --set images[1].resources.limits.cpu="100m" \
+            --set images[1].resources.limits.memory="256Mi" \
+            --set images[1].resources.requests.cpu="100m" \
+            --set images[1].resources.requests.memory="256Mi"
+    else
+        echo "Applying Off street Parking Spot Device - ${id}"
+    fi
 done
 
 # Wait for processes to the closed
@@ -156,45 +155,47 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
         DEVICE_IDS+=$id
         NUMBER_DEVICES=$((NUMBER_DEVICES + 1))
     done
-done
 
-if [[ $APPLY_HELM == true ]]
-then
-    helm upgrade --install $AIR_QUALITY_DEVICE_NAME smart-city \
-        --set numberDevices=$NUMBER_DEVICES \
-        --set deviceIds={$DEVICE_IDS} \
-        --set images[0].name=$AIR_QUALITY_DEVICE_NAME-publisher \
-        --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$AIR_QUALITY_DEVICE_NAME-publishers \
-        --set images[0].pullPolicy=Always \
-        --set images[0].tag="0.1" \
-        --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-airqualityobserved/ngsi-ld-city-airqualityobserved \
-        --set images[0].environmentVariables.clientId=$AIR_QUALITY_DEVICE_NAME-publisher \
-        --set images[0].environmentVariables.messageWindows="240;240;240;240;240;240" \
-        --set images[0].environmentVariables.messagePeriods="10;10;10;10;10;10" \
-        --set images[0].environmentVariables.fullPeriod="10" \
-        --set images[0].environmentVariables.partPeriod="4" \
-        --set images[0].resources.limits.cpu="100m" \
-        --set images[0].resources.limits.memory="256Mi" \
-        --set images[0].resources.requests.cpu="100m" \
-        --set images[0].resources.requests.memory="256Mi" \
-        --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
-        --set images[1].imagePrefixId=aqo \
-        --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
-        --set images[1].pullPolicy=Always \
-        --set images[1].tag="0.1" \
-        --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device \
-        --set images[1].environmentVariables.clientId=$BATTERY_DEVICE_NAME-publisher \
-        --set images[1].environmentVariables.messageWindows="240;240;240;240;240;240" \
-        --set images[1].environmentVariables.messagePeriods="240;120;240;240;120;240" \
-        --set images[1].environmentVariables.fullPeriod="10" \
-        --set images[1].environmentVariables.partPeriod="4" \
-        --set images[1].resources.limits.cpu="100m" \
-        --set images[1].resources.limits.memory="256Mi" \
-        --set images[1].resources.requests.cpu="100m" \
-        --set images[1].resources.requests.memory="256Mi"
-else
-    echo "Applying Pole Air Quality Observed Device - ${id}"
-fi
+
+    if [[ $APPLY_HELM == true ]]
+    then
+        helm upgrade --install $AIR_QUALITY_DEVICE_NAME-$neighborhood smart-city \
+            --set numberDevices=$NUMBER_DEVICES \
+            --set deviceIds={$DEVICE_IDS} \
+            --set images[0].name=$AIR_QUALITY_DEVICE_NAME-publisher \
+            --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$AIR_QUALITY_DEVICE_NAME-publishers \
+            --set images[0].pullPolicy=Always \
+            --set images[0].tag="0.1" \
+            --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-airqualityobserved/ngsi-ld-city-airqualityobserved \
+            --set images[0].environmentVariables.clientId=$AIR_QUALITY_DEVICE_NAME-publisher \
+            --set images[0].environmentVariables.messageWindows="240;240;240;240;240;240" \
+            --set images[0].environmentVariables.messagePeriods="10;10;10;10;10;10" \
+            --set images[0].environmentVariables.fullPeriod="10" \
+            --set images[0].environmentVariables.partPeriod="4" \
+            --set images[0].resources.limits.cpu="100m" \
+            --set images[0].resources.limits.memory="256Mi" \
+            --set images[0].resources.requests.cpu="100m" \
+            --set images[0].resources.requests.memory="256Mi" \
+            --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
+            --set images[1].imagePrefixId=aqo \
+            --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
+            --set images[1].pullPolicy=Always \
+            --set images[1].tag="0.1" \
+            --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device \
+            --set images[1].environmentVariables.clientId=$BATTERY_DEVICE_NAME-publisher \
+            --set images[1].environmentVariables.messageWindows="240;240;240;240;240;240" \
+            --set images[1].environmentVariables.messagePeriods="240;120;240;240;120;240" \
+            --set images[1].environmentVariables.fullPeriod="10" \
+            --set images[1].environmentVariables.partPeriod="4" \
+            --set images[1].resources.limits.cpu="100m" \
+            --set images[1].resources.limits.memory="256Mi" \
+            --set images[1].resources.requests.cpu="100m" \
+            --set images[1].resources.requests.memory="256Mi"
+    else
+        echo "Applying Pole Air Quality Observed Device - ${id}"
+    fi
+
+done
 
 # Wait for processes to the closed
 if [[ $APPLY_HELM == true ]]
@@ -220,46 +221,45 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
         DEVICE_IDS+=$id
         NUMBER_DEVICES=$((NUMBER_DEVICES + 1))
     done
+
+    if [[ $APPLY_HELM == true ]]
+    then
+        helm upgrade --install $POLE_WEATHER_DEVICE_NAME-$neighborhood smart-city \
+            --set numberDevices=$NUMBER_DEVICES \
+            --set deviceIds={$DEVICE_IDS} \
+            --set images[0].name=$POLE_WEATHER_DEVICE_NAME-publisher \
+            --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$POLE_WEATHER_DEVICE_NAME-publishers \
+            --set images[0].pullPolicy=Always \
+            --set images[0].tag="0.1" \
+            --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-weatherobserved/ngsi-ld-city-weatherobserved \
+            --set images[0].environmentVariables.clientId=$POLE_WEATHER_DEVICE_NAME-publisher \
+            --set images[0].environmentVariables.messageWindows="240;240;240;240;240;240" \
+            --set images[0].environmentVariables.messagePeriods="10;10;10;10;10;10" \
+            --set images[0].environmentVariables.fullPeriod="10" \
+            --set images[0].environmentVariables.partPeriod="4" \
+            --set images[0].resources.limits.cpu="100m" \
+            --set images[0].resources.limits.memory="256Mi" \
+            --set images[0].resources.requests.cpu="100m" \
+            --set images[0].resources.requests.memory="256Mi" \
+            --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
+            --set images[1].imagePrefixId=wo \
+            --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
+            --set images[1].pullPolicy=Always \
+            --set images[1].tag="0.1" \
+            --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device \
+            --set images[1].environmentVariables.clientId=$BATTERY_DEVICE_NAME-publisher \
+            --set images[1].environmentVariables.messageWindows="240;240;240;240;240;240" \
+            --set images[1].environmentVariables.messagePeriods="240;120;240;240;120;240" \
+            --set images[1].environmentVariables.fullPeriod="10" \
+            --set images[1].environmentVariables.partPeriod="4" \
+            --set images[1].resources.limits.cpu="100m" \
+            --set images[1].resources.limits.memory="256Mi" \
+            --set images[1].resources.requests.cpu="100m" \
+            --set images[1].resources.requests.memory="256Mi"
+    else
+        echo "Applying Pole Weather Observed Devices - ${id}"
+    fi
 done
-
-
-if [[ $APPLY_HELM == true ]]
-then
-    helm upgrade --install $POLE_WEATHER_DEVICE_NAME smart-city \
-        --set numberDevices=$NUMBER_DEVICES \
-        --set deviceIds={$DEVICE_IDS} \
-        --set images[0].name=$POLE_WEATHER_DEVICE_NAME-publisher \
-        --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$POLE_WEATHER_DEVICE_NAME-publishers \
-        --set images[0].pullPolicy=Always \
-        --set images[0].tag="0.1" \
-        --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-weatherobserved/ngsi-ld-city-weatherobserved \
-        --set images[0].environmentVariables.clientId=$POLE_WEATHER_DEVICE_NAME-publisher \
-        --set images[0].environmentVariables.messageWindows="240;240;240;240;240;240" \
-        --set images[0].environmentVariables.messagePeriods="10;10;10;10;10;10" \
-        --set images[0].environmentVariables.fullPeriod="10" \
-        --set images[0].environmentVariables.partPeriod="4" \
-        --set images[0].resources.limits.cpu="100m" \
-        --set images[0].resources.limits.memory="256Mi" \
-        --set images[0].resources.requests.cpu="100m" \
-        --set images[0].resources.requests.memory="256Mi" \
-        --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
-        --set images[1].imagePrefixId=wo \
-        --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
-        --set images[1].pullPolicy=Always \
-        --set images[1].tag="0.1" \
-        --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device \
-        --set images[1].environmentVariables.clientId=$BATTERY_DEVICE_NAME-publisher \
-        --set images[1].environmentVariables.messageWindows="240;240;240;240;240;240" \
-        --set images[1].environmentVariables.messagePeriods="240;120;240;240;120;240" \
-        --set images[1].environmentVariables.fullPeriod="10" \
-        --set images[1].environmentVariables.partPeriod="4" \
-        --set images[1].resources.limits.cpu="100m" \
-        --set images[1].resources.limits.memory="256Mi" \
-        --set images[1].resources.requests.cpu="100m" \
-        --set images[1].resources.requests.memory="256Mi"
-else
-    echo "Applying Pole Weather Observed Devices - ${id}"
-fi
 
 # Wait for processes to the closed
 if [[ $APPLY_HELM == true ]]
@@ -285,45 +285,46 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
         DEVICE_IDS+=$id
         NUMBER_DEVICES=$((NUMBER_DEVICES + 1))
     done
-done
 
-if [[ $APPLY_HELM == true ]]
-then
-    helm upgrade --install $POLE_NOISE_LEVEL_DEVICE_NAME smart-city \
-        --set numberDevices=$NUMBER_DEVICES \
-        --set deviceIds={$DEVICE_IDS} \
-        --set images[0].name=$POLE_NOISE_LEVEL_DEVICE_NAME-publisher \
-        --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$POLE_NOISE_LEVEL_DEVICE_NAME-publishers \
-        --set images[0].pullPolicy=Always \
-        --set images[0].tag="0.1" \
-        --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-noiselevelobserved/ngsi-ld-city-noiselevelobserved \
-        --set images[0].environmentVariables.clientId=$POLE_NOISE_LEVEL_DEVICE_NAME-publisher \
-        --set images[0].environmentVariables.messageWindows="240;240;240;240;240;240" \
-        --set images[0].environmentVariables.messagePeriods="10;10;10;10;10;10" \
-        --set images[0].environmentVariables.fullPeriod="10" \
-        --set images[0].environmentVariables.partPeriod="4" \
-        --set images[0].resources.limits.cpu="100m" \
-        --set images[0].resources.limits.memory="256Mi" \
-        --set images[0].resources.requests.cpu="100m" \
-        --set images[0].resources.requests.memory="256Mi" \
-        --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
-        --set images[1].imagePrefixId=nlo \
-        --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
-        --set images[1].pullPolicy=Always \
-        --set images[1].tag="0.1" \
-        --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device \
-        --set images[1].environmentVariables.clientId=$BATTERY_DEVICE_NAME-publisher \
-        --set images[1].environmentVariables.messageWindows="240;240;240;240;240;240" \
-        --set images[1].environmentVariables.messagePeriods="240;120;240;240;120;240" \
-        --set images[1].environmentVariables.fullPeriod="10" \
-        --set images[1].environmentVariables.partPeriod="4" \
-        --set images[1].resources.limits.cpu="100m" \
-        --set images[1].resources.limits.memory="256Mi" \
-        --set images[1].resources.requests.cpu="100m" \
-        --set images[1].resources.requests.memory="256Mi"
-else
-    echo "Applying Pole Noise Level Observed Devices - ${id}"
-fi
+    if [[ $APPLY_HELM == true ]]
+    then
+        helm upgrade --install $POLE_NOISE_LEVEL_DEVICE_NAME-$neighborhood smart-city \
+            --set numberDevices=$NUMBER_DEVICES \
+            --set deviceIds={$DEVICE_IDS} \
+            --set images[0].name=$POLE_NOISE_LEVEL_DEVICE_NAME-publisher \
+            --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$POLE_NOISE_LEVEL_DEVICE_NAME-publishers \
+            --set images[0].pullPolicy=Always \
+            --set images[0].tag="0.1" \
+            --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-noiselevelobserved/ngsi-ld-city-noiselevelobserved \
+            --set images[0].environmentVariables.clientId=$POLE_NOISE_LEVEL_DEVICE_NAME-publisher \
+            --set images[0].environmentVariables.messageWindows="240;240;240;240;240;240" \
+            --set images[0].environmentVariables.messagePeriods="10;10;10;10;10;10" \
+            --set images[0].environmentVariables.fullPeriod="10" \
+            --set images[0].environmentVariables.partPeriod="4" \
+            --set images[0].resources.limits.cpu="100m" \
+            --set images[0].resources.limits.memory="256Mi" \
+            --set images[0].resources.requests.cpu="100m" \
+            --set images[0].resources.requests.memory="256Mi" \
+            --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
+            --set images[1].imagePrefixId=nlo \
+            --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
+            --set images[1].pullPolicy=Always \
+            --set images[1].tag="0.1" \
+            --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device \
+            --set images[1].environmentVariables.clientId=$BATTERY_DEVICE_NAME-publisher \
+            --set images[1].environmentVariables.messageWindows="240;240;240;240;240;240" \
+            --set images[1].environmentVariables.messagePeriods="240;120;240;240;120;240" \
+            --set images[1].environmentVariables.fullPeriod="10" \
+            --set images[1].environmentVariables.partPeriod="4" \
+            --set images[1].resources.limits.cpu="100m" \
+            --set images[1].resources.limits.memory="256Mi" \
+            --set images[1].resources.requests.cpu="100m" \
+            --set images[1].resources.requests.memory="256Mi"
+    else
+        echo "Applying Pole Noise Level Observed Devices - ${id}"
+    fi
+
+done
 
 # Wait for processes to the closed
 if [[ $APPLY_HELM == true ]]
@@ -349,30 +350,31 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
         DEVICE_IDS+=$id
         NUMBER_DEVICES=$((NUMBER_DEVICES + 1))
     done
-done
 
-if [[ $APPLY_HELM == true ]]
-then
-    helm upgrade --install $POLE_CROWD_LEVEL_DEVICE_NAME smart-city \
-        --set numberDevices=$NUMBER_DEVICES \
-        --set deviceIds={$DEVICE_IDS} \
-        --set images[0].name=$POLE_CROWD_LEVEL_DEVICE_NAME-publisher \
-        --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$POLE_CROWD_LEVEL_DEVICE_NAME-publishers \
-        --set images[0].pullPolicy=Always \
-        --set images[0].tag="0.1" \
-        --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-crowdflowobserved/ngsi-ld-city-crowdflowobserved \
-        --set images[0].environmentVariables.clientId=$POLE_CROWD_LEVEL_DEVICE_NAME-publisher \
-        --set images[0].environmentVariables.messageWindows="240;240;240;240;240;240" \
-        --set images[0].environmentVariables.messagePeriods="10;10;10;10;10;10" \
-        --set images[0].environmentVariables.fullPeriod="10" \
-        --set images[0].environmentVariables.partPeriod="4" \
-        --set images[0].resources.limits.cpu="100m" \
-        --set images[0].resources.limits.memory="256Mi" \
-        --set images[0].resources.requests.cpu="100m" \
-        --set images[0].resources.requests.memory="256Mi"
-else
-    echo "Applying Pole Crowd Level Observed Device - ${id}"
-fi
+    if [[ $APPLY_HELM == true ]]
+    then
+        helm upgrade --install $POLE_CROWD_LEVEL_DEVICE_NAME-$neighborhood smart-city \
+            --set numberDevices=$NUMBER_DEVICES \
+            --set deviceIds={$DEVICE_IDS} \
+            --set images[0].name=$POLE_CROWD_LEVEL_DEVICE_NAME-publisher \
+            --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$POLE_CROWD_LEVEL_DEVICE_NAME-publishers \
+            --set images[0].pullPolicy=Always \
+            --set images[0].tag="0.1" \
+            --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-crowdflowobserved/ngsi-ld-city-crowdflowobserved \
+            --set images[0].environmentVariables.clientId=$POLE_CROWD_LEVEL_DEVICE_NAME-publisher \
+            --set images[0].environmentVariables.messageWindows="240;240;240;240;240;240" \
+            --set images[0].environmentVariables.messagePeriods="10;10;10;10;10;10" \
+            --set images[0].environmentVariables.fullPeriod="10" \
+            --set images[0].environmentVariables.partPeriod="4" \
+            --set images[0].resources.limits.cpu="100m" \
+            --set images[0].resources.limits.memory="256Mi" \
+            --set images[0].resources.requests.cpu="100m" \
+            --set images[0].resources.requests.memory="256Mi"
+    else
+        echo "Applying Pole Crowd Level Observed Device - ${id}"
+    fi
+
+done
 
 # Wait for processes to the closed
 if [[ $APPLY_HELM == true ]]
@@ -398,30 +400,31 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
         DEVICE_IDS+=$id
         NUMBER_DEVICES=$((NUMBER_DEVICES + 1))
     done
-done
 
-if [[ $APPLY_HELM == true ]]
-then
-    helm upgrade --install $POLE_TRAFFIC_LEVEL_DEVICE_NAME smart-city \
-        --set numberDevices=$NUMBER_DEVICES \
-        --set deviceIds={$DEVICE_IDS} \
-        --set images[0].name=$POLE_TRAFFIC_LEVEL_DEVICE_NAME-publisher \
-        --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$POLE_TRAFFIC_LEVEL_DEVICE_NAME-publishers \
-        --set images[0].pullPolicy=Always \
-        --set images[0].tag="0.1" \
-        --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-trafficflowobserved/ngsi-ld-city-trafficflowobserved \
-        --set images[0].environmentVariables.clientId=$POLE_TRAFFIC_LEVEL_DEVICE_NAME-publisher \
-        --set images[0].environmentVariables.messageWindows="240;240;240;240;240;240" \
-        --set images[0].environmentVariables.messagePeriods="10;10;10;10;10;10" \
-        --set images[0].environmentVariables.fullPeriod="10" \
-        --set images[0].environmentVariables.partPeriod="4" \
-        --set images[0].resources.limits.cpu="100m" \
-        --set images[0].resources.limits.memory="256Mi" \
-        --set images[0].resources.requests.cpu="100m" \
-        --set images[0].resources.requests.memory="256Mi"
-else
-    echo "Applying Pole Traffic Level Observed Device - ${id}"
-fi
+    if [[ $APPLY_HELM == true ]]
+    then
+        helm upgrade --install $POLE_TRAFFIC_LEVEL_DEVICE_NAME-$neighborhood smart-city \
+            --set numberDevices=$NUMBER_DEVICES \
+            --set deviceIds={$DEVICE_IDS} \
+            --set images[0].name=$POLE_TRAFFIC_LEVEL_DEVICE_NAME-publisher \
+            --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$POLE_TRAFFIC_LEVEL_DEVICE_NAME-publishers \
+            --set images[0].pullPolicy=Always \
+            --set images[0].tag="0.1" \
+            --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-trafficflowobserved/ngsi-ld-city-trafficflowobserved \
+            --set images[0].environmentVariables.clientId=$POLE_TRAFFIC_LEVEL_DEVICE_NAME-publisher \
+            --set images[0].environmentVariables.messageWindows="240;240;240;240;240;240" \
+            --set images[0].environmentVariables.messagePeriods="10;10;10;10;10;10" \
+            --set images[0].environmentVariables.fullPeriod="10" \
+            --set images[0].environmentVariables.partPeriod="4" \
+            --set images[0].resources.limits.cpu="100m" \
+            --set images[0].resources.limits.memory="256Mi" \
+            --set images[0].resources.requests.cpu="100m" \
+            --set images[0].resources.requests.memory="256Mi"
+    else
+        echo "Applying Pole Traffic Level Observed Device - ${id}"
+    fi
+
+done
 
 # Wait for processes to the closed
 if [[ $APPLY_HELM == true ]]
@@ -447,44 +450,44 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
         DEVICE_IDS+=$id
         NUMBER_DEVICES=$((NUMBER_DEVICES + 1))
     done
-done
 
-if [[ $APPLY_HELM == true ]]
-then
-    helm upgrade --install $STREETLIGHT_DEVICE_NAME smart-city \
-        --set numberDevices=$NUMBER_DEVICES \
-        --set deviceIds={$DEVICE_IDS} \
-        --set images[0].name=$STREETLIGHT_DEVICE_NAME-publisher \
-        --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$STREETLIGHT_DEVICE_NAME-publishers \
-        --set images[0].pullPolicy=Always \
-        --set images[0].tag="0.1" \
-        --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-streetlight/ngsi-ld-city-streetlight \
-        --set images[0].environmentVariables.clientId=$STREETLIGHT_DEVICE_NAME-publisher \
-        --set images[0].environmentVariables.messageWindows="240;240;240;240;240;240" \
-        --set images[0].environmentVariables.messagePeriods="240;120;240;240;120;240" \
-        --set images[0].environmentVariables.fullPeriod="10" \
-        --set images[0].environmentVariables.partPeriod="4" \
-        --set images[0].resources.limits.cpu="100m" \
-        --set images[0].resources.limits.memory="256Mi" \
-        --set images[0].resources.requests.cpu="100m" \
-        --set images[0].resources.requests.memory="256Mi" \
-        --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
-        --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
-        --set images[1].pullPolicy=Always \
-        --set images[1].tag="0.1" \
-        --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device \
-        --set images[1].environmentVariables.clientId=$BATTERY_DEVICE_NAME-publisher \
-        --set images[1].environmentVariables.messageWindows="240;240;240;240;240;240" \
-        --set images[1].environmentVariables.messagePeriods="240;120;240;240;120;240" \
-        --set images[1].environmentVariables.fullPeriod="10" \
-        --set images[1].environmentVariables.partPeriod="4" \
-        --set images[1].resources.limits.cpu="100m" \
-        --set images[1].resources.limits.memory="256Mi" \
-        --set images[1].resources.requests.cpu="100m" \
-        --set images[1].resources.requests.memory="256Mi"
-else
-    echo "Applying Streetlight Device - ${id}"
-fi
+    if [[ $APPLY_HELM == true ]]
+    then
+        helm upgrade --install $STREETLIGHT_DEVICE_NAME-$neighborhood smart-city \
+            --set numberDevices=$NUMBER_DEVICES \
+            --set deviceIds={$DEVICE_IDS} \
+            --set images[0].name=$STREETLIGHT_DEVICE_NAME-publisher \
+            --set images[0].repository=ghcr.io/open-digital-twin/ktwin-$STREETLIGHT_DEVICE_NAME-publishers \
+            --set images[0].pullPolicy=Always \
+            --set images[0].tag="0.1" \
+            --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-streetlight/ngsi-ld-city-streetlight \
+            --set images[0].environmentVariables.clientId=$STREETLIGHT_DEVICE_NAME-publisher \
+            --set images[0].environmentVariables.messageWindows="240;240;240;240;240;240" \
+            --set images[0].environmentVariables.messagePeriods="240;120;240;240;120;240" \
+            --set images[0].environmentVariables.fullPeriod="10" \
+            --set images[0].environmentVariables.partPeriod="4" \
+            --set images[0].resources.limits.cpu="100m" \
+            --set images[0].resources.limits.memory="256Mi" \
+            --set images[0].resources.requests.cpu="100m" \
+            --set images[0].resources.requests.memory="256Mi" \
+            --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
+            --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
+            --set images[1].pullPolicy=Always \
+            --set images[1].tag="0.1" \
+            --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device \
+            --set images[1].environmentVariables.clientId=$BATTERY_DEVICE_NAME-publisher \
+            --set images[1].environmentVariables.messageWindows="240;240;240;240;240;240" \
+            --set images[1].environmentVariables.messagePeriods="240;120;240;240;120;240" \
+            --set images[1].environmentVariables.fullPeriod="10" \
+            --set images[1].environmentVariables.partPeriod="4" \
+            --set images[1].resources.limits.cpu="100m" \
+            --set images[1].resources.limits.memory="256Mi" \
+            --set images[1].resources.requests.cpu="100m" \
+            --set images[1].resources.requests.memory="256Mi"
+    else
+        echo "Applying Streetlight Device - ${id}"
+    fi
+done
 
 # Wait for processes to the closed
 if [[ $APPLY_HELM == true ]]
