@@ -2,6 +2,7 @@ package publisher
 
 import (
 	"fmt"
+	"math"
 	"runtime"
 	"sync"
 	"time"
@@ -18,12 +19,14 @@ func runDevice(mqttClientConfig mqtt.MQTTClientConfig, publisherClientConfig mqt
 	messageCount := 0
 
 	for windowIndex, messageWindow := range publisherClientConfig.MessageWindows {
-		for i := 0; i < messageWindow; i++ {
+		messagePeriod := publisherClientConfig.MessagePeriods[windowIndex]
+		numberOfMessages := int(math.Ceil(float64(messageWindow) / messagePeriod))
+
+		for i := 0; i < numberOfMessages; i++ {
 			message := callback(messageCount, publisherClientConfig.PartPeriod, publisherClientConfig.FullPeriod)
 			client.Publish(message)
 
 			// Wait
-			messagePeriod := publisherClientConfig.MessagePeriods[windowIndex]
 			time.Sleep(time.Duration(messagePeriod * float64(time.Second)))
 		}
 		messageCount++
