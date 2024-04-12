@@ -56,9 +56,9 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             --set images[0].environmentVariables.fullPeriod="10" \
             --set images[0].environmentVariables.partPeriod="4" \
             --set images[0].resources.limits.cpu="100m" \
-            --set images[0].resources.limits.memory="256Mi" \
+            --set images[0].resources.limits.memory="64Mi" \
             --set images[0].resources.requests.cpu="100m" \
-            --set images[0].resources.requests.memory="256Mi"
+            --set images[0].resources.requests.memory="64Mi" &
     else
         echo "Applying EV Charging Device - ${id}"
     fi
@@ -109,9 +109,9 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             --set images[0].environmentVariables.fullPeriod="10" \
             --set images[0].environmentVariables.partPeriod="4" \
             --set images[0].resources.limits.cpu="100m" \
-            --set images[0].resources.limits.memory="256Mi" \
+            --set images[0].resources.limits.memory="64Mi" \
             --set images[0].resources.requests.cpu="100m" \
-            --set images[0].resources.requests.memory="256Mi" \
+            --set images[0].resources.requests.memory="64Mi" \
             --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
             --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
             --set images[1].pullPolicy=Always \
@@ -123,9 +123,9 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             --set images[1].environmentVariables.fullPeriod="10" \
             --set images[1].environmentVariables.partPeriod="4" \
             --set images[1].resources.limits.cpu="100m" \
-            --set images[1].resources.limits.memory="256Mi" \
+            --set images[1].resources.limits.memory="64Mi" \
             --set images[1].resources.requests.cpu="100m" \
-            --set images[1].resources.requests.memory="256Mi"
+            --set images[1].resources.requests.memory="64Mi" &
     else
         echo "Applying Off street Parking Spot Device - ${id}"
     fi
@@ -173,9 +173,9 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             --set images[0].environmentVariables.fullPeriod="10" \
             --set images[0].environmentVariables.partPeriod="4" \
             --set images[0].resources.limits.cpu="100m" \
-            --set images[0].resources.limits.memory="256Mi" \
+            --set images[0].resources.limits.memory="64Mi" \
             --set images[0].resources.requests.cpu="100m" \
-            --set images[0].resources.requests.memory="256Mi" \
+            --set images[0].resources.requests.memory="64Mi" \
             --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
             --set images[1].imagePrefixId=aqo \
             --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
@@ -188,9 +188,9 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             --set images[1].environmentVariables.fullPeriod="10" \
             --set images[1].environmentVariables.partPeriod="4" \
             --set images[1].resources.limits.cpu="100m" \
-            --set images[1].resources.limits.memory="256Mi" \
+            --set images[1].resources.limits.memory="64Mi" \
             --set images[1].resources.requests.cpu="100m" \
-            --set images[1].resources.requests.memory="256Mi"
+            --set images[1].resources.requests.memory="64Mi" &
     else
         echo "Applying Pole Air Quality Observed Device - ${id}"
     fi
@@ -238,9 +238,9 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             --set images[0].environmentVariables.fullPeriod="10" \
             --set images[0].environmentVariables.partPeriod="4" \
             --set images[0].resources.limits.cpu="100m" \
-            --set images[0].resources.limits.memory="256Mi" \
+            --set images[0].resources.limits.memory="64Mi" \
             --set images[0].resources.requests.cpu="100m" \
-            --set images[0].resources.requests.memory="256Mi" \
+            --set images[0].resources.requests.memory="64Mi" \
             --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
             --set images[1].imagePrefixId=wo \
             --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
@@ -253,9 +253,9 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             --set images[1].environmentVariables.fullPeriod="10" \
             --set images[1].environmentVariables.partPeriod="4" \
             --set images[1].resources.limits.cpu="100m" \
-            --set images[1].resources.limits.memory="256Mi" \
+            --set images[1].resources.limits.memory="64Mi" \
             --set images[1].resources.requests.cpu="100m" \
-            --set images[1].resources.requests.memory="256Mi"
+            --set images[1].resources.requests.memory="64Mi" &
     else
         echo "Applying Pole Weather Observed Devices - ${id}"
     fi
@@ -302,9 +302,9 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             --set images[0].environmentVariables.fullPeriod="10" \
             --set images[0].environmentVariables.partPeriod="4" \
             --set images[0].resources.limits.cpu="100m" \
-            --set images[0].resources.limits.memory="256Mi" \
+            --set images[0].resources.limits.memory="64Mi" \
             --set images[0].resources.requests.cpu="100m" \
-            --set images[0].resources.requests.memory="256Mi" \
+            --set images[0].resources.requests.memory="64Mi" \
             --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
             --set images[1].imagePrefixId=nlo \
             --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
@@ -317,9 +317,9 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             --set images[1].environmentVariables.fullPeriod="10" \
             --set images[1].environmentVariables.partPeriod="4" \
             --set images[1].resources.limits.cpu="100m" \
-            --set images[1].resources.limits.memory="256Mi" \
+            --set images[1].resources.limits.memory="64Mi" \
             --set images[1].resources.requests.cpu="100m" \
-            --set images[1].resources.requests.memory="256Mi"
+            --set images[1].resources.requests.memory="64Mi" &
     else
         echo "Applying Pole Noise Level Observed Devices - ${id}"
     fi
@@ -367,9 +367,9 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             --set images[0].environmentVariables.fullPeriod="10" \
             --set images[0].environmentVariables.partPeriod="4" \
             --set images[0].resources.limits.cpu="100m" \
-            --set images[0].resources.limits.memory="256Mi" \
+            --set images[0].resources.limits.memory="64Mi" \
             --set images[0].resources.requests.cpu="100m" \
-            --set images[0].resources.requests.memory="256Mi"
+            --set images[0].resources.requests.memory="64Mi" &
     else
         echo "Applying Pole Crowd Level Observed Device - ${id}"
     fi
@@ -417,9 +417,9 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             --set images[0].environmentVariables.fullPeriod="10" \
             --set images[0].environmentVariables.partPeriod="4" \
             --set images[0].resources.limits.cpu="100m" \
-            --set images[0].resources.limits.memory="256Mi" \
+            --set images[0].resources.limits.memory="64Mi" \
             --set images[0].resources.requests.cpu="100m" \
-            --set images[0].resources.requests.memory="256Mi"
+            --set images[0].resources.requests.memory="64Mi" &
     else
         echo "Applying Pole Traffic Level Observed Device - ${id}"
     fi
@@ -467,9 +467,9 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             --set images[0].environmentVariables.fullPeriod="10" \
             --set images[0].environmentVariables.partPeriod="4" \
             --set images[0].resources.limits.cpu="100m" \
-            --set images[0].resources.limits.memory="256Mi" \
+            --set images[0].resources.limits.memory="64Mi" \
             --set images[0].resources.requests.cpu="100m" \
-            --set images[0].resources.requests.memory="256Mi" \
+            --set images[0].resources.requests.memory="64Mi" \
             --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
             --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
             --set images[1].pullPolicy=Always \
@@ -481,9 +481,9 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             --set images[1].environmentVariables.fullPeriod="10" \
             --set images[1].environmentVariables.partPeriod="4" \
             --set images[1].resources.limits.cpu="100m" \
-            --set images[1].resources.limits.memory="256Mi" \
+            --set images[1].resources.limits.memory="64Mi" \
             --set images[1].resources.requests.cpu="100m" \
-            --set images[1].resources.requests.memory="256Mi"
+            --set images[1].resources.requests.memory="64Mi" &
     else
         echo "Applying Streetlight Device - ${id}"
     fi
