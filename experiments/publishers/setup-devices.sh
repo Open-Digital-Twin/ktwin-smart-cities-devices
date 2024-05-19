@@ -26,9 +26,9 @@ BATTERY_DEVICE_NAME=battery-device
 # ############################
 
 EV_CHARGING_DEVICE_NAME=ev-charging-device
-DEVICE_IDS=""
-NUMBER_DEVICES=0
 for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
+    DEVICE_IDS=""
+    NUMBER_DEVICES=0
     neighborhood_id=$(printf "nb%03d" $neighborhood)
     for ev_charging_station in $(seq 1 $NUMBER_EV_CHARGING_STATION); do
         ev_charging_station_id=$(printf "ev%04d" $ev_charging_station)
@@ -76,9 +76,9 @@ fi
 ############################
 
 PARKING_SPOT_DEVICE_NAME=parking-spot-device
-DEVICE_IDS=""
-NUMBER_DEVICES=0
 for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
+    DEVICE_IDS=""
+    NUMBER_DEVICES=0
     neighborhood_id=$(printf "nb%03d" $neighborhood)
     for parking in $(seq 1 $NUMBER_OFFSTRET_PARKING); do
         parking_id=$(printf "ofp%04d" $parking)
@@ -142,9 +142,9 @@ fi
 ############################
 
 AIR_QUALITY_DEVICE_NAME=pole-air-quality-observed-device
-DEVICE_IDS=""
-NUMBER_DEVICES=0
 for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
+    DEVICE_IDS=""
+    NUMBER_DEVICES=0
     neighborhood_id=$(printf "nb%03d" $neighborhood)
     for pole in $(seq 1 $NUMBER_POLE); do
         pole_id=$(printf "p%05d" $pole)
@@ -208,9 +208,9 @@ fi
 ############################
 
 POLE_WEATHER_DEVICE_NAME=pole-weather-observed-device
-DEVICE_IDS=""
-NUMBER_DEVICES=0
 for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
+    DEVICE_IDS=""
+    NUMBER_DEVICES=0
     neighborhood_id=$(printf "nb%03d" $neighborhood)
     for pole in $(seq 1 $NUMBER_POLE); do
         pole_id=$(printf "p%05d" $pole)
@@ -272,9 +272,9 @@ fi
 ############################
 
 POLE_NOISE_LEVEL_DEVICE_NAME=pole-noise-level-observed-device
-DEVICE_IDS=""
-NUMBER_DEVICES=0
 for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
+    DEVICE_IDS=""
+    NUMBER_DEVICES=0
     neighborhood_id=$(printf "nb%03d" $neighborhood)
     for pole in $(seq 1 $NUMBER_POLE); do
         pole_id=$(printf "p%05d" $pole)
@@ -337,9 +337,9 @@ fi
 ############################
 
 POLE_CROWD_LEVEL_DEVICE_NAME=pole-crowd-flow-observed-device
-DEVICE_IDS=""
-NUMBER_DEVICES=0
 for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
+    DEVICE_IDS=""
+    NUMBER_DEVICES=0
     neighborhood_id=$(printf "nb%03d" $neighborhood)
     for pole in $(seq 1 $NUMBER_POLE); do
         pole_id=$(printf "p%05d" $pole)
@@ -387,9 +387,9 @@ fi
 ############################
 
 POLE_TRAFFIC_LEVEL_DEVICE_NAME=pole-traffic-flow-observed-device
-DEVICE_IDS=""
-NUMBER_DEVICES=0
 for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
+    DEVICE_IDS=""
+    NUMBER_DEVICES=0
     neighborhood_id=$(printf "nb%03d" $neighborhood)
     for pole in $(seq 1 $NUMBER_POLE); do
         pole_id=$(printf "p%05d" $pole)
@@ -437,9 +437,9 @@ fi
 ############################
 
 STREETLIGHT_DEVICE_NAME=streetlight-device
-DEVICE_IDS=""
-NUMBER_DEVICES=0
 for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
+    DEVICE_IDS=""
+    NUMBER_DEVICES=0
     neighborhood_id=$(printf "nb%03d" $neighborhood)
     for streetlight in $(seq 1 $NUMBER_STREETLIGHTS); do
         streetlight_id=$(printf "sl%05d" $streetlight)
