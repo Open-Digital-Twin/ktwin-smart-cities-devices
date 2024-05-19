@@ -20,6 +20,15 @@ func runDevice(mqttClientConfig mqtt.MQTTClientConfig, publisherClientConfig mqt
 
 	for windowIndex, messageWindow := range publisherClientConfig.MessageWindows {
 		messagePeriod := publisherClientConfig.MessagePeriods[windowIndex]
+
+		// No message to be sent this window
+		if messagePeriod <= 0 {
+			// Wait for the window to end
+			fmt.Printf("Nothing to publish in the window. Waiting for window to end. Window duration: %d\n", messageWindow)
+			time.Sleep(time.Duration(messageWindow) * time.Second)
+			continue
+		}
+
 		numberOfMessages := int(math.Ceil(float64(messageWindow) / messagePeriod))
 
 		for i := 0; i < numberOfMessages; i++ {
