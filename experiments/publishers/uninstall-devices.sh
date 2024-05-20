@@ -6,7 +6,7 @@
 # ## EV Charging Devices
 # ############################
 
-NUMBER_NEIGHBORHOOD=40
+NUMBER_NEIGHBORHOOD=20
 
 DEVICE_NAME=ev-charging-device
 for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do

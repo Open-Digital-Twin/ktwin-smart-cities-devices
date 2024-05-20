@@ -21,6 +21,8 @@ NUMBER_STREETLIGHTS=50
 
 BATTERY_DEVICE_NAME=battery-device
 
+OUTPUT_FOLDER=$NUMBER_NEIGHBORHOOD
+
 # ############################
 # ## EV Charging Devices
 # ############################
@@ -42,7 +44,7 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
 
     if [[ $APPLY_HELM == true ]]
     then
-        helm upgrade --install $EV_CHARGING_DEVICE_NAME-$neighborhood smart-city \
+        helm template $EV_CHARGING_DEVICE_NAME-$neighborhood smart-city \
             --set numberDevices=$NUMBER_DEVICES \
             --set deviceIds={$DEVICE_IDS} \
             --set images[0].name=$EV_CHARGING_DEVICE_NAME-publisher \
@@ -55,10 +57,11 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             --set images[0].environmentVariables.messagePeriods="80;15;5;5;15;80" \
             --set images[0].environmentVariables.fullPeriod="10" \
             --set images[0].environmentVariables.partPeriod="4" \
-            --set images[0].resources.limits.cpu="100m" \
-            --set images[0].resources.limits.memory="64Mi" \
-            --set images[0].resources.requests.cpu="100m" \
-            --set images[0].resources.requests.memory="64Mi" &
+            --set images[0].resources.limits.cpu="50m" \
+            --set images[0].resources.limits.memory="16Mi" \
+            --set images[0].resources.requests.cpu="50m" \
+            --set images[0].resources.requests.memory="16Mi" \
+            --output-dir $OUTPUT_FOLDER/$EV_CHARGING_DEVICE_NAME-$neighborhood
     else
         echo "Applying EV Charging Device - ${id}"
     fi
@@ -95,7 +98,7 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
 
     if [[ $APPLY_HELM == true ]]
     then
-        helm upgrade --install $PARKING_SPOT_DEVICE_NAME-$neighborhood smart-city \
+        helm template $PARKING_SPOT_DEVICE_NAME-$neighborhood smart-city \
             --set numberDevices="${#DEVICE_IDS[*]}" \
             --set deviceIds={$DEVICE_IDS} \
             --set images[0].name=$PARKING_SPOT_DEVICE_NAME-publisher \
@@ -108,10 +111,10 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             --set images[0].environmentVariables.messagePeriods="80;15;5;5;15;80" \
             --set images[0].environmentVariables.fullPeriod="10" \
             --set images[0].environmentVariables.partPeriod="4" \
-            --set images[0].resources.limits.cpu="100m" \
-            --set images[0].resources.limits.memory="64Mi" \
-            --set images[0].resources.requests.cpu="100m" \
-            --set images[0].resources.requests.memory="64Mi" \
+            --set images[0].resources.limits.cpu="50m" \
+            --set images[0].resources.limits.memory="32Mi" \
+            --set images[0].resources.requests.cpu="50m" \
+            --set images[0].resources.requests.memory="32Mi" \
             --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
             --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
             --set images[1].pullPolicy=Always \
@@ -122,10 +125,11 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             --set images[1].environmentVariables.messagePeriods="240;120;240;240;120;240" \
             --set images[1].environmentVariables.fullPeriod="10" \
             --set images[1].environmentVariables.partPeriod="4" \
-            --set images[1].resources.limits.cpu="100m" \
-            --set images[1].resources.limits.memory="64Mi" \
-            --set images[1].resources.requests.cpu="100m" \
-            --set images[1].resources.requests.memory="64Mi" &
+            --set images[1].resources.limits.cpu="50m" \
+            --set images[1].resources.limits.memory="32Mi" \
+            --set images[1].resources.requests.cpu="50m" \
+            --set images[1].resources.requests.memory="32Mi" \
+            --output-dir $OUTPUT_FOLDER/$PARKING_SPOT_DEVICE_NAME-$neighborhood
     else
         echo "Applying Off street Parking Spot Device - ${id}"
     fi
@@ -159,7 +163,7 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
 
     if [[ $APPLY_HELM == true ]]
     then
-        helm upgrade --install $AIR_QUALITY_DEVICE_NAME-$neighborhood smart-city \
+        helm template $AIR_QUALITY_DEVICE_NAME-$neighborhood smart-city \
             --set numberDevices=$NUMBER_DEVICES \
             --set deviceIds={$DEVICE_IDS} \
             --set images[0].name=$AIR_QUALITY_DEVICE_NAME-publisher \
@@ -172,10 +176,10 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             --set images[0].environmentVariables.messagePeriods="10;10;10;10;10;10" \
             --set images[0].environmentVariables.fullPeriod="10" \
             --set images[0].environmentVariables.partPeriod="4" \
-            --set images[0].resources.limits.cpu="100m" \
-            --set images[0].resources.limits.memory="64Mi" \
-            --set images[0].resources.requests.cpu="100m" \
-            --set images[0].resources.requests.memory="64Mi" \
+            --set images[0].resources.limits.cpu="50m" \
+            --set images[0].resources.limits.memory="32Mi" \
+            --set images[0].resources.requests.cpu="50m" \
+            --set images[0].resources.requests.memory="32Mi" \
             --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
             --set images[1].imagePrefixId=aqo \
             --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
@@ -187,10 +191,11 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             --set images[1].environmentVariables.messagePeriods="240;120;240;240;120;240" \
             --set images[1].environmentVariables.fullPeriod="10" \
             --set images[1].environmentVariables.partPeriod="4" \
-            --set images[1].resources.limits.cpu="100m" \
-            --set images[1].resources.limits.memory="64Mi" \
-            --set images[1].resources.requests.cpu="100m" \
-            --set images[1].resources.requests.memory="64Mi" &
+            --set images[1].resources.limits.cpu="50m" \
+            --set images[1].resources.limits.memory="32Mi" \
+            --set images[1].resources.requests.cpu="50m" \
+            --set images[1].resources.requests.memory="32Mi" \
+            --output-dir $OUTPUT_FOLDER/$AIR_QUALITY_DEVICE_NAME-$neighborhood
     else
         echo "Applying Pole Air Quality Observed Device - ${id}"
     fi
@@ -224,7 +229,7 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
 
     if [[ $APPLY_HELM == true ]]
     then
-        helm upgrade --install $POLE_WEATHER_DEVICE_NAME-$neighborhood smart-city \
+        helm template $POLE_WEATHER_DEVICE_NAME-$neighborhood smart-city \
             --set numberDevices=$NUMBER_DEVICES \
             --set deviceIds={$DEVICE_IDS} \
             --set images[0].name=$POLE_WEATHER_DEVICE_NAME-publisher \
@@ -237,10 +242,10 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             --set images[0].environmentVariables.messagePeriods="10;10;10;10;10;10" \
             --set images[0].environmentVariables.fullPeriod="10" \
             --set images[0].environmentVariables.partPeriod="4" \
-            --set images[0].resources.limits.cpu="100m" \
-            --set images[0].resources.limits.memory="64Mi" \
-            --set images[0].resources.requests.cpu="100m" \
-            --set images[0].resources.requests.memory="64Mi" \
+            --set images[0].resources.limits.cpu="50m" \
+            --set images[0].resources.limits.memory="32Mi" \
+            --set images[0].resources.requests.cpu="50m" \
+            --set images[0].resources.requests.memory="32Mi" \
             --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
             --set images[1].imagePrefixId=wo \
             --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
@@ -252,10 +257,11 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             --set images[1].environmentVariables.messagePeriods="240;120;240;240;120;240" \
             --set images[1].environmentVariables.fullPeriod="10" \
             --set images[1].environmentVariables.partPeriod="4" \
-            --set images[1].resources.limits.cpu="100m" \
-            --set images[1].resources.limits.memory="64Mi" \
-            --set images[1].resources.requests.cpu="100m" \
-            --set images[1].resources.requests.memory="64Mi" &
+            --set images[1].resources.limits.cpu="50m" \
+            --set images[1].resources.limits.memory="32Mi" \
+            --set images[1].resources.requests.cpu="50m" \
+            --set images[1].resources.requests.memory="32Mi" \
+            --output-dir $OUTPUT_FOLDER/$POLE_WEATHER_DEVICE_NAME-$neighborhood
     else
         echo "Applying Pole Weather Observed Devices - ${id}"
     fi
@@ -288,7 +294,7 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
 
     if [[ $APPLY_HELM == true ]]
     then
-        helm upgrade --install $POLE_NOISE_LEVEL_DEVICE_NAME-$neighborhood smart-city \
+        helm template $POLE_NOISE_LEVEL_DEVICE_NAME-$neighborhood smart-city \
             --set numberDevices=$NUMBER_DEVICES \
             --set deviceIds={$DEVICE_IDS} \
             --set images[0].name=$POLE_NOISE_LEVEL_DEVICE_NAME-publisher \
@@ -301,10 +307,10 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             --set images[0].environmentVariables.messagePeriods="10;10;10;10;10;10" \
             --set images[0].environmentVariables.fullPeriod="10" \
             --set images[0].environmentVariables.partPeriod="4" \
-            --set images[0].resources.limits.cpu="100m" \
-            --set images[0].resources.limits.memory="64Mi" \
-            --set images[0].resources.requests.cpu="100m" \
-            --set images[0].resources.requests.memory="64Mi" \
+            --set images[0].resources.limits.cpu="50m" \
+            --set images[0].resources.limits.memory="32Mi" \
+            --set images[0].resources.requests.cpu="50m" \
+            --set images[0].resources.requests.memory="32Mi" \
             --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
             --set images[1].imagePrefixId=nlo \
             --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
@@ -316,10 +322,11 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             --set images[1].environmentVariables.messagePeriods="240;120;240;240;120;240" \
             --set images[1].environmentVariables.fullPeriod="10" \
             --set images[1].environmentVariables.partPeriod="4" \
-            --set images[1].resources.limits.cpu="100m" \
-            --set images[1].resources.limits.memory="64Mi" \
-            --set images[1].resources.requests.cpu="100m" \
-            --set images[1].resources.requests.memory="64Mi" &
+            --set images[1].resources.limits.cpu="50m" \
+            --set images[1].resources.limits.memory="32Mi" \
+            --set images[1].resources.requests.cpu="50m" \
+            --set images[1].resources.requests.memory="32Mi" \
+            --output-dir $OUTPUT_FOLDER/$POLE_NOISE_LEVEL_DEVICE_NAME-$neighborhood
     else
         echo "Applying Pole Noise Level Observed Devices - ${id}"
     fi
@@ -353,7 +360,7 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
 
     if [[ $APPLY_HELM == true ]]
     then
-        helm upgrade --install $POLE_CROWD_LEVEL_DEVICE_NAME-$neighborhood smart-city \
+        helm template $POLE_CROWD_LEVEL_DEVICE_NAME-$neighborhood smart-city \
             --set numberDevices=$NUMBER_DEVICES \
             --set deviceIds={$DEVICE_IDS} \
             --set images[0].name=$POLE_CROWD_LEVEL_DEVICE_NAME-publisher \
@@ -366,10 +373,11 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             --set images[0].environmentVariables.messagePeriods="10;10;10;10;10;10" \
             --set images[0].environmentVariables.fullPeriod="10" \
             --set images[0].environmentVariables.partPeriod="4" \
-            --set images[0].resources.limits.cpu="100m" \
-            --set images[0].resources.limits.memory="64Mi" \
-            --set images[0].resources.requests.cpu="100m" \
-            --set images[0].resources.requests.memory="64Mi" &
+            --set images[0].resources.limits.cpu="50m" \
+            --set images[0].resources.limits.memory="32Mi" \
+            --set images[0].resources.requests.cpu="50m" \
+            --set images[0].resources.requests.memory="32Mi" \
+            --output-dir $OUTPUT_FOLDER/$POLE_CROWD_LEVEL_DEVICE_NAME-$neighborhood
     else
         echo "Applying Pole Crowd Level Observed Device - ${id}"
     fi
@@ -403,7 +411,7 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
 
     if [[ $APPLY_HELM == true ]]
     then
-        helm upgrade --install $POLE_TRAFFIC_LEVEL_DEVICE_NAME-$neighborhood smart-city \
+        helm template $POLE_TRAFFIC_LEVEL_DEVICE_NAME-$neighborhood smart-city \
             --set numberDevices=$NUMBER_DEVICES \
             --set deviceIds={$DEVICE_IDS} \
             --set images[0].name=$POLE_TRAFFIC_LEVEL_DEVICE_NAME-publisher \
@@ -416,10 +424,11 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             --set images[0].environmentVariables.messagePeriods="10;10;10;10;10;10" \
             --set images[0].environmentVariables.fullPeriod="10" \
             --set images[0].environmentVariables.partPeriod="4" \
-            --set images[0].resources.limits.cpu="100m" \
-            --set images[0].resources.limits.memory="64Mi" \
-            --set images[0].resources.requests.cpu="100m" \
-            --set images[0].resources.requests.memory="64Mi" &
+            --set images[0].resources.limits.cpu="50m" \
+            --set images[0].resources.limits.memory="32Mi" \
+            --set images[0].resources.requests.cpu="50m" \
+            --set images[0].resources.requests.memory="32Mi" \
+            --output-dir $OUTPUT_FOLDER/$POLE_TRAFFIC_LEVEL_DEVICE_NAME-$neighborhood
     else
         echo "Applying Pole Traffic Level Observed Device - ${id}"
     fi
@@ -453,7 +462,7 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
 
     if [[ $APPLY_HELM == true ]]
     then
-        helm upgrade --install $STREETLIGHT_DEVICE_NAME-$neighborhood smart-city \
+        helm template $STREETLIGHT_DEVICE_NAME-$neighborhood smart-city \
             --set numberDevices=$NUMBER_DEVICES \
             --set deviceIds={$DEVICE_IDS} \
             --set images[0].name=$STREETLIGHT_DEVICE_NAME-publisher \
@@ -466,10 +475,10 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             --set images[0].environmentVariables.messagePeriods="240;120;240;240;120;240" \
             --set images[0].environmentVariables.fullPeriod="10" \
             --set images[0].environmentVariables.partPeriod="4" \
-            --set images[0].resources.limits.cpu="100m" \
-            --set images[0].resources.limits.memory="64Mi" \
-            --set images[0].resources.requests.cpu="100m" \
-            --set images[0].resources.requests.memory="64Mi" \
+            --set images[0].resources.limits.cpu="50m" \
+            --set images[0].resources.limits.memory="32Mi" \
+            --set images[0].resources.requests.cpu="50m" \
+            --set images[0].resources.requests.memory="32Mi" \
             --set images[1].name=$BATTERY_DEVICE_NAME-publisher \
             --set images[1].repository=ghcr.io/open-digital-twin/ktwin-$BATTERY_DEVICE_NAME-publishers \
             --set images[1].pullPolicy=Always \
@@ -480,10 +489,11 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             --set images[1].environmentVariables.messagePeriods="240;120;240;240;120;240" \
             --set images[1].environmentVariables.fullPeriod="10" \
             --set images[1].environmentVariables.partPeriod="4" \
-            --set images[1].resources.limits.cpu="100m" \
-            --set images[1].resources.limits.memory="64Mi" \
-            --set images[1].resources.requests.cpu="100m" \
-            --set images[1].resources.requests.memory="64Mi" &
+            --set images[1].resources.limits.cpu="50m" \
+            --set images[1].resources.limits.memory="32Mi" \
+            --set images[1].resources.requests.cpu="50m" \
+            --set images[1].resources.requests.memory="32Mi" \
+            --output-dir $OUTPUT_FOLDER/$STREETLIGHT_DEVICE_NAME-$neighborhood
     else
         echo "Applying Streetlight Device - ${id}"
     fi
