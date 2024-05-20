@@ -31,7 +31,7 @@ func runDevice(mqttClientConfig mqtt.MQTTClientConfig, publisherClientConfig mqt
 		remainingMessageWindow := float64(messageWindow)
 
 		for remainingMessageWindow > 0 {
-			if remainingMessageWindow-messagePeriod < 0 {
+			if remainingMessageWindow < messagePeriod {
 				messagePeriod = remainingMessageWindow
 			}
 
