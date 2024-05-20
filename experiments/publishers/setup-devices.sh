@@ -421,7 +421,7 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             --set images[0].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-trafficflowobserved/ngsi-ld-city-trafficflowobserved \
             --set images[0].environmentVariables.clientId=$POLE_TRAFFIC_LEVEL_DEVICE_NAME-publisher \
             --set images[0].environmentVariables.messageWindows="240;240;240;240;240;240" \
-            --set images[0].environmentVariables.messagePeriods="10;2;2;2;2;10" \
+            --set images[0].environmentVariables.messagePeriods="10;5;5;5;5;10" \
             --set images[0].environmentVariables.fullPeriod="10" \
             --set images[0].environmentVariables.partPeriod="4" \
             --set images[0].resources.limits.cpu="50m" \
