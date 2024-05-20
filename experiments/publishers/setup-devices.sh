@@ -122,7 +122,7 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device \
             --set images[1].environmentVariables.clientId=$BATTERY_DEVICE_NAME-publisher \
             --set images[1].environmentVariables.messageWindows="240;240;240;240;240;240" \
-            --set images[1].environmentVariables.messagePeriods="0;220;0;220;0;220" \
+            --set images[1].environmentVariables.messagePeriods="0;220;0;0;220;0" \
             --set images[1].environmentVariables.fullPeriod="10" \
             --set images[1].environmentVariables.partPeriod="4" \
             --set images[1].resources.limits.cpu="50m" \
@@ -188,7 +188,7 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device \
             --set images[1].environmentVariables.clientId=$BATTERY_DEVICE_NAME-publisher \
             --set images[1].environmentVariables.messageWindows="240;240;240;240;240;240" \
-            --set images[1].environmentVariables.messagePeriods="0;220;0;220;0;220" \
+            --set images[1].environmentVariables.messagePeriods="0;220;0;0;220;0" \
             --set images[1].environmentVariables.fullPeriod="10" \
             --set images[1].environmentVariables.partPeriod="4" \
             --set images[1].resources.limits.cpu="50m" \
@@ -254,7 +254,7 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device \
             --set images[1].environmentVariables.clientId=$BATTERY_DEVICE_NAME-publisher \
             --set images[1].environmentVariables.messageWindows="240;240;240;240;240;240" \
-            --set images[1].environmentVariables.messagePeriods="0;220;0;220;0;220" \
+            --set images[1].environmentVariables.messagePeriods="0;220;0;0;220;0" \
             --set images[1].environmentVariables.fullPeriod="10" \
             --set images[1].environmentVariables.partPeriod="4" \
             --set images[1].resources.limits.cpu="50m" \
@@ -319,7 +319,7 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device \
             --set images[1].environmentVariables.clientId=$BATTERY_DEVICE_NAME-publisher \
             --set images[1].environmentVariables.messageWindows="240;240;240;240;240;240" \
-            --set images[1].environmentVariables.messagePeriods="0;220;0;220;0;220" \
+            --set images[1].environmentVariables.messagePeriods="0;220;0;0;220;0" \
             --set images[1].environmentVariables.fullPeriod="10" \
             --set images[1].environmentVariables.partPeriod="4" \
             --set images[1].resources.limits.cpu="50m" \
@@ -486,7 +486,7 @@ for neighborhood in $(seq 1 $NUMBER_NEIGHBORHOOD); do
             --set images[1].environmentVariables.brokerTopic=ktwin/real/ngsi-ld-city-device/ngsi-ld-city-device \
             --set images[1].environmentVariables.clientId=$BATTERY_DEVICE_NAME-publisher \
             --set images[1].environmentVariables.messageWindows="240;240;240;240;240;240" \
-            --set images[1].environmentVariables.messagePeriods="0;220;0;220;0;220" \
+            --set images[1].environmentVariables.messagePeriods="0;220;0;0;220;0" \
             --set images[1].environmentVariables.fullPeriod="10" \
             --set images[1].environmentVariables.partPeriod="4" \
             --set images[1].resources.limits.cpu="50m" \
