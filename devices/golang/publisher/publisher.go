@@ -32,11 +32,11 @@ func runDevice(mqttClientConfig mqtt.MQTTClientConfig, publisherClientConfig mqt
 		numberOfMessages := int(math.Ceil(float64(messageWindow) / messagePeriod))
 
 		for i := 0; i < numberOfMessages; i++ {
-			message := callback(messageCount, publisherClientConfig.PartPeriod, publisherClientConfig.FullPeriod)
-			client.Publish(message)
-
 			// Wait
 			time.Sleep(time.Duration(messagePeriod * float64(time.Second)))
+
+			message := callback(messageCount, publisherClientConfig.PartPeriod, publisherClientConfig.FullPeriod)
+			client.Publish(message)
 		}
 		messageCount++
 	}
